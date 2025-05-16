@@ -7,42 +7,70 @@ function displayMessage(msg) {
 }
 
 // Exibe todos os jogos na tabela
-function exibeJogos() {
+function exibeJogos(nome = "", tipo = "", destaque = "") {
     fetch(API_URL)
         .then(res => res.json())
         .then(jogos => {
             let tabela = document.getElementById("table-jogos");
             tabela.innerHTML = "";
-            jogos.forEach(jogo => {
-                tabela.innerHTML += `
-                    <tr>
-                        <td>${jogo.id}</td>
-                        <td>${jogo.nome}</td>
-                        <td>${jogo.imagem}</td>
-                        <td>${jogo.urlJogo}</td>
-                        <td>${jogo.tipo}</td>
-                        <td>${jogo.destaques ? 'Sim' : 'Não'}</td>
-                        <td>${jogo.habilidades}</td>
-                        <td>${jogo.descricao}</td>
-                    </tr>`;
+
+            jogos.reverse().forEach(jogo => {
+                // Converte os valores para comparação
+                const nomeMatch = !nome || jogo.nome.toLowerCase().includes(nome.toLowerCase());
+                const tipoMatch = !tipo || jogo.tipo === tipo;
+                const destaqueMatch = destaque === "" || jogo.destaques === (destaque === "1");
+
+                if (nomeMatch && tipoMatch && destaqueMatch) {
+                    tabela.innerHTML += `
+                        <tr>
+                            <td>${jogo.id}</td>
+                            <td>${jogo.nome}</td>
+                            <td>${jogo.imagem}</td>
+                            <td>${jogo.urlJogo}</td>
+                            <td>${jogo.tipo}</td>
+                            <td>${jogo.destaques ? 'Sim' : 'Não'}</td>
+                            <td>${jogo.habilidades}</td>
+                            <td>${jogo.descricao}</td>
+                        </tr>`;
+                }
             });
         })
         .catch(() => displayMessage("Erro ao carregar os jogos."));
 }
 
+
 // Insere novo jogo
 function insertJogo(jogo) {
-    fetch(API_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(jogo)
-    })
-    .then(res => res.json())
-    .then(() => {
-        displayMessage("Jogo inserido com sucesso.");
-        exibeJogos();
-    })
-    .catch(() => displayMessage("Erro ao inserir jogo."));
+    fetch(API_URL)
+        .then(res => res.json())
+        .then(jogos => {
+            const jogoExistente = jogos.find(j => j.nome.toLowerCase() === jogo.nome.toLowerCase() && j.urlJogo === jogo.urlJogo);
+            if (jogoExistente) {
+                displayMessage("Este jogo já está cadastrado.");
+                document.getElementById("title").scrollIntoView({ behavior: 'smooth' });
+            } else {
+                fetch(API_URL, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(jogo)
+                })
+                .then(res => {
+                    if (res.ok) {
+                        displayMessage("Jogo inserido com sucesso.");
+                        exibeJogos();
+                        limparFormulario();
+                        document.getElementById("title").scrollIntoView({ behavior: 'smooth' });
+                    } else {
+                        throw new Error("Erro ao inserir jogo.");
+                    }
+                })
+                .catch(() => {
+                    displayMessage("Erro ao inserir jogo.");
+                    document.getElementById("title").scrollIntoView({ behavior: 'smooth' });
+                });
+            }
+        })
+        .catch(() => displayMessage("Erro ao inserir jogo."), document.getElementById("title").scrollIntoView({ behavior: 'smooth' }));
 }
 
 // Altera jogo existente
@@ -56,7 +84,7 @@ function updateJogo(id, jogo) {
         displayMessage("Jogo alterado com sucesso.");
         exibeJogos();
     })
-    .catch(() => displayMessage("Erro ao alterar jogo."));
+    .catch(() => displayMessage("Erro ao alterar jogo."), document.getElementById("title").scrollIntoView({ behavior: 'smooth' }));
 }
 
 // Exclui jogo
@@ -68,7 +96,7 @@ function deleteJogo(id) {
         displayMessage("Jogo removido com sucesso.");
         exibeJogos();
     })
-    .catch(() => displayMessage("Erro ao excluir jogo."));
+    .catch(() => displayMessage("Erro ao excluir jogo."), document.getElementById("title").scrollIntoView({ behavior: 'smooth' }));
 }
 
 // Coleta os dados do formulário
@@ -133,6 +161,8 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById("inputDestaques").value = colunas[5].innerText === "Sim" ? "1" : "2";
             document.getElementById("inputHabilidades").value = colunas[6].innerText;
             document.getElementById("inputDesc").value = colunas[7].innerText;
+
+            document.getElementById("title").scrollIntoView({ behavior: 'smooth' });
         }
     });
 
@@ -151,4 +181,14 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         observer.observe(msgElement, { childList: true });
     }
+});
+
+//Chama a função de exibir passando parametros para filtrar
+document.getElementById("btnSearch").addEventListener("click", (event) => {
+    event.preventDefault();
+    nome = document.getElementById("filtroNome").value;
+    tipo = document.getElementById("filtroTipo").value;
+    destaque = document.getElementById("filtroDestaques").value;
+    exibeJogos(nome, tipo, destaque)
+
 });

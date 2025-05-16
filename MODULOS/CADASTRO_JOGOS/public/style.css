@@ -1,21 +1,120 @@
 label {
     font-weight: bolder;
 }
-::placeholder {
-    color: rgb(0, 0, 0) !important;
-}
-::-webkit-input-placeholder { /* WebKit, Blink, Edge */
-        color: rgb(0, 0, 0) !important;
-}
-:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-    color:  black !important;
- }
+
  h1 {
+    padding-top: 1em;
      text-align: center;
  }
  #msg {
      height: 60px;
  }
- #grid-contatos tbody {
+ #grid-jogos tbody {
      cursor: pointer;
  }
+
+ nav{
+    background-color: #def1f8;
+}
+
+nav a{
+    color: black;
+}
+
+nav.navbar {
+  position: relative;
+  height: 110px;
+  padding: 0 20px;
+}
+
+nav.navbar img {
+  height: 80px;
+  display: block;
+}
+
+nav.navbar > a.navbar {
+  display: flex;
+  align-items: center;
+}
+
+#navbarNav {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.navbar-nav {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.navbar-nav .nav-item .nav-link {
+  color: inherit;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+}
+
+
+
+#btnInsert{
+    background-color: #28a745;   
+    color: white;
+}
+#btnUpdate{
+    background-color: #007bff;
+    color: white;
+}
+#btnDelete{
+    background-color: #dc3545;
+    color: white;
+}
+#btnClear{
+    background-color: #6c757d;
+    color: white;
+}
+
+table{
+    border-radius: 5px;
+}
+
+.styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 16px;
+    font-family: sans-serif;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+
+.styled-table thead tr {
+    background-color: #5c8898;
+    color: #ffffff;
+    text-align: left;
+}
+
+.styled-table th,
+.styled-table td {
+    padding: 12px 15px;
+    border: 1px solid #dddddd;
+}
+
+.styled-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.styled-table tbody tr:hover {
+    background-color: #e0f7fa;
+    cursor: pointer;
+}

@@ -104,6 +104,9 @@ table{
 .styled-table td {
     padding: 12px 15px;
     border: 1px solid #dddddd;
+    max-width: 200px;
+    word-wrap: break-word;
+    white-space: normal;
 }
 
 .styled-table tbody tr {

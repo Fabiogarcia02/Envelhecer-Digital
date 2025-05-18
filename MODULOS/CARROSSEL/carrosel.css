@@ -1,4 +1,3 @@
-
 html, body {
   max-width: 100vw;
   max-height: 100vh;
@@ -15,6 +14,7 @@ h1 {
   margin-right: 20px;
   font-size: 50px;
   padding-left: 6.25rem;
+  
 
 }
 /* Carousel */
@@ -379,7 +379,7 @@ a:hover {
   left: 0;
   width: 100%;
   background-color: rgba(0, 0, 0, 0.8);
-  padding: 15px 0;
+  padding: 7px 0;
   text-align: center;
   z-index: 1000;
   box-shadow: 0 4px 20px          rgb(77, 118, 145);
@@ -400,9 +400,9 @@ a:hover {
 }
 
 .menu a {
-  color: white;
+  color: rgb(77, 118, 145);
   text-decoration: none;
   font-weight: bold;
-  font-size: 24px;
+  font-size: 30px;
   padding: 10px;
 }   /* menua acima do carrosel*/ 

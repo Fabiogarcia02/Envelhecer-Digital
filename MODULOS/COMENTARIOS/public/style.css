@@ -1,0 +1,127 @@
+.comentario-conteiner {
+      background-color: #E8E8E8;
+      height: 280px;
+      width: 300px;
+      border-radius: 20px;
+      position: relative;
+    }
+
+    .comentario-conteiner .title .img-titulo {
+      position: absolute;
+      height: 10px;
+      width: 10px;
+      left: 10px;
+      top: 10px;
+    }
+
+    .comentario-conteiner h1 {
+      color: #FFFFFF;
+      background-color: #1BADCB;
+      height: 50px;
+      width: 100%;
+      text-align: center;
+      border-radius: 20px 20px 0px 0px;
+      padding-top: 10px;
+      margin-bottom: 0;
+    }
+
+    .comentario-form {
+      text-align: center;
+      width: 100%;
+    }
+
+    .comentario-form input:nth-of-type(n+2), textarea {
+      margin-top: 10px;
+    }
+
+    .comentario-form input::placeholder,
+    textarea::placeholder {
+      color: #1E7A9C;
+    }
+
+    .comentario-form input {
+      padding-top: 5px;
+      padding-left: 13px;
+      border-radius: 20px;
+      outline: none;
+      border: none;
+      background-color: #FFFDFD;
+      width: 165px;
+    }
+    .comentario-form input[type="number"] {
+      padding-top: 5px;
+      padding-left: 13px;
+      border-radius: 20px;
+      outline: none;
+      border: none;
+      background-color: #FFFDFD;
+      width: 165px;
+    }
+
+    .comentario-form textarea {
+      resize: none;
+      width: 165px;
+      padding-bottom: 53px;
+      border-radius: 5px;
+      outline: none;
+      border: none;
+    }
+
+    .comentario-button {
+      background-color: #1BADCB;
+      border: none;
+      color: #FFFFFF;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 15px;
+    }
+
+    .comentario-conteiner-recente .title img {
+      position: absolute;
+      height: 10px;
+      width: 10px;
+      left: 10px;
+      top: 10px;
+    }
+
+    .comentario-conteiner-recente {
+      background-color: #E8E8E8;
+      height: 280px;
+      width: 400px;
+      border-radius: 20px;
+      position: relative;
+    }
+
+    .comentario-conteiner-recente h1 {
+      color: #FFFFFF;
+      background-color: #1BADCB;
+      text-align: center;
+      border-radius: 20px 20px 0px 0px;
+      padding-top: 10px;
+      margin-bottom: 0;
+    }
+
+    .comentario-p-recentee {
+      text-align: center;
+      width: 100%;
+    }
+
+    .comentario-conteiner-recente p {
+      height: 60px;
+      width: 350px;
+      padding-left: 15px;
+      padding-top: 10px;
+      border-radius: 20px;
+      outline: none;
+      border: none;
+      background-color: #FFFDFD;
+    }
+
+    .comentario-conteiner-recente section {
+      display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  overflow-y: auto;
+  max-height: 200px;
+    }

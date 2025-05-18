@@ -21,8 +21,40 @@
             <ul>
 <li><a href="index.html">Home</a></li>
       <li><a href="#" onclick="window.open('detalhes-tutoriais.html', '_blank')">Tutoriais</a></li>
-      <li><a href="#" onclick="window.open('detalhes-jogos.html', '_blank')">Jogos</a></li>
+      <li><a href="#" onclick="window.open('detalhes-jogos1.html', '_blank')">Jogos</a></li>
       <li><a href="#" onclick="window.open('detalhes-conquistas.html', '_blank')">Conquistas</a></li>
+      <style>
+.menu a {
+  position: relative;
+  color: rgb(77, 118, 145);
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 30px;
+  padding: 10px;
+  transition: color 0.15s ease;
+}
+
+.menu a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  left: 0;
+  bottom: 0;
+  background: rgb(155, 195, 241);
+  transition: width 0.15s ease;
+}
+
+.menu a:hover {
+  color: rgb(155, 195, 241);
+}
+
+.menu a:hover::after {
+  width: 100%;
+}
+
+</style>
+
             </ul>
         </nav>
 
@@ -96,8 +128,7 @@
         </div>
 
 
-        <!-- time running -->
-        <div class="timeRunning"></div>
+      
 
     </div>
 

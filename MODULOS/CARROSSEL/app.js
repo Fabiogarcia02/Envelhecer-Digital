@@ -28,7 +28,7 @@ function resetTimeAnimation() {
     runningTime.style.animation = 'none'
     runningTime.offsetHeight 
     runningTime.style.animation = null 
-    runningTime.style.animation = 'runningTime 40s linear 1 forwards'
+    runningTime.style.animation = 'runningTime 50s linear 1 forwards'
 }
 
 

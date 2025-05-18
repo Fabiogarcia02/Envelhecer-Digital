@@ -67,3 +67,6 @@ function voltarHome() {
 }
 
 window.onload = gerarCards;
+function voltarHome() {
+    window.location.href = "index.html"; 
+}

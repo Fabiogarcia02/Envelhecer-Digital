@@ -23,14 +23,7 @@ body {
     width: 100px;
 }
 
-.home {
-    padding: 0px 20px;
-    font-weight: bold;
-    border: 1px solid #333;
-    background-color: #fff;
-    cursor: pointer;
-    border-radius: 5px;
-}
+
 
 h1 {
     color: #003366;

@@ -48,14 +48,7 @@ p {
     transform: scale(1.03);
 }
 
-.card {
-    background: #d4e5ff;
-    border-radius: 10px;
-    padding: 15px;
-    width: 90%;
-    max-width: 1000px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
+
 
 .card .plataforma {
     font-size: 0.9em;
@@ -68,8 +61,35 @@ p {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 60px;
-    flex-wrap: wrap;
+    gap: 30px;
+    flex-wrap: nowrap; /
+}
+
+@media (max-width: 750px) {
+    .card-content {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+    
+    .Logo_APPs, .video-thumb, .Logo_PDF {
+        width: 100%;
+        max-width: 250px;
+    }
+    
+    .middle-content {
+        text-align: center;
+    }
+}
+
+.card {
+    background: #d4e5ff;
+    border-radius: 10px;
+    padding: 25px;
+    width: 90%;
+    max-width: 1000px;
+    margin: 0 auto; /* Centraliza o card */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 .Logo_APPs{
     width: 100px;
@@ -117,44 +137,7 @@ p {
     gap: 8px;
     text-align: center;
 }
-/*Parte da responsividade
-@media (max-width: 768px) {
-    .card-content {
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-    }
 
-    .Logo_APPs,
-    .video-thumb,
-    .Logo_PDF {
-        width: 80px;
-        height: 80px;
-    }
-
-    .middle-content {
-        text-align: center;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .pdf_conteiner {
-        flex-direction: column;
-        gap: 4px;
-    }
-
-    .card {
-        padding: 10px;
-    }
-
-    .video-thumb {
-        width: 100%;
-        max-width: 300px;
-        height: auto;
-    }
-}
-*/
-/* Estilos para o modal de vídeo */
 .modal {
     display: none;
     position: fixed;

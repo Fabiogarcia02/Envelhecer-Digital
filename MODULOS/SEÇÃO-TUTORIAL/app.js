@@ -44,7 +44,7 @@ function gerarCards() {
             <div class="card-content">
                 <img class="Logo_APPs" src="${video.imageApp}" alt="">
                 <div class="middle-content">
-                    <a href="${video.videoLink}" target="_blank">
+                    <a href="#" class="video-link" data-video-id="${videoId}">
                         <img src="${thumbUrl}" alt="Thumbnail do vídeo" class="video-thumb">
                     </a>
                     <small>${video.description}</small>
@@ -60,7 +60,43 @@ function gerarCards() {
 
         container.appendChild(card);
     });
+
+    // Adiciona event listeners para os links de vídeo
+    document.querySelectorAll('.video-link').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const videoId = this.getAttribute('data-video-id');
+            openVideoModal(videoId);
+        });
+    });
+
+    // Fecha o modal quando clicar no X
+    document.querySelector('.close-modal').addEventListener('click', closeVideoModal);
+    
+    // Fecha o modal quando clicar fora do vídeo
+    document.getElementById('videoModal').addEventListener('click', function(e) {
+        if (e.target === this) {
+            closeVideoModal();
+        }
+    });
 }
+
+function openVideoModal(videoId) {
+    const modal = document.getElementById('videoModal');
+    const iframe = document.getElementById('videoFrame');
+    
+    iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+    modal.style.display = 'flex';
+}
+
+function closeVideoModal() {
+    const modal = document.getElementById('videoModal');
+    const iframe = document.getElementById('videoFrame');
+    
+    iframe.src = '';
+    modal.style.display = 'none';
+}
+
 
 function voltarHome() {
     window.location.href = "index.html";

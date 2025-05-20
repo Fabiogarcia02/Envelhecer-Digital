@@ -88,7 +88,7 @@ p {
     padding: 25px;
     width: 90%;
     max-width: 1000px;
-    margin: 0 auto; /* Centraliza o card */
+    margin: 0 auto; 
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 .Logo_APPs{

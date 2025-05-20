@@ -34,7 +34,6 @@ function gerarCards() {
 
     videos.forEach(video => {
         const videoId = new URL(video.videoLink).searchParams.get("v");
-        // Removemos a linha que pega a thumb do YouTube
 
         const card = document.createElement("section");
         card.classList.add("card");
@@ -61,7 +60,6 @@ function gerarCards() {
         container.appendChild(card);
     });
 
-    // O restante do código permanece igual
     document.querySelectorAll('.video-link').forEach(link => {
         link.addEventListener('click', function (e) {
             e.preventDefault();

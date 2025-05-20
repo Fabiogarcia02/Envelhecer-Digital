@@ -34,7 +34,7 @@ function gerarCards() {
 
     videos.forEach(video => {
         const videoId = new URL(video.videoLink).searchParams.get("v");
-        const thumbUrl = `https://img.youtube.com/vi/${videoId}/0.jpg`;
+        // Removemos a linha que pega a thumb do YouTube
 
         const card = document.createElement("section");
         card.classList.add("card");
@@ -45,15 +45,15 @@ function gerarCards() {
                 <img class="Logo_APPs" src="${video.imageApp}" alt="">
                 <div class="middle-content">
                     <a href="#" class="video-link" data-video-id="${videoId}">
-                        <img src="${thumbUrl}" alt="Thumbnail do vídeo" class="video-thumb">
+                        <img src="imagens/imagem_padrao.png" alt="Thumbnail do vídeo" class="video-thumb">
                     </a>
                     <small>${video.description}</small>
                 </div>
                 <div class="pdf_conteiner">
                     <a href="${video.pdf}" class="pdf-link" target="_blank">
-                        <img class="Logo_PDF" src="imagens/Logo_PDF.png" alt="">
-                        <p>PDF</p>
-                    </a>
+    <img class="Logo_PDF" src="imagens/logo_pdf-2.0.png" alt="Ícone PDF">
+    <p>PDF</p>
+</a>
                 </div>
             </div>
         `;
@@ -61,20 +61,18 @@ function gerarCards() {
         container.appendChild(card);
     });
 
-    // Adiciona event listeners para os links de vídeo
+    // O restante do código permanece igual
     document.querySelectorAll('.video-link').forEach(link => {
-        link.addEventListener('click', function(e) {
+        link.addEventListener('click', function (e) {
             e.preventDefault();
             const videoId = this.getAttribute('data-video-id');
             openVideoModal(videoId);
         });
     });
 
-    // Fecha o modal quando clicar no X
     document.querySelector('.close-modal').addEventListener('click', closeVideoModal);
-    
-    // Fecha o modal quando clicar fora do vídeo
-    document.getElementById('videoModal').addEventListener('click', function(e) {
+
+    document.getElementById('videoModal').addEventListener('click', function (e) {
         if (e.target === this) {
             closeVideoModal();
         }
@@ -84,7 +82,7 @@ function gerarCards() {
 function openVideoModal(videoId) {
     const modal = document.getElementById('videoModal');
     const iframe = document.getElementById('videoFrame');
-    
+
     iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
     modal.style.display = 'flex';
 }
@@ -92,7 +90,7 @@ function openVideoModal(videoId) {
 function closeVideoModal() {
     const modal = document.getElementById('videoModal');
     const iframe = document.getElementById('videoFrame');
-    
+
     iframe.src = '';
     modal.style.display = 'none';
 }
@@ -104,5 +102,5 @@ function voltarHome() {
 
 window.onload = gerarCards;
 function voltarHome() {
-    window.location.href = "index.html"; 
+    window.location.href = "index.html";
 }

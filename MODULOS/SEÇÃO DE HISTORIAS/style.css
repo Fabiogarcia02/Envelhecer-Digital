@@ -1,0 +1,58 @@
+     body {
+      font-family: Arial, sans-serif;
+      background-color: #ffd1c1;
+      margin: 0;
+      padding: 0;
+    }
+
+    .carousel-container {
+      width: 80%;
+      max-width: 900px;
+      margin: 30px auto;
+      overflow: hidden;
+      border-radius: 10px;
+      background-color: white;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      position: relative;
+    }
+
+    .slider {
+      display: flex;
+      transition: transform 0.8s ease-in-out;
+      width: 100%;
+    }
+
+    .persona {
+      min-width: 100%;
+      box-sizing: border-box;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .persona img {
+      border-radius: 50%;
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+    }
+
+    .info {
+      flex: 1;
+    }
+
+    .info h2 {
+      margin: 0 0 10px;
+      color: #123456;
+    }
+
+    .info p {
+      margin: 5px 0;
+    }
+
+    .section-title {
+      color: #003366;
+      font-weight: bold;
+      margin-top: 15px;
+    }

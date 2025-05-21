@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Minha Página</title>
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+
+<div class="carousel-container">
+  <div class="slider" id="slider">
+    <!-- Persona 1 -->
+    <div class="persona">
+      <img src="https://via.placeholder.com/150" alt="Alice">
+      <div class="info">
+        <h2>Alice Nogueira</h2>
+        <p>68 anos | Casada, 1 filho</p>
+        <p>Proprietária de loja de comidas saudáveis</p>
+        <p>Graduada em Administração</p>
+
+           <p class="section-title">Desafios em relação a internet:</p>
+        <ul>
+          <li>Dificuldade de se comunicar via mensagens.</li>
+          <li>Falta de conheciemto necessario para usufruir dos beneficios da internet.</li>
+        </ul>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Persona 2 -->
+    <div class="persona">
+      <img src="https://via.placeholder.com/150" alt="Bruno">
+      <div class="info">
+        <h2>Bruno Silva</h2>
+        <p>76 anos | Solteiro</p>
+        <p>Bancario aposentado</p>
+
+              <p class="section-title">Desafios em relação a internet:</p>
+        <ul>
+          <li>Dificuldade de se comunicar via mensagens.</li>
+          <li>Falta de conheciemto necessario para usufruir dos beneficios da internet.</li>
+        </ul>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  const slider = document.getElementById('slider');
+  const totalSlides = slider.children.length;
+  let index = 0;
+
+  setInterval(() => {
+    index = (index + 1) % totalSlides;
+    slider.style.transform = `translateX(-${index * 100}%)`;
+  }, 10000); // 15 segundos
+</script>
+</body>
+</html>

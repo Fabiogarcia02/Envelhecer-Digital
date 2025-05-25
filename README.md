@@ -1,4 +1,4 @@
-🧠 Jogo da Memória: Tecnologia para Idosos
+🧠  Memória Digital: Tecnologia para Idosos
 Um jogo interativo criado com HTML, CSS, JavaScript e Node.js, desenvolvido para ajudar pessoas idosas a aprender e reconhecer ícones e funções comuns da internet (como WhatsApp, YouTube, Google e E-mail) de forma lúdica e intuitiva.
 
 O jogo vai além de uma simples aplicação estática: ele utiliza backend com Express, persistência de dados com JSON, e comunicação assíncrona via fetch, permitindo registro e consulta de pontuação no ranking.

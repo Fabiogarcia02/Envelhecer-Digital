@@ -1,5 +1,5 @@
 function carregarRanking() {
-  fetch("http://localhost:3000/ranking")
+fetch("/ranking")
     .then(res => res.json())
     .then(data => {
       const rankingDiv = document.getElementById("ranking");

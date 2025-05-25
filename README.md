@@ -1,31 +1,40 @@
-🧠   Memória Digital: Tecnologia para Idosos
-Este é um jogo da memória interativo feito com HTML, CSS e JavaScript, desenvolvido com o objetivo de ajudar idosos a aprender e memorizar ícones e funções de aplicativos populares da internet, como WhatsApp, YouTube, Google e E-mail.
+🧠 Jogo da Memória: Tecnologia para Idosos
+Um jogo interativo criado com HTML, CSS, JavaScript e Node.js, desenvolvido para ajudar pessoas idosas a aprender e reconhecer ícones e funções comuns da internet (como WhatsApp, YouTube, Google e E-mail) de forma lúdica e intuitiva.
 
-👵👴 Público-alvo
-Idosos com pouca familiaridade com a tecnologia e que desejam aprender, de forma lúdica e leve, a reconhecer ícones e suas funções no uso cotidiano da internet.
+O jogo vai além de uma simples aplicação estática: ele utiliza backend com Express, persistência de dados com JSON, e comunicação assíncrona via fetch, permitindo registro e consulta de pontuação no ranking.
 
-🎯 Objetivos do Jogo
-Associar ícones reais de aplicativos com suas respectivas funções (ex: ícone do WhatsApp ↔ Enviar mensagens).
+👵 Público-alvo
+Idosos que estão começando a aprender sobre tecnologia e desejam desenvolver memória visual, reconhecimento de ícones e vocabulário digital de forma acessível.
 
-Desenvolver a memória visual e o reconhecimento digital.
+🚀 Tecnologias Utilizadas
+🔹 Frontend:
+HTML5: estrutura do jogo.
 
-Tornar o aprendizado de tecnologia mais acessível e divertido.
+CSS3: layout simples, limpo e acessível (alto contraste, letras legíveis).
 
-🛠️ Tecnologias Utilizadas
-HTML5
+JavaScript (Vanilla): lógica do jogo e manipulação do DOM.
 
-CSS3
+Fetch API: comunicação com o backend.
 
-JavaScript (vanilla)
+Áudio (<audio>): efeitos sonoros de acerto e erro.
 
-Áudio embutido com a tag <audio>
+🔹 Backend:
+Node.js + Express: criação de API REST.
 
-Ícones em imagem (<img>)
+CORS: integração entre frontend e backend local.
 
-🔊 Recursos Interativos
-Som de acerto e erro ao virar as cartas.
+JSON como banco de dados local (db.json): armazena pontuações dos jogadores.
 
-Interface simples e com alto contraste para melhor acessibilidade.
+⚙️ Funcionalidades
+🧠 Jogo da memória com pares de ícone + função correspondente.
 
-Fontes legíveis e interações intuitivas.
+🔊 Feedback sonoro para acertos e erros.
+
+📡 Envio e consulta de pontuação com fetch.
+
+📋 Ranking persistente armazenado em JSON.
+
+📅 Data automática da partida salva no ranking.
+
+💾 Backend local   para API de pontuação.
 

@@ -4,39 +4,48 @@ const path = require("path");
 const cors = require("cors");
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 const DB_PATH = path.join(__dirname, "db.json");
 
 // Middleware
 app.use(cors());
 app.use(express.json());
 
-// Serve arquivos estáticos da pasta 'public'
+// Serve arquivos estáticos da pasta 'public' (se você tiver frontend aqui)
 app.use(express.static(path.join(__dirname, "public")));
 
-// Se não encontrar rota, envia index.html
+// Rota principal para servir o frontend
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
-// Utilitários de leitura e escrita do JSON
+// Funções utilitárias para ler e escrever o arquivo db.json
 function readDB() {
-  const data = fs.readFileSync(DB_PATH);
-  return JSON.parse(data);
+  try {
+    const data = fs.readFileSync(DB_PATH, "utf-8");
+    return JSON.parse(data);
+  } catch (err) {
+    console.error("Erro lendo o banco de dados:", err);
+    return { ranking: [] };
+  }
 }
 
 function writeDB(data) {
-  fs.writeFileSync(DB_PATH, JSON.stringify(data, null, 2));
+  try {
+    fs.writeFileSync(DB_PATH, JSON.stringify(data, null, 2));
+  } catch (err) {
+    console.error("Erro escrevendo no banco de dados:", err);
+  }
 }
 
-// Endpoint GET /ranking
+// GET /ranking retorna o ranking ordenado
 app.get("/ranking", (req, res) => {
   const db = readDB();
   const ranking = db.ranking.sort((a, b) => b.pontuacao - a.pontuacao);
   res.json(ranking);
 });
 
-// Endpoint POST /ranking
+// POST /ranking adiciona uma nova pontuação
 app.post("/ranking", (req, res) => {
   const { nome, pontuacao } = req.body;
 
@@ -48,14 +57,14 @@ app.post("/ranking", (req, res) => {
   db.ranking.push({
     nome,
     pontuacao,
-    data: new Date().toISOString().split("T")[0]
+    data: new Date().toISOString().split("T")[0],
   });
 
   writeDB(db);
   res.status(201).json({ message: "Pontuação salva com sucesso." });
 });
 
-// Iniciar servidor
+// Inicia o servidor
 app.listen(PORT, () => {
-  console.log(`✅ Servidor rodando em http://localhost:${PORT}`);
+  console.log(`✅ Servidor rodando na porta ${PORT}`);
 });

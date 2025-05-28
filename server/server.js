@@ -5,18 +5,16 @@ const cors = require("cors");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+// Ajusta o caminho do db.json para dentro da pasta server
 const DB_PATH = path.join(__dirname, "db.json");
 
-// Middleware
-app.use(cors());
-app.use(express.json());
+// Serve arquivos estáticos da pasta 'public' que está uma pasta acima de 'server'
+app.use(express.static(path.join(__dirname, "..", "public")));
 
-// Serve arquivos estáticos da pasta 'public' (se você tiver frontend aqui)
-app.use(express.static(path.join(__dirname, "public")));
-
-// Rota principal para servir o frontend
+// Rota principal para servir o frontend (index.html na pasta public uma pasta acima)
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "index.html"));
+  res.sendFile(path.join(__dirname, "..", "public", "index.html"));
 });
 
 // Funções utilitárias para ler e escrever o arquivo db.json

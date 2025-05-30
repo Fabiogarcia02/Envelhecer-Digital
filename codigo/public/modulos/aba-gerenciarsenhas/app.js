@@ -1,100 +1,83 @@
-const senhas = [
-  {
-    nome: "Banco 01",
-    descricao: "Senha do aplicativo do banco",
-    senha: "senha1234",
-    plataforma: "Plataforma X",
-    imageApp: "imagens/logo_banco.png",
-    videoLink: "https://www.youtube.com/watch?v=123456",
-    pdf: "arquivos/banco01.pdf"
-  },
-  {
-    nome: "Rede Social 02",
-    descricao: "Senha da rede social principal",
-    senha: "senha5678",
-    plataforma: "Plataforma Y",
-    imageApp: "imagens/logo_rede.png",
-    videoLink: "https://www.youtube.com/watch?v=abcdef",
-    pdf: "arquivos/rede02.pdf"
-  },
-  {
-    nome: "Banco 02",
-    descricao: "Senha do segundo banco",
-    senha: "senha9999",
-    plataforma: "Plataforma Z",
-    imageApp: "imagens/logo_banco2.png",
-    videoLink: "https://www.youtube.com/watch?v=ghijkl",
-    pdf: "arquivos/banco02.pdf"
-  }
-];
-
-function gerarCards() {
-  const container = document.getElementById("cardsContainer");
-
-  senhas.forEach(senha => {
-    const videoId = new URL(senha.videoLink).searchParams.get("v");
-
-    const card = document.createElement("section");
-    card.classList.add("card");
-
-    card.innerHTML = `
-      <span class="plataforma">${senha.plataforma}</span>
-      <div class="card-content">
-        <img class="Logo_APPs" src="${senha.imageApp}" alt="">
-        <div class="middle-content">
-          <h2>${senha.nome}</h2>
-          <p>${senha.descricao}</p>
-        </div>
-        <div class="pdf_conteiner">
-          <a href="#" class="video-link" data-video-id="${videoId}">
-            <button class="video-btn"></button>
-          </a>
-          <a href="${senha.pdf}" target="_blank">
-            <img class="Logo_PDF" src="imagens/logo_pdf-2.0.png" alt="PDF">
-            <p>PDF</p>
-          </a>
-        </div>
-      </div>
-    `;
-
-    container.appendChild(card);
-  });
-
-  document.querySelectorAll('.video-link').forEach(link => {
-    link.addEventListener('click', function (e) {
-      e.preventDefault();
-      const videoId = this.getAttribute('data-video-id');
-      openVideoModal(videoId);
-    });
-  });
-
-  document.querySelector('.close-modal').addEventListener('click', closeVideoModal);
-
-  document.getElementById('videoModal').addEventListener('click', function (e) {
-    if (e.target === this) {
-      closeVideoModal();
+document.addEventListener('DOMContentLoaded', function() {
+    const passwords = {
+        "Banko Irsesta": "b4nk0!r$",
+        "Rede Social": "s0c!@lM3d!@",
+        "Iznus platamain": "!znu$P@55"
+    };
+    
+    function addCardEventListeners(card) {
+        const revealBtn = card.querySelector('.reveal');
+        const deleteBtn = card.querySelector('.delete');
+        const serviceName = card.querySelector('.service-name').textContent;
+        
+        if (!passwords[serviceName]) {
+            passwords[serviceName] = "NovaSenha123";
+        }
+        
+        revealBtn.addEventListener('click', function() {
+            const passwordElement = card.querySelector('.password');
+            
+            if (passwordElement.classList.contains('masked')) {
+                passwordElement.textContent = passwords[serviceName];
+                passwordElement.classList.remove('masked');
+                this.innerHTML = '<i class="fas fa-eye-slash"></i>';
+            } else {
+                passwordElement.textContent = '••••••••';
+                passwordElement.classList.add('masked');
+                this.innerHTML = '<i class="fas fa-eye"></i>';
+            }
+        });
+        
+        deleteBtn.addEventListener('click', function() {
+            if (confirm(`Tem certeza que deseja excluir a senha de ${serviceName}?`)) {
+                card.style.transform = 'translateX(100%)';
+                card.style.opacity = '0';
+                
+                setTimeout(() => {
+                    card.remove();
+                    delete passwords[serviceName];
+                }, 300);
+            }
+        });
     }
-  });
-}
-
-function openVideoModal(videoId) {
-  const modal = document.getElementById('videoModal');
-  const iframe = document.getElementById('videoFrame');
-
-  iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
-  modal.style.display = 'flex';
-}
-
-function closeVideoModal() {
-  const modal = document.getElementById('videoModal');
-  const iframe = document.getElementById('videoFrame');
-
-  iframe.src = '';
-  modal.style.display = 'none';
-}
-
-function voltarHome() {
-  window.location.href = "index.html";
-}
-
-window.onload = gerarCards;
+    
+    document.querySelectorAll('.password-card').forEach(card => {
+        addCardEventListeners(card);
+    });
+    
+    document.getElementById('addNewCard').addEventListener('click', function() {
+        const newCardHTML = `
+        <div class="password-card">
+            <div class="service-logo">
+                <i class="fas fa-plus-circle"></i>
+            </div>
+            <div class="service-info">
+                <div class="service-name">Novo Serviço</div>
+                <div class="service-description">Descrição do novo serviço</div>
+            </div>
+            <div class="password-section">
+                <div class="password masked">••••••••</div>
+                <button class="action-btn reveal" title="Mostrar senha">
+                    <i class="fas fa-eye"></i>
+                </button>
+                <button class="action-btn delete" title="Excluir senha">
+                    <i class="fas fa-trash-alt"></i>
+                </button>
+            </div>
+        </div>
+        `;
+        
+        const container = document.querySelector('.password-container');
+        const firstCard = document.querySelector('.password-card');
+        if (firstCard) {
+            firstCard.insertAdjacentHTML('beforebegin', newCardHTML);
+        } else {
+            const lastTitle = document.querySelector('.platform-title:last-of-type') || 
+                              document.querySelector('.header-container');
+            lastTitle.insertAdjacentHTML('afterend', newCardHTML);
+        }
+        
+        const newCard = document.querySelector('.password-card:first-of-type');
+        addCardEventListeners(newCard);
+    });
+}); 

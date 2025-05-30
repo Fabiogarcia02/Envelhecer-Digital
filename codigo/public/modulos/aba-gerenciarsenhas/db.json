@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "serviceName": "Banko Irsesta",
+    "serviceDescription": "Lorem ipsum dolor sit amet, consectetur semipuvuecoe soe titorciar",
+    "password": "b4nk0!r$",
+    "platform": "plataforma y"
+  },
+  {
+    "id": 2,
+    "serviceName": "Rede Social",
+    "serviceDescription": "Lorem ipsum dolor atelor sit amet, consectetur semipuvue coe sce titorciar",
+    "password": "s0c!@lM3d!@",
+    "platform": "plataforma y"
+  },
+  {
+    "id": 3,
+    "serviceName": "Iznus platamain",
+    "serviceDescription": "Lorem ipsum dolor atelor sit amet, consectetur semipuvue coe titorciar",
+    "password": "!znu$P@55",
+    "platform": "plataforma z"
+  }
+]

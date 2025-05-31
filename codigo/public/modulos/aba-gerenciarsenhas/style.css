@@ -39,14 +39,6 @@ body {
     background-color: #3e8e41;
 }
 
-.platform-title {
-    color: #444;
-    margin: 30px 0 15px 0;
-    font-size: 20px;
-    padding-bottom: 5px;
-    border-bottom: 1px solid #ddd;
-}
-
 .password-card {
     background-color: white;
     border-radius: 10px;
@@ -185,36 +177,12 @@ body {
     color: #444;
 }
 
-.form-group input, 
-.form-group select {
+.form-group input {
     width: 100%;
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 4px;
     font-size: 16px;
-}
-
-.password-input-container {
-    display: flex;
-    gap: 10px;
-}
-
-.password-input-container input {
-    flex: 1;
-}
-
-.generate-btn {
-    background-color: #2196F3;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    padding: 0 15px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.generate-btn:hover {
-    background-color: #0b7dda;
 }
 
 .submit-btn {

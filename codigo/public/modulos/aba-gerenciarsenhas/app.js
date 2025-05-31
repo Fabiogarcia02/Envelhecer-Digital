@@ -19,14 +19,15 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     async function loadPasswords() {
-        try {
-            const response = await fetch('db.json');
-            const data = await response.json();
-            renderPasswords(data);
-        } catch (error) {
-            console.error('Erro ao carregar senhas:', error);
-        }
+    try {
+        const response = await fetch('http://localhost:3000/passwords');
+        const data = await response.json();
+        renderPasswords(data);
+    } catch (error) {
+        console.error('Erro ao carregar senhas:', error);
     }
+}
+
 
     function renderPasswords(data) {
         const container = document.querySelector('.password-container');
@@ -85,36 +86,36 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
         
-        deleteBtn.addEventListener('click', async function() {
-            if (confirm(`Tem certeza que deseja excluir a senha de ${item.serviceName}?`)) {
-                try {
-                    const updatedData = data.filter(i => i.id != cardId);
-                    await savePasswords(updatedData);
-                    
-                    card.style.transform = 'translateX(100%)';
-                    card.style.opacity = '0';
-                    setTimeout(() => card.remove(), 300);
-                } catch (error) {
-                    console.error('Erro ao excluir senha:', error);
-                }
-            }
-        });
-    }
-
-    async function savePasswords(data) {
+        deleteBtn.addEventListener('click', async function () {
+    if (confirm(`Tem certeza que deseja excluir a senha de ${item.serviceName}?`)) {
         try {
-            const response = await fetch('db.json', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data),
-            });
-            return response.json();
+            await deletePassword(item.id);
+            card.style.transform = 'translateX(100%)';
+            card.style.opacity = '0';
+            setTimeout(() => card.remove(), 300);
         } catch (error) {
-            console.error('Erro ao salvar senhas:', error);
+            console.error('Erro ao excluir senha:', error);
         }
     }
+});
+
+    }
+
+    async function addPassword(item) {
+    try {
+        const response = await fetch('http://localhost:3000/passwords', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(item),
+        });
+        return response.json();
+    } catch (error) {
+        console.error('Erro ao salvar senha:', error);
+    }
+}
+
 
     form.addEventListener('submit', async function(e) {
         e.preventDefault();
@@ -145,3 +146,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
     loadPasswords();
 });
+async function deletePassword(id) {
+    try {
+        await fetch(`http://localhost:3000/passwords/${id}`, {
+            method: 'DELETE'
+        });
+    } catch (error) {
+        console.error('Erro ao deletar senha:', error);
+    }
+}

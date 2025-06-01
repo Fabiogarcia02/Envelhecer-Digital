@@ -1,157 +1,146 @@
 document.addEventListener('DOMContentLoaded', function() {
+    const API_URL = 'http://localhost:3000/passwords';
     const modal = document.getElementById('addModal');
-    const btn = document.getElementById('addNewCard');
-    const span = document.getElementsByClassName('close')[0];
+    const addBtn = document.getElementById('addNewCard');
+    const closeBtn = document.getElementsByClassName('close')[0];
     const form = document.getElementById('passwordForm');
 
-    btn.onclick = function() {
-        modal.style.display = 'block';
-    }
+    // Configuração dos eventos do modal
+    addBtn.onclick = () => modal.style.display = 'block';
+    closeBtn.onclick = () => modal.style.display = 'none';
+    window.onclick = (event) => event.target === modal ? modal.style.display = 'none' : null;
 
-    span.onclick = function() {
-        modal.style.display = 'none';
-    }
+    // Carrega as senhas ao iniciar
+    loadPasswords();
 
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = 'none';
+    // Função principal para carregar senhas
+    async function loadPasswords() {
+        try {
+            const response = await fetch(API_URL);
+            const data = await response.json();
+            renderPasswords(data);
+        } catch (error) {
+            console.error('Erro ao carregar senhas:', error);
+            alert('Erro ao carregar senhas. Verifique se o json-server está rodando.');
         }
     }
 
-    async function loadPasswords() {
-    try {
-        const response = await fetch('http://localhost:3000/passwords');
-        const data = await response.json();
-        renderPasswords(data);
-    } catch (error) {
-        console.error('Erro ao carregar senhas:', error);
-    }
-}
-
-
-    function renderPasswords(data) {
+    // Renderiza as senhas na tela
+    function renderPasswords(passwords) {
         const container = document.querySelector('.password-container');
         const header = document.querySelector('.header-container');
+        
         container.innerHTML = '';
-        container.appendChild(header);
-        
-        data.forEach(item => {
-            const cardHTML = `
-                <div class="password-card" data-id="${item.id}">
-                    <div class="service-logo">
-                        <i class="fas fa-key"></i>
-                    </div>
-                    <div class="service-info">
-                        <div class="service-name">${item.serviceName}</div>
-                        <div class="service-description">${item.serviceDescription}</div>
-                    </div>
-                    <div class="password-section">
-                        <div class="password masked">••••••••</div>
-                        <button class="action-btn reveal" title="Mostrar senha">
-                            <i class="fas fa-eye"></i>
-                        </button>
-                        <button class="action-btn delete" title="Excluir senha">
-                            <i class="fas fa-trash-alt"></i>
-                        </button>
-                    </div>
-                </div>
-            `;
-            container.insertAdjacentHTML('beforeend', cardHTML);
-        });
-        
-        document.querySelectorAll('.password-card').forEach(card => {
-            addCardEventListeners(card, data);
+        container.appendChild(header.cloneNode(true));
+
+        passwords.forEach(password => {
+            const card = createPasswordCard(password);
+            container.appendChild(card);
         });
     }
 
-    function addCardEventListeners(card, data) {
+    // Cria um card de senha
+    function createPasswordCard(password) {
+        const card = document.createElement('div');
+        card.className = 'password-card';
+        card.dataset.id = password.id;
+
+        card.innerHTML = `
+            <div class="service-logo">
+                <i class="fas fa-key"></i>
+            </div>
+            <div class="service-info">
+                <div class="service-name">${password.serviceName}</div>
+                <div class="service-description">${password.serviceDescription}</div>
+            </div>
+            <div class="password-section">
+                <div class="password masked">••••••••</div>
+                <button class="action-btn reveal" title="Mostrar senha">
+                    <i class="fas fa-eye"></i>
+                </button>
+                <button class="action-btn delete" title="Excluir senha">
+                    <i class="fas fa-trash-alt"></i>
+                </button>
+            </div>
+        `;
+
+        // Adiciona os eventos ao card
+        addCardEvents(card, password);
+        return card;
+    }
+
+    // Adiciona eventos a um card
+    function addCardEvents(card, password) {
         const revealBtn = card.querySelector('.reveal');
         const deleteBtn = card.querySelector('.delete');
-        const cardId = card.dataset.id;
         const passwordElement = card.querySelector('.password');
-        
-        const item = data.find(i => i.id == cardId);
-        
-        if (!item) return;
-        
-        revealBtn.addEventListener('click', function() {
+
+        // Evento para mostrar/ocultar senha
+        revealBtn.addEventListener('click', () => {
             if (passwordElement.classList.contains('masked')) {
-                passwordElement.textContent = item.password;
+                passwordElement.textContent = password.password;
                 passwordElement.classList.remove('masked');
-                this.innerHTML = '<i class="fas fa-eye-slash"></i>';
+                revealBtn.innerHTML = '<i class="fas fa-eye-slash"></i>';
+                revealBtn.title = "Ocultar senha";
             } else {
                 passwordElement.textContent = '••••••••';
                 passwordElement.classList.add('masked');
-                this.innerHTML = '<i class="fas fa-eye"></i>';
+                revealBtn.innerHTML = '<i class="fas fa-eye"></i>';
+                revealBtn.title = "Mostrar senha";
             }
         });
-        
-        deleteBtn.addEventListener('click', async function () {
-    if (confirm(`Tem certeza que deseja excluir a senha de ${item.serviceName}?`)) {
-        try {
-            await deletePassword(item.id);
-            card.style.transform = 'translateX(100%)';
-            card.style.opacity = '0';
-            setTimeout(() => card.remove(), 300);
-        } catch (error) {
-            console.error('Erro ao excluir senha:', error);
-        }
-    }
-});
 
+        // Evento para deletar senha
+        deleteBtn.addEventListener('click', async () => {
+            if (confirm(`Tem certeza que deseja excluir a senha de ${password.serviceName}?`)) {
+                try {
+                    await deletePassword(password.id);
+                    card.remove();
+                } catch (error) {
+                    console.error('Erro ao excluir senha:', error);
+                    alert('Erro ao excluir senha.');
+                }
+            }
+        });
     }
 
-    async function addPassword(item) {
-    try {
-        const response = await fetch('http://localhost:3000/passwords', {
+    // Função para adicionar nova senha
+    async function addPassword(password) {
+        const response = await fetch(API_URL, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(item),
+            body: JSON.stringify(password)
         });
         return response.json();
-    } catch (error) {
-        console.error('Erro ao salvar senha:', error);
     }
-}
 
+    // Função para deletar senha
+    async function deletePassword(id) {
+        await fetch(`${API_URL}/${id}`, {
+            method: 'DELETE'
+        });
+    }
 
-    form.addEventListener('submit', async function(e) {
+    // Evento do formulário
+    form.addEventListener('submit', async (e) => {
         e.preventDefault();
-        
-        const newItem = {
-            id: Date.now(),
+
+        const newPassword = {
             serviceName: document.getElementById('serviceName').value,
             serviceDescription: document.getElementById('serviceDescription').value,
             password: document.getElementById('password').value
         };
-        
+
         try {
-            const response = await fetch('db.json');
-            let data = await response.json();
-            if (!Array.isArray(data)) data = [];
-            
-            data.push(newItem);
-            
-            await savePasswords(data);
+            await addPassword(newPassword);
             await loadPasswords();
-            
             modal.style.display = 'none';
             form.reset();
         } catch (error) {
-            console.error('Erro ao adicionar nova senha:', error);
+            console.error('Erro ao adicionar senha:', error);
+            alert('Erro ao adicionar senha.');
         }
     });
-
-    loadPasswords();
 });
-async function deletePassword(id) {
-    try {
-        await fetch(`http://localhost:3000/passwords/${id}`, {
-            method: 'DELETE'
-        });
-    } catch (error) {
-        console.error('Erro ao deletar senha:', error);
-    }
-}

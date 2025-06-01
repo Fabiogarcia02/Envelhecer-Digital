@@ -1,23 +1,22 @@
-[
-  {
-    "id": 1,
-    "serviceName": "Banko Irsesta",
-    "serviceDescription": "Lorem ipsum dolor sit amet, consectetur semipuvuecoe soe titorciar",
-    "password": "b4nk0!r$",
-    "platform": "plataforma y"
-  },
-  {
-    "id": 2,
-    "serviceName": "Rede Social",
-    "serviceDescription": "Lorem ipsum dolor atelor sit amet, consectetur semipuvue coe sce titorciar",
-    "password": "s0c!@lM3d!@",
-    "platform": "plataforma y"
-  },
-  {
-    "id": 3,
-    "serviceName": "Iznus platamain",
-    "serviceDescription": "Lorem ipsum dolor atelor sit amet, consectetur semipuvue coe titorciar",
-    "password": "!znu$P@55",
-    "platform": "plataforma z"
-  }
-]
+{
+  "passwords": [
+    {
+      "id": 1,
+      "serviceName": "Banco Principal",
+      "serviceDescription": "Conta corrente e investimentos",
+      "password": "banco123@"
+    },
+    {
+      "id": 2,
+      "serviceName": "E-mail",
+      "serviceDescription": "Conta de e-mail principal",
+      "password": "email#secure"
+    },
+    {
+      "id": 3,
+      "serviceName": "Rede Social",
+      "serviceDescription": "Perfil profissional",
+      "password": "socialMedia2023"
+    }
+  ]
+}

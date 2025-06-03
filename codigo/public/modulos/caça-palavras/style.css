@@ -1,0 +1,77 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    background-color: #def1f8;
+    height: 100vh;
+    width: 100vw;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.navbar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 1em 10px ;
+}
+
+.navbar img{
+    height: 80px;
+    display: block;
+}
+
+.navbar h1{
+    font-size: 30px;
+}
+
+.navbar button{
+    height: 50px;
+    width: 100px;
+    border-radius: 1em;
+    border: none;
+    background-color: #51bce3;
+    color: white;
+    font-size: 18px;
+}
+
+main{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+}
+
+.procura-palavras, .lista-palavras{
+    background-color: white;
+    border-radius: 1em;
+}
+
+.procura-palavras{
+    display: flex;
+    margin: 2em 0 0 6em ;
+    height: 75vh;
+    width: 60vw; 
+}
+
+.levelTitle, .listTitle{
+    margin-top: 1em;
+    width: 100%;
+    text-align: center;
+    font-size: 23px;
+}
+
+.lista-palavras{
+    display: flex;
+    flex-direction: column;
+    margin: 2em 0 0 0 ;
+    height: 75vh;
+    width: 20vw;
+}
+
+.listWords li{
+    margin-top: 20px;
+    text-align: center;
+    list-style: none;
+}
+

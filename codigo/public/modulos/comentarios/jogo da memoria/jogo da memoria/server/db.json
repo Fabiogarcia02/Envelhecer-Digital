@@ -3,7 +3,14 @@
     {
       "nome": "Fabio garcia",
       "pontuacao": 12,
+      "erros": 2,
       "data": "2025-06-01"
+    },
+    {
+      "nome": "deide",
+      "pontuacao": 12,
+      "erros": 3,
+      "data": "2025-06-04"
     }
   ],
   "cartas": [

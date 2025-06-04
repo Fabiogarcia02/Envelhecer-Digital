@@ -11,6 +11,7 @@ Informações básicas do projeto.
   * [ Francisco Sacchetto](https://github.com/cicrano) 
   * [João Pedro](https://github.com/fulano) 
   * [João Vitor Porto Lorencini](https://github.com/jvplorencini) 
+  * [Caio Vieira Da Costa Leal](https://github.com/cronos-caio-vieira/gamifica-o.git)
 
 A documentação do projeto é estruturada da seguinte forma:
 

@@ -49,13 +49,21 @@ main{
 
 .procura-palavras{
     display: flex;
+    flex-direction: column;
     margin: 2em 0 0 6em ;
     height: 75vh;
-    width: 60vw; 
+    width: 50vw; 
+}
+
+#containerCacaPalavras{
+    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(20, 30px);
+    gap: 2px;
 }
 
 .levelTitle, .listTitle{
-    margin-top: 1em;
+    margin: 1em 0 1em;
     width: 100%;
     text-align: center;
     font-size: 23px;

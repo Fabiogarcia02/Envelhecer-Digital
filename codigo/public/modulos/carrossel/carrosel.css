@@ -112,7 +112,7 @@ a:hover {
 }
 
 .content .title {
-  font-size: 100px;
+  font-size: 60px;
   text-transform: uppercase;
  color: rgb(77, 118, 145);
   font-weight: bold;
@@ -123,7 +123,7 @@ a:hover {
 }
 
 .content .name {
-  font-size: 100px;
+  font-size: 40px;
   text-transform: uppercase;
   font-weight: bold;
   line-height: 1;

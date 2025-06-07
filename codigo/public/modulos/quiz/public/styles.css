@@ -76,7 +76,8 @@ header h1 {
 
 .icon-button:hover {
   transform: scale(1.08);
-  background-color: #3b2f91;
+  background-color: #074f61;
+  color: white;
 }
 
 .next-button {

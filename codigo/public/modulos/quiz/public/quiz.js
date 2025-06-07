@@ -1,25 +1,28 @@
-let quiz = [];
-let perguntaIndex = 0;
-function responder(perguntaId, indiceResposta) {
-  const pergunta = quiz.find(q => q.id === perguntaId);
-  if (!pergunta) return;
+let perguntas = [];
+let perguntaAtual = 0;
 
-  const correta = pergunta.respostas[indiceResposta].correta;
-  
-  if (correta) {
+async function carregarPerguntas() {
+  const res = await fetch('http://localhost:3000/quiz');
+  perguntas = await res.json();
+  renderQuiz(0);
+}
+
+function responder(indiceResposta) {
+  const pergunta = perguntas[perguntaAtual];
+  const resposta = pergunta.respostas[indiceResposta];
+
+  if (resposta.correta) {
     alert(" Acertou! +1 ponto");
   } else {
     alert(" Errou. Nenhum ponto.");
   }
 
-  renderQuiz(perguntaIndex + 1);
+  perguntaAtual++;
+  renderQuiz(perguntaAtual);
 }
 
-
 function renderQuiz(index) {
-  const pergunta = quiz[index];
-  perguntaIndex = index;
-
+  const pergunta = perguntas[index];
   const container = document.querySelector(".container");
 
   if (!pergunta) {
@@ -33,15 +36,11 @@ function renderQuiz(index) {
     </header>
     <section class="question-box">
       <h2>PERGUNTA ${pergunta.id}</h2>
-      <p class="question-text" onmouseover="lerTexto(this.innerText)">
-        ${pergunta.pergunta}
-      </p>
+      <p class="question-text" onmouseover="lerTexto(this.innerText)">${pergunta.pergunta}</p>
     </section>
     <div class="options-grid">
       ${pergunta.respostas.map((r, i) => `
-        <button class="icon-button" onmouseover="lerTexto('${r.texto}')" onclick="responder(${pergunta.id}, ${i})">
-          ${r.texto}
-        </button>
+        <button class="icon-button" onmouseover="lerTexto('${r.texto}')" onclick="responder(${i})">${r.texto}</button>
       `).join('')}
     </div>
     <footer>
@@ -50,17 +49,12 @@ function renderQuiz(index) {
   `;
 }
 
-// iniciando a API 
 function lerTexto(texto) {
   const synth = window.speechSynthesis;
-  if (synth.speaking) synth.cancel(); 
+  if (synth.speaking) synth.cancel();
   const utterance = new SpeechSynthesisUtterance(texto);
   utterance.lang = "pt-BR";
   synth.speak(utterance);
 }
 
-window.onload = async () => {
-  const response = await fetch('/api/quiz');
-  quiz = await response.json();
-  renderQuiz(0); 
-};
+window.onload = carregarPerguntas;

@@ -1,4 +1,5 @@
-[
+{
+ "quiz": [
   {
     "id": 1,
     "pergunta": "Como você pode identificar se um e-mail é falso (golpe)?",
@@ -71,4 +72,5 @@
       { "texto": "Um botão que apaga todas as mensagens", "correta": false }
     ]
   }
-]
+ ]
+}

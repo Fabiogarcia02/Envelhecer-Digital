@@ -83,3 +83,10 @@ main{
     list-style: none;
 }
 
+.letra {
+  user-select: none;
+}
+
+.selecionada {
+    background-color: yellow;
+}

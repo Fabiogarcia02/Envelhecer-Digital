@@ -184,6 +184,11 @@ document.addEventListener("mouseover", e => {
 
 
 document.addEventListener("mouseup", () => {
+    const palavraSelecionada = selectPalavra.map(span => span.textContent).join("");
+
+    if (!palavras.includes(palavraSelecionada)) {
+        limpaSelecao();
+    }
     selecionado = false;
     startX = null;
     startY = null;

@@ -1,6 +1,7 @@
-const tam = 20;
+const tam = 15;
 const letras = "ABCDEFGHIJKLMNOPQRSTUVWXYZÁÀÂÃÉÊÍÓÔÕÚÇ";
 const matriz = Array.from({ length: tam }, () => Array(tam).fill(""));
+let listItems = [];
 const palavras = ["SENHA", "BRADESCO", "CAIXA", "LOREM", "PASTA"];
 let selectPalavra = [];
 let selecionado = false;
@@ -23,6 +24,10 @@ window.onload = () => {
                 insereDiagonal(palavras[i]);
                 break;
         }
+            let li = document.createElement("li");
+            li.textContent = palavras[i];
+            document.getElementById("listWords").appendChild(li);
+            listItems.push(li);
     }
 
     for (let x = 0; x < tam; x++) {
@@ -109,89 +114,118 @@ function mdc(a, b) {
 }
 
 function limpaSelecao() {
-    selectPalavra.forEach(el => el.classList.remove("selecionada"));
+        selectPalavra.forEach(el => {
+        if (!el.classList.contains("fixa")) {
+            el.classList.remove("selecionada");
+        }
+    });
     selectPalavra = [];
+    // const faixa = document.querySelector(".tracado-diagonal");
+    // if (faixa) faixa.remove();
 }
 
 function selecionaIntervalo(startX, startY, endX, endY) {
     limpaSelecao();
+    const letrasSpan = document.querySelectorAll(".letra");
     let dx = endX - startX;
     let dy = endY - startY;
-    const denominador = Math.abs(mdc(dx, dy)) || 1;
-    dx = dx / denominador;
-    dy = dy / denominador;
+    const divisor = Math.abs(mdc(dx, dy)) || 1;
+    dx /= divisor;
+    dy /= divisor;
 
     let x = startX;
     let y = startY;
-    const letras = document.querySelectorAll(".letra");
 
-    while ((x !== endX || y !== endY) && x >= 0 && x < tam && y >= 0 && y < tam) {
+    while (x !== endX + dx || y !== endY + dy) {
         const index = x * tam + y;
-        const el = letras[index];
+        const el = letrasSpan[index];
         if (el) {
             el.classList.add("selecionada");
             selectPalavra.push(el);
         }
-
         x += dx;
         y += dy;
     }
 
-    if (x === endX && y === endY && x >= 0 && x < tam && y >= 0 && y < tam) {
-        const index = x * tam + y;
-        const el = letras[index];
-        if (el) {
-            el.classList.add("selecionada");
-            selectPalavra.push(el);
-        }
+    if (dx !== 0 && dy !== 0) {
+        desenhaFaixaDiagonal(startX, startY, endX, endY);
     }
 }
 
-document.addEventListener("mousedown", e => {
-    if (e.target.classList.contains("letra")){
-        const letras = document.querySelectorAll(".letra");
-        const index = Array.from(letras).indexOf(e.target);
+// Eventos de mouse
+function getLetraFromEvent(e) {
+    let target = e.target;
+    if (e.touches && e.touches.length > 0) {
+        const touch = e.touches[0];
+        target = document.elementFromPoint(touch.clientX, touch.clientY);
+    }
+    if (target && target.classList && target.classList.contains("letra")) {
+        return target;
+    }
+    return null;
+}
+
+function startSelection(e) {
+    const letra = getLetraFromEvent(e);
+    if (letra) {
+        const letrasSpan = document.querySelectorAll(".letra");
+        const index = Array.from(letrasSpan).indexOf(letra);
         startX = Math.floor(index / tam);
         startY = index % tam;
-        limpaSelecao();
-        e.target.classList.add("selecionada");
-        selectPalavra.push(e.target);
         selecionado = true;
+        e.preventDefault();
     }
-});
+}
 
-document.addEventListener("mouseover", e => {
-    if (selecionado && e.target.classList.contains("letra")) {
-        const letras = document.querySelectorAll(".letra");
-        const index = Array.from(letras).indexOf(e.target);
-        const x = Math.floor(index / tam);
-        const y = index % tam;
+function moveSelection(e) {
+    if (!selecionado) return;
+    const letra = getLetraFromEvent(e);
+    if (letra) {
+        const letrasSpan = document.querySelectorAll(".letra");
+        const index = Array.from(letrasSpan).indexOf(letra);
+        const endX = Math.floor(index / tam);
+        const endY = index % tam;
 
-        let dx = x - startX;
-        let dy = y - startY;
-        const denominador = Math.abs(mdc(dx, dy));
+        let dx = endX - startX;
+        let dy = endY - startY;
+        const divisor = Math.abs(mdc(dx, dy));
 
-        if (denominador !== 0) {
-            dx /= denominador;
-            dy /= denominador;
-
+        if (divisor !== 0) {
+            dx /= divisor;
+            dy /= divisor;
             if (dx === 0 || dy === 0 || Math.abs(dx) === Math.abs(dy)) {
-                selecionaIntervalo(startX, startY, x, y);
+                selecionaIntervalo(startX, startY, endX, endY);
             }
         }
+        e.preventDefault();
     }
-});
+}
 
-
-document.addEventListener("mouseup", () => {
+function endSelection(e) {
+    if (!selecionado) return;
     const palavraSelecionada = selectPalavra.map(span => span.textContent).join("");
-
     if (!palavras.includes(palavraSelecionada)) {
         limpaSelecao();
+    } else {
+        for (let i = 0; i < palavras.length; i++) {
+            if (palavras[i] == palavraSelecionada) {
+                listItems[i].classList.add("encontrado");
+            }
+        }
+        selectPalavra.forEach(el => el.classList.add("fixa"));
     }
     selecionado = false;
     startX = null;
     startY = null;
     selectPalavra = [];
-});
+    e.preventDefault();
+}
 
+document.addEventListener("mousedown", startSelection);
+document.addEventListener("touchstart", startSelection);
+
+document.addEventListener("mouseover", moveSelection);
+document.addEventListener("touchmove", moveSelection);
+
+document.addEventListener("mouseup", endSelection);
+document.addEventListener("touchend", endSelection);

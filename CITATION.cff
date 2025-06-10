@@ -1,0 +1,28 @@
+cff-version: 1.2.0
+message: "Por favor, cite este software usando os metadados abaixo."
+title: Envelhecer Digital
+authors:
+  - family-names: Garcia Martins
+    given-names: Fábio
+  - family-names: Sacchetto Andrade
+    given-names: Francisco
+  - family-names: Porto Lorencini
+    given-names: João Vitor
+  - family-names: Freitas Borges
+    given-names: Anthony
+  - family-names: Vieira da Costa Leal
+    given-names: Caio
+-  family-names: De Moura Campos Torga
+    given-names: João Pedro
+
+  - name: Cleiton Silva Tavares
+    affiliation: PUC Minas
+  - name:  Rommel Vieira Carneiro
+    affiliation: PUC Minas
+keywords:
+  - Analfabetismo Digital
+  - Acessibilidade na Internet
+repository-code: https://github.com/ICEI-PUC-Minas-PPLES-TI/plf-es-2025-1-ti1-0385100-envelhecerdigital.git
+license: CC-BY-4.0
+version: 1.0.0
+date-released: 2022-07-14

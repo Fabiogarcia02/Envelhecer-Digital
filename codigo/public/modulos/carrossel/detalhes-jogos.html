@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Detalhes do Jogo</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div id="jogo-container">
+    <h1 id="titulo"></h1>
+    <img id="imagem" src="" alt="" style="max-width:200px" />
+    <p id="descricao"></p>
+    <a id="link-jogar" href="" target="_blank">Jogar 🎮</a>
+  </div>
+
+  <script>
+    const jogos = {
+      2: {
+        titulo: "Jogo da Memória",
+        imagem: "imgs/jogomemoriacard.png",
+        descricao: "Desafie sua memória encontrando os pares corretos!",
+        link: "https://exemplo.com/memoria"
+      },
+      3: {
+        titulo: "Jogo Simulador Email",
+        imagem: "imgs/jogoemailcard.png",
+        descricao: "Teste seus conhecimentos em uso do gmail",
+        link: "https://exemplo.com/velha"
+      },
+      1: {
+        titulo: "Adivinhe a Senha Segura",
+        imagem: "imgs/senhascard.png",
+        descricao: "Teste suas habilidades tentando adivinhar senhas fortes e descubra como criar combinações seguras!",
+        link: "https://exemplo.com/senhas"
+      }
+    };
+
+    function getParametro(nome) {
+      const params = new URLSearchParams(window.location.search);
+      return params.get(nome);
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      const idJogo = getParametro("jogo");
+      const jogo = jogos[idJogo];
+
+      if (jogo) {
+        document.getElementById("titulo").textContent = jogo.titulo;
+        document.getElementById("imagem").src = jogo.imagem;
+        document.getElementById("imagem").alt = jogo.titulo;
+        document.getElementById("descricao").textContent = jogo.descricao;
+        document.getElementById("link-jogar").href = jogo.link;
+      } else {
+        document.getElementById("jogo-container").innerHTML = "<p style='color: red;'>Jogo não encontrado.</p>";
+      }
+    });
+  </script>
+  
+</body> 
+
+
+
+</html>

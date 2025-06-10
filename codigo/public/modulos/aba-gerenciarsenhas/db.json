@@ -1,0 +1,22 @@
+{
+  "passwords": [
+    {
+      "id": 1,
+      "serviceName": "Banco Principal",
+      "serviceDescription": "Conta corrente e investimentos",
+      "password": "banco123@"
+    },
+    {
+      "id": 2,
+      "serviceName": "E-mail",
+      "serviceDescription": "Conta de e-mail principal",
+      "password": "email#secure"
+    },
+    {
+      "id": 3,
+      "serviceName": "Rede Social",
+      "serviceDescription": "Perfil profissional",
+      "password": "socialMedia2023"
+    }
+  ]
+}

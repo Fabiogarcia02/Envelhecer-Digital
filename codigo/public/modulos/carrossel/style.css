@@ -1,0 +1,102 @@
+/* Reset e base */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #1d3557, #457b9d);
+  color: #fff;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  animation: fadeInBody 1s ease-in-out;
+}
+
+/* Animação de entrada do body */
+@keyframes fadeInBody {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+#jogo-container {
+  background-color: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 2.5rem;
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4);
+  text-align: center;
+  max-width: 420px;
+  width: 90%;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: popUp 0.8s ease;
+}
+
+/* Efeito ao passar o mouse */
+#jogo-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 16px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* Animação de entrada */
+@keyframes popUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+#titulo {
+  font-size: 2.2rem;
+  margin-bottom: 1rem;
+  color: #f1faee;
+}
+
+#imagem {
+  width: 100%;
+  max-width: 250px;
+  border-radius: 12px;
+  margin-bottom: 1.2rem;
+  transition: transform 0.3s ease;
+}
+
+#imagem:hover {
+  transform: scale(1.05);
+}
+
+#descricao {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  color: #f8f9fa;
+}
+
+/* Botão de jogar */
+#link-jogar {
+  background-color: #e63946;
+  color: white;
+  padding: 0.9rem 2rem;
+  border-radius: 12px;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  display: inline-block;
+}
+
+#link-jogar:hover {
+  background-color: #d62839;
+  transform: scale(1.05);
+}

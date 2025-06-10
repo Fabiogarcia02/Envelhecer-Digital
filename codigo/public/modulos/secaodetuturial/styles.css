@@ -1,0 +1,191 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #c5d8e2;
+    color: #333;
+}
+
+.top-bar {
+    text-align: center;
+    padding: 20px;
+}
+
+.top-buttons {
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+    padding: 10px 20px;
+}
+
+.logo {
+    border-radius: 100%;
+    height: 100px;
+    width: 100px;
+}
+
+
+
+h1 {
+    color: #003366;
+    font-size: 2em;
+    margin: 10px 0 5px;
+}
+
+p {
+    margin: 5px 0 20px;
+}
+
+.cards-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 60px;
+    padding: 10px 20px;
+}
+
+
+.video-thumb:hover {
+    transform: scale(1.03);
+}
+
+
+
+.card .plataforma {
+    font-size: 0.9em;
+    font-weight: bold;
+    margin-bottom: 10px;
+    display: inline-block;
+}
+
+.card-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    flex-wrap: nowrap; /
+}
+
+@media (max-width: 750px) {
+    .card-content {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+    
+    .Logo_APPs, .video-thumb, .Logo_PDF {
+        width: 100%;
+        max-width: 250px;
+    }
+    
+    .middle-content {
+        text-align: center;
+    }
+}
+
+.card {
+    background: #d4e5ff;
+    border-radius: 10px;
+    padding: 25px;
+    width: 90%;
+    max-width: 1000px;
+    margin: 0 auto; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.Logo_APPs{
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+}
+
+.video-thumb {
+    width: 100%;
+    max-width: 320px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.Logo_PDF{
+    display: block;
+     width: 100px;
+    height: 100px;
+    object-fit: contain;
+}
+.middle-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    justify-content: center;
+}
+
+.video-btn {
+    width: 50px;
+    height: 50px;
+    background: url('img/play-icon.png') center/contain no-repeat;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.pdf_conteiner {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-align: center;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    position: relative;
+    background: transparent;
+    padding: 20px;
+    max-width: 320px;
+    width: 100%;
+}
+
+.close-modal {
+    position: absolute;
+    top: -30px;
+    right: -10px;
+    color: white;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-modal:hover {
+    color: #ccc;
+}
+
+#videoFrame {
+    width: 320px;
+    height: 180px;
+    border-radius: 8px;
+}
+
+@media (min-width: 768px) {
+    .modal-content {
+        max-width: 640px;
+    }
+    
+    #videoFrame {
+        width: 640px;
+        height: 360px;
+    }
+}

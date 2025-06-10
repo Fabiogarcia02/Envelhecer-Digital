@@ -14,12 +14,11 @@ let timerInterval;
 let tempoRestante = 240;
 
 window.addEventListener("DOMContentLoaded", () => {
-  backgroundMusic.volume = 0.2;
+backgroundMusic.volume = 0.03; // 3% do volume
   backgroundMusic.play().catch(() => {});
   carregarRanking();
   carregarCartas();
 });
-
 toggleButton.addEventListener("click", () => {
   if (backgroundMusic.paused) {
     backgroundMusic.play();

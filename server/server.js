@@ -12,19 +12,22 @@ const DB_PATH = path.join(__dirname, "db.json");
 // Serve arquivos estáticos da pasta 'public' que está uma pasta acima de 'server'
 app.use(express.static(path.join(__dirname, "..", "public")));
 
-// Rota principal para servir o frontend (index.html na pasta public uma pasta acima)
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "..", "public", "index.html"));
-});
+// Habilita o CORS e o JSON parsing
+app.use(cors());
+app.use(express.json());
 
-// Funções utilitárias para ler e escrever o arquivo db.json
+// Rota principal para servir o frontend
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "..", "public", "jogodamemoria.html"));
+});
+// Funções para ler e escrever o banco de dados
 function readDB() {
   try {
     const data = fs.readFileSync(DB_PATH, "utf-8");
     return JSON.parse(data);
   } catch (err) {
     console.error("Erro lendo o banco de dados:", err);
-    return { ranking: [] };
+    return { ranking: [], cartas: [] };
   }
 }
 
@@ -45,7 +48,7 @@ app.get("/ranking", (req, res) => {
 
 // POST /ranking adiciona uma nova pontuação
 app.post("/ranking", (req, res) => {
-  const { nome, pontuacao } = req.body;
+  const { nome, pontuacao, erros, tempo } = req.body;
 
   if (!nome || pontuacao == null) {
     return res.status(400).json({ error: "Nome e pontuação são obrigatórios." });
@@ -55,11 +58,19 @@ app.post("/ranking", (req, res) => {
   db.ranking.push({
     nome,
     pontuacao,
+    erros: typeof erros === "number" ? erros : null,
+    tempo: typeof tempo === "number" ? tempo : null,
     data: new Date().toISOString().split("T")[0],
   });
 
   writeDB(db);
   res.status(201).json({ message: "Pontuação salva com sucesso." });
+});
+
+// NOVA ROTA: GET /cartas
+app.get("/cartas", (req, res) => {
+  const db = readDB();
+  res.json(db.cartas || []);
 });
 
 // Inicia o servidor

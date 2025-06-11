@@ -2,33 +2,63 @@ const tam = 15;
 const letras = "ABCDEFGHIJKLMNOPQRSTUVWXYZÁÀÂÃÉÊÍÓÔÕÚÇ";
 const matriz = Array.from({ length: tam }, () => Array(tam).fill(""));
 let listItems = [];
-const palavras = ["SENHA", "BRADESCO", "CAIXA", "LOREM", "PASTA"];
 let selectPalavra = [];
 let selecionado = false;
 let startX = null;
 let startY = null;
 let dirX = null;
 let dirY = null;
+let nivelAtual = 1;
+let jogosJson = [];
+let palavrasEncontradas = 0;
+let palavras = [];
 
 window.onload = () => {
-    for (let i = 0; i < palavras.length; i++) {
+    fetch("/jogos")
+        .then(response => response.json())
+        .then(data => {
+            jogosJson = data;
+            carregarNivel(nivelAtual);
+        });
+};
+
+function carregarNivel(nivel) {
+    const jogo = jogosJson.find(j => j.nivel === nivel);
+    if (!jogo) return;
+
+    nivelAtual = nivel;
+    palavras = jogo.palavras;
+    palavrasEncontradas = 0;
+    listItems = [];
+
+    for (let x = 0; x < tam; x++) {
+        for (let y = 0; y < tam; y++) {
+            matriz[x][y] = "";
+        }
+    }
+    const level = document.getElementById("levelTitle");
+    level.innerHTML = `Nivel - ${nivelAtual}`;
+    const listaUl = document.getElementById("listWords");
+    listaUl.innerHTML = "";
+
+    palavras.forEach(palavra => {
         let direcao = Math.floor(Math.random() * 3);
         switch (direcao) {
             case 0:
-                insereHorizontal(palavras[i]);
+                insereHorizontal(palavra);
                 break;
             case 1:
-                insereVertical(palavras[i]);
+                insereVertical(palavra);
                 break;
             case 2:
-                insereDiagonal(palavras[i]);
+                insereDiagonal(palavra);
                 break;
         }
-            let li = document.createElement("li");
-            li.textContent = palavras[i];
-            document.getElementById("listWords").appendChild(li);
-            listItems.push(li);
-    }
+        let li = document.createElement("li");
+        li.textContent = palavra;
+        listaUl.appendChild(li);
+        listItems.push(li);
+    });
 
     for (let x = 0; x < tam; x++) {
         for (let y = 0; y < tam; y++) {
@@ -45,7 +75,7 @@ window.onload = () => {
             container.innerHTML += `<span class="letra">${matriz[x][y]}</span>`;
         }
     }
-};
+}
 
 function insereHorizontal(palavra) {
     let inserida = false;
@@ -120,8 +150,6 @@ function limpaSelecao() {
         }
     });
     selectPalavra = [];
-    // const faixa = document.querySelector(".tracado-diagonal");
-    // if (faixa) faixa.remove();
 }
 
 function selecionaIntervalo(startX, startY, endX, endY) {
@@ -147,12 +175,8 @@ function selecionaIntervalo(startX, startY, endX, endY) {
         y += dy;
     }
 
-    if (dx !== 0 && dy !== 0) {
-        desenhaFaixaDiagonal(startX, startY, endX, endY);
-    }
 }
 
-// Eventos de mouse
 function getLetraFromEvent(e) {
     let target = e.target;
     if (e.touches && e.touches.length > 0) {
@@ -204,22 +228,35 @@ function moveSelection(e) {
 function endSelection(e) {
     if (!selecionado) return;
     const palavraSelecionada = selectPalavra.map(span => span.textContent).join("");
+
     if (!palavras.includes(palavraSelecionada)) {
         limpaSelecao();
     } else {
         for (let i = 0; i < palavras.length; i++) {
-            if (palavras[i] == palavraSelecionada) {
+            if (palavras[i] === palavraSelecionada && !listItems[i].classList.contains("encontrado")) {
                 listItems[i].classList.add("encontrado");
+                palavrasEncontradas++;
+                break;
             }
         }
+
         selectPalavra.forEach(el => el.classList.add("fixa"));
+
+        // Verifica se todas as palavras foram encontradas
+        if (palavrasEncontradas === palavras.length) {
+            setTimeout(() => {
+                carregarNivel(nivelAtual + 1); 
+            }, 300);
+        }
     }
+
     selecionado = false;
     startX = null;
     startY = null;
     selectPalavra = [];
     e.preventDefault();
 }
+
 
 document.addEventListener("mousedown", startSelection);
 document.addEventListener("touchstart", startSelection);

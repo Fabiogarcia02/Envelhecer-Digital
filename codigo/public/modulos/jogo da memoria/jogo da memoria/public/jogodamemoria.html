@@ -2,39 +2,53 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <title>Jogo da Memória</title>
+  <title>Memória Digital</title>
   <link rel="stylesheet" href="jogodamemoria.css" />
 </head>
 <body>
   <div class="main-wrapper">
+    <!-- Tabela Completa à esquerda -->
+    <div class="tabela-wrapper">
+      <div class="ranking-box tabela-completa-box">
+        <h3>Tabela de Classificação</h3>
+        <div id="ranking-tabela">Carregando...</div>
+      </div>
+    </div>
+    <!-- Jogo central -->
     <div class="container">
-      <h1>Jogo da Memória</h1>
+      <h1>Memória Digital</h1>
       <p id="timer">Tempo restante: 04:00</p>
       <div>
         <label for="nome">Digite seu nome:</label>
         <input type="text" id="nome" placeholder="Seu nome" />
         <button onclick="salvarPontuacao()">Salvar Pontuação</button>
       </div>
-      <p id="score">Pontos: 0</p>
-      <p id="erros">Erros: 0</p>
-      <p id="melhor-pontuacao">Melhor pontuação: 0</p>
+      <!-- Layout melhorado para pontuação -->
+      <div class="score-info">
+        <div class="score-main">
+          <span class="score-label"></span>
+          <span id="score" class="score-value">0</span>
+        </div>
+        <div class="score-details">
+          <span id="erros" class="score-detail">Erros: 0</span>
+          <span id="melhor-pontuacao" class="score-detail">Melhor pontuação: 0</span>
+        </div>
+      </div>
       <div id="game-board" class="game-board"></div>
     </div>
+    <!-- Rankings à direita -->
     <div class="ranking-wrapper">
-      <h2>Rankings</h2>
-      <div class="ranking-container">
-        <div class="ranking-box">
-          <h3>Ranking Pontuação</h3>
-          <div id="ranking">Carregando...</div>
-        </div>
-        <div class="ranking-box">
-          <h3>Ranking por Erros</h3>
-          <div id="ranking-erros">Carregando...</div>
-        </div>
-        <div class="ranking-box">
-          <h3>Ranking por Tempo</h3>
-          <div id="ranking-tempo">Carregando...</div>
-        </div>
+      <div class="ranking-box ranking-wide">
+        <h3>Ranking Global</h3>
+        <div id="ranking-global">Carregando...</div>
+      </div>
+      <div class="ranking-box ranking-wide">
+        <h3>Ranking Pontuação</h3>
+        <div id="ranking">Carregando...</div>
+      </div>
+      <div class="ranking-box ranking-wide">
+        <h3>Ranking por Tempo</h3>
+        <div id="ranking-tempo">Carregando...</div>
       </div>
     </div>
   </div>

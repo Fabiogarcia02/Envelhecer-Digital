@@ -18,9 +18,8 @@ app.use(express.json());
 
 // Rota principal para servir o frontend
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "..", "public", "index.html"));
+  res.sendFile(path.join(__dirname, "..", "public", "jogodamemoria.html"));
 });
-
 // Funções para ler e escrever o banco de dados
 function readDB() {
   try {
@@ -49,7 +48,7 @@ app.get("/ranking", (req, res) => {
 
 // POST /ranking adiciona uma nova pontuação
 app.post("/ranking", (req, res) => {
-  const { nome, pontuacao } = req.body;
+  const { nome, pontuacao, erros, tempo } = req.body;
 
   if (!nome || pontuacao == null) {
     return res.status(400).json({ error: "Nome e pontuação são obrigatórios." });
@@ -59,6 +58,8 @@ app.post("/ranking", (req, res) => {
   db.ranking.push({
     nome,
     pontuacao,
+    erros: typeof erros === "number" ? erros : null,
+    tempo: typeof tempo === "number" ? tempo : null,
     data: new Date().toISOString().split("T")[0],
   });
 

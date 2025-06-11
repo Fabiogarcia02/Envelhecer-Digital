@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Gamificação</title>
+    <link rel="stylesheet" href="gamificacao.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🏆 Gamificação Escolar</h1>
+        
+        <!-- Perfil do Aluno -->
+        <div class="profile-card">
+            <h2 id="student-name">Caio Vieira</h2>
+            <div class="progress-bar">
+                <div id="progress" class="progress-fill"></div>
+            </div>
+            <p>Pontos: <span id="points">0</span>/1000</p>
+        </div>
+
+        <!-- Badges -->
+        <div class="badges-section">
+            <h2>📛 Conquistas</h2>
+            <div id="badges-container" class="badges-grid">
+                <!-- Badges serão inseridas via JS -->
+            </div>
+        </div>
+
+        <!-- Ranking -->
+        <div class="ranking-section">
+            <h2>🏅 Ranking da Turma</h2>
+            <table id="ranking-table">
+                <thead>
+                    <tr>
+                        <th>Posição</th>
+                        <th>Nome</th>
+                        <th>Pontos</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Dados serão inseridos via JS -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="gamificacao.js"></script>
+</body>
+</html>

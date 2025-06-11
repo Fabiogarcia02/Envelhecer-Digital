@@ -1,1 +1,79 @@
+ body {
+      font-family: Arial, sans-serif;
+      background: #f1f9ff;
+      margin: 0;
+      padding: 2rem;
+      text-align: center;
+    }
 
+    h1 {
+      color: #035a8d;
+      margin-bottom: 1rem;
+    }
+
+    .podium {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .podium div {
+      padding: 1rem;
+      border-radius: 10px;
+      color: white;
+      width: 120px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+    }
+
+    .first {
+      background: gold;
+      height: 200px;
+    }
+
+    .second {
+      background: silver;
+      height: 160px;
+    }
+
+    .third {
+      background: #cd7f32; /* Bronze */
+      height: 140px;
+    }
+
+    .avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      margin-bottom: 0.5rem;
+    }
+
+    .ranking-list {
+      text-align: left;
+      max-width: 300px;
+      margin: 0 auto;
+      background: white;
+      padding: 1rem;
+      border-radius: 10px;
+    }
+
+    .ranking-list ol {
+      padding-left: 1rem;
+    }
+
+    .ranking-list li {
+      margin: 0.5rem 0;
+    }
+
+    .btn-ver-mais {
+      margin-top: 1rem;
+      background: none;
+      border: none;
+      color: #035a8d;
+      cursor: pointer;
+      text-decoration: underline;
+    }

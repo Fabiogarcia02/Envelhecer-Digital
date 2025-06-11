@@ -12,9 +12,10 @@ let firstCard = null;
 let lock = false;
 let timerInterval;
 let tempoRestante = 240;
+let pontosPorPar = 10; // será ajustado ao carregar as cartas
 
 window.addEventListener("DOMContentLoaded", () => {
-backgroundMusic.volume = 0.03; // 3% do volume
+  backgroundMusic.volume = 0.03; // 3% do volume
   backgroundMusic.play().catch(() => {});
   carregarRanking();
   carregarCartas();
@@ -34,47 +35,155 @@ async function carregarRanking() {
     const res = await fetch("http://localhost:3000/ranking");
     const data = await res.json();
 
-    const rankingDiv = document.getElementById("ranking");
-    const rankingErrosDiv = document.getElementById("ranking-erros");
-    const rankingTempoDiv = document.getElementById("ranking-tempo");
+    // RANKING GLOBAL: mais pontos, menor tempo (visual pódio + lista, só nome)
+    const rankingGlobalDiv = document.getElementById("ranking-global");
+    let globalSorted = data
+      .slice()
+      .sort((a, b) => {
+        if (b.pontuacao !== a.pontuacao) {
+          return b.pontuacao - a.pontuacao;
+        }
+        return (a.tempo || 99999) - (b.tempo || 99999);
+      });
 
+    const trofeus = [
+      '<span class="trophy">🏆</span>',
+      '<span class="trophy">🥈</span>',
+      '<span class="trophy">🥉</span>'
+    ];
+    let podiumHTML = '<div class="ranking-list">';
+    for (let i = 0; i < 3; i++) {
+      const user = globalSorted[i];
+      if (!user) continue;
+      let podiumClass = i === 0 ? "first" : i === 1 ? "second" : "third";
+      podiumHTML += `
+        <div class="ranking-podium ${podiumClass}">
+          ${trofeus[i] || ""}
+          <div style="font-size:14px;opacity:0.8">${i === 0 ? "Primeiro" : i === 1 ? "Segundo" : "Terceiro"} lugar</div>
+          <div style="font-size:18px;margin:6px 0 2px 0">${user.nome}</div>
+        </div>
+      `;
+    }
+    podiumHTML += '</div>';
+
+    // Exibe a lista do 4º em diante só se houver mais de 3 usuários
+    let restHTML = '';
+    if (globalSorted.length > 3) {
+      restHTML = '<div class="ranking-rest">';
+      for (let i = 3; i < globalSorted.length && i < 10; i++) {
+        restHTML += `<p>${globalSorted[i].nome}</p>`;
+      }
+      if (globalSorted.length > 10) {
+        restHTML += `<a href="#">Ver mais</a>`;
+      }
+      restHTML += '</div>';
+    }
+    rankingGlobalDiv.innerHTML = podiumHTML + restHTML;
+
+    // NOVA TABELA COMPLETA
+    const rankingTabelaDiv = document.getElementById("ranking-tabela");
+    let tabelaHTML = `
+      <table class="ranking-global-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Nome</th>
+            <th>Pontos</th>
+            <th>Erros</th>
+            <th>Tempo (s)</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${globalSorted.map((item, i) => `
+            <tr>
+              <td>${i + 1}</td>
+              <td>${item.nome}</td>
+              <td>${item.pontuacao}</td>
+              <td>${item.erros}</td>
+              <td>${item.tempo || 0}</td>
+            </tr>
+          `).join("")}
+        </tbody>
+      </table>
+    `;
+    rankingTabelaDiv.innerHTML = tabelaHTML || "Sem dados ainda.";
+
+    // Ranking Pontuação: apenas nome do usuário e lista só se houver mais de 3
+    const rankingDiv = document.getElementById("ranking");
     if (!data.length) {
       rankingDiv.innerText = "Nenhuma pontuação registrada ainda.";
-      rankingErrosDiv.innerText = "Nenhum dado de erros.";
-      rankingTempoDiv.innerText = "Nenhum dado de tempo.";
       return;
     }
+    const sorted = data.slice().sort((a, b) => b.pontuacao - a.pontuacao);
+    let podiumHTML2 = '<div class="ranking-list">';
+    for (let i = 0; i < 3; i++) {
+      const user = sorted[i];
+      if (!user) continue;
+      let podiumClass = i === 0 ? "first" : i === 1 ? "second" : "third";
+      podiumHTML2 += `
+        <div class="ranking-podium ${podiumClass}">
+          ${trofeus[i] || ""}
+          <div style="font-size:14px;opacity:0.8">${i === 0 ? "Primeiro" : i === 1 ? "Segundo" : "Terceiro"} lugar</div>
+          <div style="font-size:18px;margin:6px 0 2px 0">${user.nome}</div>
+        </div>
+      `;
+    }
+    podiumHTML2 += '</div>';
 
-    let rankingHTML = data
-      .sort((a, b) => b.pontuacao - a.pontuacao)
-      .map((item, i) =>
-        `<p>${i + 1}. ${item.nome} - ${item.pontuacao} pontos</p>`
-      ).join("");
+    let restHTML2 = '';
+    if (sorted.length > 3) {
+      restHTML2 = '<div class="ranking-rest">';
+      for (let i = 3; i < sorted.length && i < 10; i++) {
+        restHTML2 += `<p>${sorted[i].nome}</p>`;
+      }
+      if (sorted.length > 10) {
+        restHTML2 += `<a href="#">Ver mais</a>`;
+      }
+      restHTML2 += '</div>';
+    }
+    rankingDiv.innerHTML = podiumHTML2 + restHTML2;
 
-    let errosHTML = data
-      .filter(item => typeof item.erros === "number")
-      .sort((a, b) => a.erros - b.erros)
-      .map((item, i) =>
-        `<p>${i + 1}. ${item.nome} - ${item.erros} erro(s)</p>`
-      ).join("");
+    // Ranking por tempo (apenas quem fez 100 pontos)
+    const rankingTempoDiv = document.getElementById("ranking-tempo");
+    let tempoSorted = data
+      .filter(item => item.pontuacao === 100 && typeof item.tempo === "number")
+      .sort((a, b) => a.tempo - b.tempo);
 
-    let tempoHTML = data
-      .filter(item => typeof item.tempo === "number")
-      .sort((a, b) => a.tempo - b.tempo)
-      .map((item, i) =>
-        `<p>${i + 1}. ${item.nome} - ${item.tempo}s</p>`
-      ).join("");
+    let podiumHTML3 = '<div class="ranking-list">';
+    for (let i = 0; i < 3; i++) {
+      const user = tempoSorted[i];
+      if (!user) continue;
+      let podiumClass = i === 0 ? "first" : i === 1 ? "second" : "third";
+      podiumHTML3 += `
+        <div class="ranking-podium ${podiumClass}">
+          ${trofeus[i] || ""}
+          <div style="font-size:14px;opacity:0.8">${i === 0 ? "Primeiro" : i === 1 ? "Segundo" : "Terceiro"} lugar</div>
+          <div style="font-size:18px;margin:6px 0 2px 0">${user.nome}</div>
+        </div>
+      `;
+    }
+    podiumHTML3 += '</div>';
 
-    rankingHTML += `<p><strong>Melhor pontuação local:</strong> ${localStorage.getItem("bestScore") || 0}</p>`;
+    let restHTML3 = '';
+    if (tempoSorted.length > 3) {
+      restHTML3 = '<div class="ranking-rest">';
+      for (let i = 3; i < tempoSorted.length && i < 10; i++) {
+        restHTML3 += `<p>${tempoSorted[i].nome}</p>`;
+      }
+      if (tempoSorted.length > 10) {
+        restHTML3 += `<a href="#">Ver mais</a>`;
+      }
+      restHTML3 += '</div>';
+    }
+    rankingTempoDiv.innerHTML = (tempoSorted.length === 0)
+      ? "Sem dados de tempo ainda."
+      : podiumHTML3 + restHTML3;
 
-    if (rankingDiv) rankingDiv.innerHTML = rankingHTML;
-    if (rankingErrosDiv) rankingErrosDiv.innerHTML = errosHTML || "Sem dados de erros ainda.";
-    if (rankingTempoDiv) rankingTempoDiv.innerHTML = tempoHTML || "Sem dados de tempo ainda.";
   } catch (err) {
-    console.error("Erro ao carregar ranking:", err);
-    if (document.getElementById("ranking")) document.getElementById("ranking").innerText = "Erro ao carregar ranking.";
-    if (document.getElementById("ranking-erros")) document.getElementById("ranking-erros").innerText = "Erro ao carregar ranking de erros.";
-    if (document.getElementById("ranking-tempo")) document.getElementById("ranking-tempo").innerText = "Erro ao carregar ranking de tempo.";
+    document.getElementById("ranking-global").innerText = "Erro ao carregar ranking global.";
+    document.getElementById("ranking-tabela").innerText = "Erro ao carregar tabela.";
+    document.getElementById("ranking").innerText = "Erro ao carregar ranking.";
+    document.getElementById("ranking-tempo").innerText = "Erro ao carregar ranking de tempo.";
   }
 }
 
@@ -89,9 +198,13 @@ async function carregarCartas() {
       { type: "text", content: item.descricao, pairId: item.id }
     ]);
 
+    // Calcula quantos pontos cada par vale para fechar em 100
+    const totalPares = data.length;
+    pontosPorPar = Math.floor(100 / totalPares);
+
     score = 0;
     erros = 0;
-    document.getElementById("score").innerText = `Pontos: ${score}`;
+    atualizarPontuacao();
     document.getElementById("erros").innerText = `Erros: ${erros}`;
     gameBoard.innerHTML = "";
     renderCards(cardsData);
@@ -100,6 +213,11 @@ async function carregarCartas() {
     console.error("Erro ao carregar cartas:", err);
     alert("Erro ao carregar cartas do jogo.");
   }
+}
+
+function atualizarPontuacao() {
+  let pontosFinais = Math.max(0, score - erros * 0.5);
+  document.getElementById("score").innerText = `Pontos: ${pontosFinais}`;
 }
 
 function createCard(card, index, cardsData) {
@@ -157,18 +275,26 @@ function handleCardClick(e, cardsData) {
         successSound.play();
         firstCard.classList.add("matched");
         card.classList.add("matched");
-        score++;
-        document.getElementById("score").innerText = `Pontos: ${score}`;
+        score += pontosPorPar;
+        if (score > 100) score = 100;
+        atualizarPontuacao();
         if (score > bestScore) {
           bestScore = score;
           localStorage.setItem("bestScore", bestScore);
           document.getElementById("melhor-pontuacao").innerText = `Melhor pontuação: ${bestScore}`;
           carregarRanking();
         }
+        // Se chegou a 100 pontos, para o jogo e salva o tempo
+        if (score >= 100) {
+          clearInterval(timerInterval);
+          alert("Parabéns! Você atingiu 100 pontos!");
+          salvarPontuacao();
+        }
       } else {
         errorSound.play();
         erros++;
         document.getElementById("erros").innerText = `Erros: ${erros}`;
+        atualizarPontuacao();
         firstCard.classList.remove("flipped");
         card.classList.remove("flipped");
         firstCard.innerHTML = "";
@@ -205,13 +331,14 @@ function salvarPontuacao() {
   }
 
   const tempoGastoAtual = 240 - tempoRestante;
+  const pontosFinais = Math.max(0, score - erros * 0.5);
 
   fetch("http://localhost:3000/ranking", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       nome,
-      pontuacao: score,
+      pontuacao: pontosFinais,
       erros,
       tempo: tempoGastoAtual,
       data: new Date().toISOString().split("T")[0]

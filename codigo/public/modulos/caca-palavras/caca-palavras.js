@@ -12,6 +12,9 @@ let nivelAtual = 1;
 let jogosJson = [];
 let palavrasEncontradas = 0;
 let palavras = [];
+let intervaloTempo = null;
+let tempoDecorrido = 0;
+let pontuacaoAtual = 100;
 
 window.onload = () => {
     fetch("/jogos")
@@ -75,6 +78,7 @@ function carregarNivel(nivel) {
             container.innerHTML += `<span class="letra">${matriz[x][y]}</span>`;
         }
     }
+    iniciarCronometro();
 }
 
 function insereHorizontal(palavra) {
@@ -239,22 +243,21 @@ function endSelection(e) {
                 break;
             }
         }
-
-        selectPalavra.forEach(el => el.classList.add("fixa"));
-
-        // Verifica se todas as palavras foram encontradas
         if (palavrasEncontradas === palavras.length) {
+            pararCronometro();
             setTimeout(() => {
-                carregarNivel(nivelAtual + 1); 
-            }, 300);
-        }
-    }
+                carregarNivel(nivelAtual + 1);
+            }, 100);
 
-    selecionado = false;
-    startX = null;
-    startY = null;
-    selectPalavra = [];
-    e.preventDefault();
+            selectPalavra.forEach(el => el.classList.add("fixa"));
+        }
+
+        selecionado = false;
+        startX = null;
+        startY = null;
+        selectPalavra = [];
+        e.preventDefault();
+    }
 }
 
 
@@ -266,3 +269,34 @@ document.addEventListener("touchmove", moveSelection);
 
 document.addEventListener("mouseup", endSelection);
 document.addEventListener("touchend", endSelection);
+
+function formatarTempo(segundos) {
+    const min = String(Math.floor(segundos / 60)).padStart(2, '0');
+    const sec = String(segundos % 60).padStart(2, '0');
+    return `${min}:${sec}`;
+}
+
+function atualizarCronometro() {
+    tempoDecorrido++;
+    document.getElementById("cronometro").textContent = formatarTempo(tempoDecorrido);
+
+    // Reduz 10 pontos a cada 30s após 2min
+    if (tempoDecorrido > 120) {
+        let penalidade = Math.floor((tempoDecorrido - 120) / 30) * 10;
+        pontuacaoAtual = Math.max(100 - penalidade, 0);
+        document.getElementById("pontuacao").textContent = pontuacaoAtual;
+    }
+}
+
+function iniciarCronometro() {
+    tempoDecorrido = 0;
+    pontuacaoAtual = 100;
+    document.getElementById("cronometro").textContent = "00:00";
+    document.getElementById("pontuacao").textContent = "100";
+    clearInterval(intervaloTempo);
+    intervaloTempo = setInterval(atualizarCronometro, 1000);
+}
+
+function pararCronometro() {
+    clearInterval(intervaloTempo);
+}

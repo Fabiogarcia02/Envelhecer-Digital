@@ -126,6 +126,19 @@ main {
   font-size: 1.1rem;
 }
 
+#infoJogo {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+#infoJogo span {
+    color: #007acc;
+}
+
 #listWords li {
   margin-top: 15px;
   text-align: center;
@@ -178,6 +191,7 @@ main {
 
     #levelTitle,
     .listTitle {
+        margin-top: -5px;
         font-size: 1.5em;
     }
 

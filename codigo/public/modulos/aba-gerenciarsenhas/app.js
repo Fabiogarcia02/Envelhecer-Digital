@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const closeBtn = document.getElementsByClassName('close')[0];
     const form = document.getElementById('passwordForm');
 
-    // Configuração dos eventos do modal
     addBtn.onclick = () => modal.style.display = 'block';
     closeBtn.onclick = () => modal.style.display = 'none';
     window.onclick = (event) => event.target === modal ? modal.style.display = 'none' : null;
@@ -13,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Carrega as senhas ao iniciar
     loadPasswords();
 
-    // Função principal para carregar senhas
+    //carregar senhas
     async function loadPasswords() {
         try {
             const response = await fetch(API_URL);
@@ -25,11 +24,10 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Renderiza as senhas na tela
+    // Mostra as senhas na tela
     function renderPasswords(passwords) {
     const container = document.querySelector('.password-container');
 
-    // Apenas remova os cards, mas mantenha o header
     const cards = container.querySelectorAll('.password-card');
     cards.forEach(card => card.remove());
 
@@ -75,7 +73,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const deleteBtn = card.querySelector('.delete');
         const passwordElement = card.querySelector('.password');
 
-        // Evento para mostrar/ocultar senha
+        //mostrar/ocultar senha
         revealBtn.addEventListener('click', () => {
             if (passwordElement.classList.contains('masked')) {
                 passwordElement.textContent = password.password;
@@ -90,7 +88,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
-        // Evento para deletar senha
+        //deletar senha
         deleteBtn.addEventListener('click', async () => {
             if (confirm(`Tem certeza que deseja excluir a senha de ${password.serviceName}?`)) {
                 try {
@@ -104,7 +102,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Função para adicionar nova senha
+    //adicionar nova senha
     async function addPassword(password) {
         const response = await fetch(API_URL, {
             method: 'POST',
@@ -116,7 +114,7 @@ document.addEventListener('DOMContentLoaded', function() {
         return response.json();
     }
 
-    // Função para deletar senha
+    //deletar senha
     async function deletePassword(id) {
         await fetch(`${API_URL}/${id}`, {
             method: 'DELETE'

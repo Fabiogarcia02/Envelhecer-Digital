@@ -117,7 +117,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Função para deletar senha
-    async function deletePassword(id) {
+    async function deletePassword(id) {ds
         await fetch(`${API_URL}/${id}`, {
             method: 'DELETE'
         });

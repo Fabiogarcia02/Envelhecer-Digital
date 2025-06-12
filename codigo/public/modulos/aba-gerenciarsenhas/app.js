@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const API_URL = 'http://localhost:3000/passwords';
+    const API_URL = '/passwords';
     const modal = document.getElementById('addModal');
     const addBtn = document.getElementById('addNewCard');
     const closeBtn = document.getElementsByClassName('close')[0];
@@ -27,17 +27,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Renderiza as senhas na tela
     function renderPasswords(passwords) {
-        const container = document.querySelector('.password-container');
-        const header = document.querySelector('.header-container');
-        
-        container.innerHTML = '';
-        container.appendChild(header.cloneNode(true));
+    const container = document.querySelector('.password-container');
 
-        passwords.forEach(password => {
-            const card = createPasswordCard(password);
-            container.appendChild(card);
-        });
-    }
+    // Apenas remova os cards, mas mantenha o header
+    const cards = container.querySelectorAll('.password-card');
+    cards.forEach(card => card.remove());
+
+    passwords.forEach(password => {
+        const card = createPasswordCard(password);
+        container.appendChild(card);
+    });
+}
 
     // Cria um card de senha
     function createPasswordCard(password) {
@@ -117,7 +117,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Função para deletar senha
-    async function deletePassword(id) {ds
+    async function deletePassword(id) {
         await fetch(`${API_URL}/${id}`, {
             method: 'DELETE'
         });

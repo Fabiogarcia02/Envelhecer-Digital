@@ -1,0 +1,46 @@
+{
+  "achievements": [
+    {
+      "id": 1,
+      "title": "Mais rápido",
+      "game": "quiz",
+      "emoji": "⏱️"
+    },
+    {
+      "id": 2,
+      "title": "Melhor jogador",
+      "game": "quiz",
+      "emoji": "🏆"
+    },
+    {
+      "id": 3,
+      "title": "Melhor raciocínio lógico",
+      "game": "memoria",
+      "emoji": "🧠"
+    },
+    {
+      "id": 4,
+      "title": "Mestre em história",
+      "game": "caca_palavras",
+      "emoji": "📖"
+    },
+    {
+      "id": 5,
+      "title": "Velocidade suprema",
+      "game": "quiz",
+      "emoji": "🚀"
+    },
+    {
+      "id": 6,
+      "title": "Memória infalível",
+      "game": "memoria",
+      "emoji": "🧩"
+    },
+    {
+      "id": 7,
+      "title": "Caçador de palavras",
+      "game": "caca_palavras",
+      "emoji": "🔍"
+    }
+  ]
+}

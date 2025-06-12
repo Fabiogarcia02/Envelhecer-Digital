@@ -20,6 +20,13 @@
       "nome": "Rommel",
       "email": "rommel@gmail.com",
       "id": 3
+    },
+    {
+      "login": "caio",
+      "senha": "caio123",
+      "nome": "caio",
+      "email": "caio@gmail.com",
+      "id": 4
     }
   ]
 }

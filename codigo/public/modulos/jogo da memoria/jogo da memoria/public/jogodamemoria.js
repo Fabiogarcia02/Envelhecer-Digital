@@ -89,7 +89,6 @@ async function carregarRanking() {
             <th>#</th>
             <th>Nome</th>
             <th>Pontos</th>
-            <th>Erros</th>
             <th>Tempo (s)</th>
           </tr>
         </thead>
@@ -99,7 +98,6 @@ async function carregarRanking() {
               <td>${i + 1}</td>
               <td>${item.nome}</td>
               <td>${item.pontuacao}</td>
-              <td>${item.erros}</td>
               <td>${item.tempo || 0}</td>
             </tr>
           `).join("")}

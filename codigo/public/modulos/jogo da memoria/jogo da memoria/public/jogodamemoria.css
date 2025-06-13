@@ -471,3 +471,26 @@ button:hover {
     padding: 6px;
   }
 }
+
+#rankingBox {
+  max-width: 500px;
+  margin-top: 30px;
+  background-color: #fff;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+}
+
+#rankingBox h2 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+#rankingBox ol {
+  padding-left: 20px;
+}
+
+#rankingBox li {
+  margin-bottom: 6px;
+}

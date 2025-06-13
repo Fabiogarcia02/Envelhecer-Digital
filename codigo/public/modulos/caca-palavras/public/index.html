@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Caça-Palavras</title>
+    <script src="caca-palavras.js" defer></script>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="#"><img src="img/logo.jpg" alt="Logo" /></a>
+        <h1>Caça-Palavras</h1>
+        <a href="#"><button>Voltar</button></a>
+    </nav>
+
+    <main>
+        <section class="lista-palavras">
+            <h1 class="listTitle">Palavras</h1>
+            <ul id="listWords"></ul>
+        </section>
+
+        <section class="procura-palavras">
+            <h1 id="levelTitle">Nível - 1</h1>
+            <div id="infoJogo">
+                <p>Tempo: <span id="cronometro">00:00</span></p>
+                <p>Pontuação: <span id="pontuacao">100</span></p>
+            </div>
+            <div id="containerCacaPalavras" class="grid"></div>
+        </section>
+
+        <!-- Rankings -->
+        <section class="ranking-section">
+            <div class="ranking-box">
+                <h3>Ranking por Pontuação</h3>
+                <table>
+                <thead><tr><th>Posição</th><th>Nome</th><th>Pontuação</th></tr></thead>
+                <tbody id="ranking"><tr><td colspan="3">Carregando...</td></tr></tbody>
+                </table>
+            </div>
+
+            <div class="ranking-box">
+                <h3>Ranking por Tempo</h3>
+                <table>
+                <thead><tr><th>Posição</th><th>Nome</th><th>Tempo</th></tr></thead>
+                <tbody id="ranking-tempo"><tr><td colspan="3">Carregando...</td></tr></tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

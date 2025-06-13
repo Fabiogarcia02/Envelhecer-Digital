@@ -1,0 +1,343 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #def1f8;
+  min-height: 100vh;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px; 
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 1em;
+}
+
+.navbar img {
+  height: 50px;
+}
+
+.navbar h1 {
+  font-size: 20px;
+}
+
+.navbar button {
+  height: 40px;
+  width: 80px;
+  border-radius: 1em;
+  border: none;
+  background-color: #51bce3;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 90px);
+  padding: 10px;
+  gap: 10px;
+}
+
+.procura-palavras,
+.lista-palavras {
+  background-color: #fefdfb;
+  border-radius: 1em;
+  padding: 1em;
+}
+
+.procura-palavras {
+  padding: 15px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: calc(15 * 32px + 30px);
+  box-sizing: content-box;
+}
+
+.lista-palavras {
+  width: 100%;
+  max-height: 100%;
+}
+
+#containerCacaPalavras {
+  display: grid;
+  grid-template-columns: repeat(15, 28px);
+  gap: 1px;
+  position: relative;
+  user-select: none;
+  width: fit-content;
+  height: fit-content;
+}
+
+.letra {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 28px;
+  height: 26px;
+  font-size: 13px; 
+  font-weight: bold;
+  color: #111;
+  background-color: #fff;
+  border-radius: 2px;
+  z-index: 2;
+  position: relative;
+}
+
+.letra.selecionada {
+  background-color: #b6e7c9;
+  border-radius: 50%;
+}
+
+.letra::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 0.3em;
+  pointer-events: none;
+}
+
+.selecionada::after {
+  background-color: rgba(255, 230, 0, 0.6);
+  border: 3px solid #ffc400;
+}
+
+.inicio::after,
+.fim::after {
+  background-color: rgba(255, 200, 0, 0.8);
+  border-radius: 1em;
+}
+
+#levelTitle,
+.listTitle {
+  margin: 0.5em 0;
+  width: 100%;
+  text-align: center;
+  font-size: 1.1rem;
+}
+
+#infoJogo {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  #infoJogo span {
+    color: #007acc;
+}
+
+#listWords li {
+  margin-top: 15px;
+  text-align: center;
+  list-style: none;
+  font-size: 0.8em;
+}
+
+.encontrado {
+  color: #787676;
+  text-decoration: line-through;
+}
+
+.fixa {
+  background-color: rgba(51, 0, 128, 0.3);
+  border-radius: 4px;
+}
+
+/* Ranking */
+.ranking-section {
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+}
+
+.ranking-box {
+  width: 100%;
+  max-width: 600px;
+  background: #e6f2fb;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px #0288d122;
+  padding: 1em;
+  animation: fadeInBody 1.2s;
+}
+
+.ranking-box h3 {
+  text-align: center;
+  margin-bottom: 10px;
+  color: #0288d1;
+}
+
+.ranking-box table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 8px;
+}
+
+.ranking-box th,
+.ranking-box td {
+  padding: 10px 8px;
+  text-align: center;
+  font-size: 16px;
+}
+
+.ranking-box th {
+  background: linear-gradient(90deg, #0288d1 80%, #00bcd4 100%);
+  color: #fff;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+}
+
+.ranking-box tr:nth-child(even) {
+  background: #f7fbff;
+}
+
+.ranking-box tr:nth-child(odd) {
+  background: #e6f2fb;
+}
+
+.ranking-box td {
+  color: #045d8c;
+}
+  /* ===================== MEDIA QUERIES ===================== */
+  /* Tablet (768px a 991px) */
+  @media (min-width: 768px) and (max-width: 991px) {
+    main {
+      flex-direction: row;
+      justify-content: center;
+      gap: 15px;
+    }
+  
+    .lista-palavras {
+      width: 200px; /* largura menor no tablet */
+      max-height: calc(100vh - 90px - 20px);
+      display: block; /* garantir visibilidade */
+      flex-shrink: 0;
+    }
+    
+    .procura-palavras {
+      max-width: calc(15 * 28px + 30px);
+      flex-shrink: 0;
+    }
+  
+    .ranking-section {
+      max-width: 250px;
+      flex-shrink: 0;
+      overflow-y: auto;
+      max-height: calc(100vh - 90px - 20px);
+    }
+  }
+  
+  /* Desktop (>= 992px) */
+  @media (min-width: 992px) {
+    main {
+      flex-direction: row;
+    }
+    
+    .lista-palavras {
+      width: 250px;
+      order: 0;
+      flex-shrink: 0;
+    }
+    
+    .procura-palavras {
+      max-width: calc(15 * 28px + 30px);
+      flex-shrink: 0;
+      order: 1;
+    }
+  
+    .ranking-section {
+      max-width: 300px;
+      flex-shrink: 0;
+      order: 2;
+      align-self: flex-start;
+      overflow-y: auto;
+      max-height: calc(100vh - 90px - 20px);
+    }
+  }
+  
+  /* Mobile (max-width: 767px) */
+  @media (max-width: 767px) {
+  .navbar {
+    padding-top: 2em;
+    margin-bottom: 1em;
+  }
+
+  .navbar h1 {
+    font-size: 1.2em;
+  }
+
+  .navbar button {
+    font-size: 12px;
+    width: 70px;
+    height: 36px;
+  }
+
+  main {
+    padding: 0;
+    margin: 0;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .ranking-section {
+    order: 0;
+    width: 100%;
+    margin-bottom: 1em;
+  }
+
+  .lista-palavras {
+    order: 1;
+    width: 100%;
+    max-height: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 1em;
+    gap: 10px;
+  }
+
+  .procura-palavras {
+    padding: 15px 0;
+    order: 2;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  #listWords {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    width: 100%;
+  }
+
+  #listWords li {
+    font-size: 12px;
+    white-space: nowrap;
+  }
+
+  .letra {
+    width: 22px;
+    height: 22px;
+    font-size: 15px;
+  }
+
+  #containerCacaPalavras {
+    grid-template-columns: repeat(15, 21px);
+  }
+}

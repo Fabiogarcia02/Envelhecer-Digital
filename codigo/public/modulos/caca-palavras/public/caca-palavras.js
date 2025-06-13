@@ -22,6 +22,7 @@ window.onload = () => {
         .then(data => {
             jogosJson = data;
             carregarNivel(nivelAtual);
+            carregarRankings();
         });
 };
 
@@ -30,6 +31,7 @@ function carregarNivel(nivel) {
     if (!jogo) return;
 
     nivelAtual = nivel;
+    carregarRankings();
     palavras = jogo.palavras;
     palavrasEncontradas = 0;
     listItems = [];
@@ -243,14 +245,14 @@ function endSelection(e) {
                 break;
             }
         }
-        if (palavrasEncontradas === palavras.length) {
-            pararCronometro();
-            setTimeout(() => {
-                carregarNivel(nivelAtual + 1);
-            }, 100);
+    if (palavrasEncontradas === palavras.length) {
+        finalizarJogo(); // salva nome e pontuação
+        selectPalavra.forEach(el => el.classList.add("fixa"));
+        setTimeout(() => {
+            carregarNivel(nivelAtual + 1);
+        }, 500);
+    }
 
-            selectPalavra.forEach(el => el.classList.add("fixa"));
-        }
 
         selecionado = false;
         startX = null;
@@ -269,12 +271,20 @@ document.addEventListener("touchmove", moveSelection);
 
 document.addEventListener("mouseup", endSelection);
 document.addEventListener("touchend", endSelection);
+document.addEventListener("touchmove", function (e) {
+  if (selecionado) {
+    e.preventDefault();
+  }
+}, { passive: false });
+
 
 function formatarTempo(segundos) {
+    if (typeof segundos !== "number" || isNaN(segundos)) return "00:00";
     const min = String(Math.floor(segundos / 60)).padStart(2, '0');
     const sec = String(segundos % 60).padStart(2, '0');
     return `${min}:${sec}`;
 }
+
 
 function atualizarCronometro() {
     tempoDecorrido++;
@@ -300,3 +310,76 @@ function iniciarCronometro() {
 function pararCronometro() {
     clearInterval(intervaloTempo);
 }
+
+function finalizarJogo() {
+  pararCronometro();
+  const nome = prompt("Parabéns! Digite seu nome:");
+
+  if (nome) {
+const jogador = {
+  nome,
+  pontuacao: pontuacaoAtual,
+  tempo: Number(tempoDecorrido),
+  data: new Date().toISOString().split("T")[0],
+  nivel: nivelAtual  // << adicionar isso
+};
+
+
+    fetch("/ranking", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(jogador)
+    })
+      .then(res => res.json())
+      .then(() => alert("Pontuação salva com sucesso!"))
+      .catch(err => console.error("Erro ao salvar:", err));
+  }
+}
+
+function carregarRankings() {
+  fetch("/ranking")
+    .then(res => res.json())
+    .then(data => {
+      if (!Array.isArray(data)) return;
+
+      const dataNivelAtual = data.filter(j => j.nivel === nivelAtual);
+
+      const rankingPontuacao = [...dataNivelAtual].sort((a, b) => b.pontuacao - a.pontuacao);
+      const rankingTempo = [...dataNivelAtual].sort((a, b) => a.tempo - b.tempo);
+      const rankingTabela = [...dataNivelAtual].sort((a, b) => b.pontuacao - a.pontuacao || a.tempo - b.tempo);
+
+      document.getElementById("ranking").innerHTML = gerarLinhasTabela(rankingPontuacao, "pontuacao");
+      document.getElementById("ranking-tempo").innerHTML = gerarLinhasTabela(rankingTempo, "tempo");
+      document.getElementById("ranking-global").innerHTML = gerarTabelaCompleta(rankingTabela);
+    })
+    .catch(err => {
+      console.error("Erro ao carregar rankings:", err);
+    });
+}
+
+
+function gerarListaRanking(lista) {
+  return `<ol>${lista
+    .filter(j => typeof j.tempo === 'number')  // Evita registros inválidos
+    .slice(0, 5)
+    .map(j =>
+      `<li>${j.nome} - ${j.pontuacao} pts - ${formatarTempo(j.tempo)}</li>`
+    ).join("")
+  }</ol>`;
+}
+
+
+function gerarLinhasTabela(lista, tipo) {
+  return lista
+    .filter(j => typeof j.tempo === 'number')
+    .slice(0, 5)
+    .map((j, index) => {
+      if (tipo === "pontuacao") {
+        return `<tr><td>${index + 1}</td><td>${j.nome}</td><td>${j.pontuacao}</td></tr>`;
+      } else if (tipo === "tempo") {
+        return `<tr><td>${index + 1}</td><td>${j.nome}</td><td>${formatarTempo(j.tempo)}</td></tr>`;
+      }
+    }).join("");
+}
+
+

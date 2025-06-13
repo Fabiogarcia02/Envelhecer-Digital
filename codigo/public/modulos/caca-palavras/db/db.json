@@ -1,4 +1,49 @@
 {
+  "ranking": [
+    {
+      "nome": "Fabio garcia",
+      "pontuacao": 90,
+      "tempo": 180,
+      "data": "2025-06-01",
+      "nivel": 5
+    },
+    {
+      "nome": "deide",
+      "pontuacao": 80,
+      "tempo": 225,
+      "data": "2025-06-04",
+      "nivel": 4
+    },
+    {
+      "nome": "josimar",
+      "pontuacao": 50,
+      "tempo": 300,
+      "data": "2025-06-08",
+      "nivel": 1
+    },
+    {
+      "nome": "josimar",
+      "pontuacao": 100,
+      "tempo": 100,
+      "data": "2025-06-08",
+      "nivel": 6
+    },
+    {
+      "nome": "deize",
+      "pontuacao": 100,
+      "tempo": 140,
+      "data": "2025-06-10",
+      "nivel": 7
+    },
+    {
+      "id": "9503",
+      "nome": "João",
+      "pontuacao": 100,
+      "tempo": 136,
+      "data": "2025-06-12",
+      "nivel": 10
+    }
+  ],
   "jogos": [
     {
       "id": 1,

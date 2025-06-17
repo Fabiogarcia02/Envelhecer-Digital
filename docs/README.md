@@ -83,21 +83,32 @@ Idosos que possuem dificuldades em utilizar tecnologias digitais
 As tabelas que se seguem apresentam os requisitos funcionais e não funcionais que detalham o escopo do projeto.
 
 ### Requisitos Funcionais
+| ID     | Descrição do Requisito                                                                            | Prioridade |
+| ------ | ------------------------------------------------------------------------------------------------- | ---------- |
+| RF-001 | Permitir que o usuário faça login com nome de usuário e senha.                                    | ALTA       |
+| RF-002 | Exibir instruções claras e acessíveis antes de iniciar cada jogo.                                 | ALTA       |
+| RF-003 | Permitir que o idoso selecione entre os jogos disponíveis: quiz, jogo da memória e caça-palavras. | ALTA       |
+| RF-004 | Registrar a pontuação de cada usuário ao final de cada jogo.                                      | ALTA       |
+| RF-005 | Exibir um ranking com os melhores desempenhos dos usuários nos diferentes jogos.                  | MÉDIA      |
+| RF-006 | Armazenar os dados dos usuários e suas pontuações utilizando JSON Server.                         | ALTA       |
+| RF-007 | Exibir uma tela com as conquistas desbloqueadas pelo usuário.                                     | MÉDIA      |
+| RF-008 | Permitir filtragem de conquistas por tipo de jogo (quiz, memória ou caça-palavras).               | MÉDIA      |
+| RF-009 | Implementar um sistema de metas e níveis com base na pontuação obtida nos jogos.                  | ALTA       |
+| RF-010 | Oferecer feedback visual e sonoro durante os jogos para reforço positivo.                         | MÉDIA      |
 
-| ID     | Descrição do Requisito                                   | Prioridade |
-| ------ | ---------------------------------------------------------- | ---------- |
-| RF-001 | ensinar como ver o saldo                                    |ALTA       |
-| RF-002 | entrar no app do no banco                                   | ALTA     |
-| RF-002 | pagar a conta pelo banco                                    | ALTA     |
-| RF-002 | accessar  a rede sociais                                    | MÉDIA     |
-| RF-002 | navegar pela no aplicativo                                  | MÉDIA     |
 
 ### Requisitos não Funcionais
+| ID      | Descrição do Requisito                                                                                | Prioridade |
+| ------- | ----------------------------------------------------------------------------------------------------- | ---------- |
+| RNF-001 | O sistema deve ser responsivo, adaptando-se a diferentes tamanhos de tela (desktop, tablet, celular). | ALTA       |
+| RNF-002 | A interface deve ser simples, intuitiva e com elementos visuais adequados para idosos.                | ALTA       |
+| RNF-003 | O carregamento das páginas deve ocorrer em até 3 segundos em redes comuns.                            | MÉDIA      |
+| RNF-004 | O sistema deve funcionar em navegadores modernos como Chrome, Firefox e Edge.                         | ALTA       |
+| RNF-005 | As informações de pontuação e conquistas devem ser persistidas localmente via JSON Server.            | ALTA       |
+| RNF-006 | Deve conter texto com fonte ampliada e bom contraste de cores para acessibilidade.                    | ALTA       |
+| RNF-007 | A navegação entre as telas deve ser fluida e funcionar corretamente após o login.                     | MÉDIA      |
+| RNF-008 | O sistema deve armazenar os dados de login localmente para manter a sessão ativa durante o uso.       | MÉDIA      |
 
-| ID      | Descrição do Requisito                                                              | Prioridade |
-| ------- | ------------------------------------------------------------------------------------- | ---------- |
-| RNF-001 | O sistema deve ser responsivo para rodar em um dispositivos móvel                     | ALTA       |
-| RNF-002 | O sistema deve permitir a auteração de cor da pagina                                  | BAIXA      |
 
 ## Projeto de Interface
 

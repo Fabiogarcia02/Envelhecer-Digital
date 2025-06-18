@@ -146,8 +146,6 @@ Imagem da página com os tutoriais para cada dúvida e dificuldade dos idosos
 
 ### Protótipo Interativo
 
-**✳️✳️✳️ COLOQUE AQUI UM IFRAME COM SEU PROTÓTIPO INTERATIVO ✳️✳️✳️**
-
 ✅ [Protótipo Interativo (Figma)](https://www.figma.com/proto/NwIAn7SpSR8UA2bTcbS95L/Untitled?node-id=1-1743&p=f&t=0ThCFXdTcf1R02HR-0&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=1%3A1618)
 
 # Metodologia
@@ -178,7 +176,7 @@ Relação de ferramentas empregadas pelo grupo durante o projeto.
 | Gerenciamento de Tarefas    | Trello             | https://trello.com/b/I8ZQLtsw/kanban-quadro-modelo |
 
 ## Gerenciamento do Projeto
-
+👍
 Divisão de papéis no grupo e apresentação da estrutura da ferramenta de controle de tarefas (Kanban).
 
 ![Exemplo de Kanban](images/kanban-trello_1.png)![Exemplo de Kanban](images/kanban-trello_2.png)

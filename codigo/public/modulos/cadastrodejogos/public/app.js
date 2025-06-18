@@ -1,194 +1,448 @@
 const API_URL = "http://localhost:3000/jogos";
-
-
 function displayMessage(msg) {
-    document.getElementById("msg").innerHTML =
-        `<div class="alert alert-warning">${msg}</div>`;
-}
-
-// Exibe todos os jogos na tabela
-function exibeJogos(nome = "", tipo = "", destaque = "") {
-    fetch(API_URL)
-        .then(res => res.json())
-        .then(jogos => {
-            let tabela = document.getElementById("table-jogos");
-            tabela.innerHTML = "";
-
-            jogos.reverse().forEach(jogo => {
-                // Converte os valores para comparação
-                const nomeMatch = !nome || jogo.nome.toLowerCase().includes(nome.toLowerCase());
-                const tipoMatch = !tipo || jogo.tipo === tipo;
-                const destaqueMatch = destaque === "" || jogo.destaques === (destaque === "1");
-
-                if (nomeMatch && tipoMatch && destaqueMatch) {
-                    tabela.innerHTML += `
-                        <tr>
-                            <td>${jogo.id}</td>
-                            <td>${jogo.nome}</td>
-                            <td>${jogo.imagem}</td>
-                            <td>${jogo.urlJogo}</td>
-                            <td>${jogo.tipo}</td>
-                            <td>${jogo.destaques ? 'Sim' : 'Não'}</td>
-                            <td>${jogo.habilidades}</td>
-                            <td>${jogo.descricao}</td>
-                        </tr>`;
-                }
-            });
-        })
-        .catch(() => displayMessage("Erro ao carregar os jogos."));
+    const div = document.getElementById("msg");
+    if (div) {
+        div.innerHTML = `<div class="alert alert-warning">${msg}</div>`;
+    } else {
+        alert(msg); 
+    }
 }
 
 
-// Insere novo jogo
-function insertJogo(jogo) {
-    fetch(API_URL)
-        .then(res => res.json())
-        .then(jogos => {
-            const jogoExistente = jogos.find(j => j.nome.toLowerCase() === jogo.nome.toLowerCase() && j.urlJogo === jogo.urlJogo);
-            if (jogoExistente) {
-                displayMessage("Este jogo já está cadastrado.");
-                document.getElementById("title").scrollIntoView({ behavior: 'smooth' });
-            } else {
-                fetch(API_URL, {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(jogo)
-                })
-                .then(res => {
-                    if (res.ok) {
-                        displayMessage("Jogo inserido com sucesso.");
-                        exibeJogos();
-                        limparFormulario();
-                        document.getElementById("title").scrollIntoView({ behavior: 'smooth' });
-                    } else {
-                        throw new Error("Erro ao inserir jogo.");
-                    }
-                })
-                .catch(() => {
-                    displayMessage("Erro ao inserir jogo.");
-                    document.getElementById("title").scrollIntoView({ behavior: 'smooth' });
-                });
+document.addEventListener("DOMContentLoaded", function () {
+    const selectTipo = document.getElementById("inputTipo");
+
+    const camposMemoria = document.querySelectorAll(".camposMemoria");
+    const camposCacaPalavras = document.querySelectorAll(".camposCacaPalavras");
+    const camposQuiz = document.querySelectorAll(".camposQuiz");
+
+    function esconderTodos() {
+        camposMemoria.forEach(el => el.style.display = "none");
+        camposCacaPalavras.forEach(el => el.style.display = "none");
+        camposQuiz.forEach(el => el.style.display = "none");
+    }
+
+    function mostrarCamposDoTipo(tipo) {
+        if (tipo === "jogo-memoria") {
+            camposMemoria.forEach(el => el.style.display = "flex");
+        } else if (tipo === "caca-palavras") {
+            camposCacaPalavras.forEach(el => el.style.display = "flex");
+        } else if (tipo === "quiz") {
+            camposQuiz.forEach(el => el.style.display = "flex");
+        }
+    }
+    
+    // Oculta todos os campos ao carregar
+    esconderTodos();
+    
+    // Verifica se algum tipo já está selecionado
+    if (selectTipo.value) {
+        mostrarCamposDoTipo(selectTipo.value);
+    }
+    selectTipo.addEventListener("change", function () {
+        esconderTodos();
+        mostrarCamposDoTipo(this.value);
+    
+        // Busque e exiba os níveis do tipo selecionado
+        fetch(API_URL)
+    .then(res => {
+        if (!res.ok) throw new Error("Erro HTTP: " + res.status);
+        return res.json();
+    })
+    .then(jogos => {
+        const tipoSelecionado = selectTipo.value.toLowerCase().trim();
+        const jogoSelecionado = jogos.find(j => j.tipo.toLowerCase().trim() === tipoSelecionado);
+
+        if (jogoSelecionado) {
+            exibirNiveis(jogoSelecionado);
+        } else {
+            displayMessage("Tipo de jogo não encontrado.");
+        }
+
+    })
+    .catch((erro) => {
+        console.error("Erro no fetch:", erro);
+        displayMessage("Erro ao carregar os dados do jogo.");
+    });
+    });
+});
+
+function obterDadosNivel() {
+    const tipo = document.getElementById("inputTipo").value;
+    const nivel = document.getElementById("inputNivel").value;
+
+    if (!tipo) return null;
+
+    if (tipo === "jogo-memoria") {
+        const cartas = [];
+        for (let i = 1; i <= 12; i++) {
+            const imagem = document.getElementById(`inputImagem${i}`).value;
+            const descricao = document.getElementById(`inputDesc${i}`).value;
+            cartas.push({ imagem, descricao });
+        }
+        return { tipo, nivel, cartas };
+
+    } else if (tipo === "caca-palavras") {
+        const palavras = [];
+        for (let i = 1; i <= 8; i++) {
+            const palavra = document.getElementById(`inputPalavras${i}`).value;
+            if (palavra) palavras.push(palavra);
+        }
+        return { tipo, nivel, palavras };
+
+    } else if (tipo === "quiz") {
+        const pergunta = document.getElementById("inputPergunta").value;
+        const respostaCorreta = document.getElementById("inputRespostaCorreta").value;
+
+        const respostasIncorretas = [];
+        for (let i = 1; i <= 5; i++) {
+            const campo = document.getElementById(`inputRespostaIncorreta${i}`);
+            if (campo && campo.value) {
+                respostasIncorretas.push(campo.value);
             }
-        })
-        .catch(() => displayMessage("Erro ao inserir jogo."), document.getElementById("title").scrollIntoView({ behavior: 'smooth' }));
+        }
+
+        return {
+            tipo,
+            nivel,
+            pergunta,
+            respostaCorreta,
+            respostasIncorretas
+        };
+    }
+
+    return null;
 }
 
-// Altera jogo existente
-function updateJogo(id, jogo) {
-    fetch(`${API_URL}/${id}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(jogo)
-    })
-    .then(() => {
-        displayMessage("Jogo alterado com sucesso.");
-        exibeJogos();
-    })
-    .catch(() => displayMessage("Erro ao alterar jogo."), document.getElementById("title").scrollIntoView({ behavior: 'smooth' }));
-}
 
-// Exclui jogo
-function deleteJogo(id) {
-    fetch(`${API_URL}/${id}`, {
-        method: "DELETE"
-    })
-    .then(() => {
-        displayMessage("Jogo removido com sucesso.");
-        exibeJogos();
-    })
-    .catch(() => displayMessage("Erro ao excluir jogo."), document.getElementById("title").scrollIntoView({ behavior: 'smooth' }));
-}
-
-// Coleta os dados do formulário
-function obterDadosFormulario() {
-    return {
-        nome: document.getElementById("inputNome").value,
-        imagem: document.getElementById("inputImagem").value,
-        urlJogo: document.getElementById("inputURLJogo")?.value,
-        tipo: document.getElementById("inputTipo").value,
-        destaques: document.getElementById("inputDestaques").value === "1",
-        habilidades: document.getElementById("inputHabilidades").value,
-        descricao: document.getElementById("inputDesc").value
-    };
-}
-
-// Limpa o formulário
-function limparFormulario() {
-    document.getElementById("form-jogo").reset();
-    document.getElementById("inputId").value = "";
-}
-
-// Inicializa os eventos da interface
-document.addEventListener('DOMContentLoaded', () => {
-    exibeJogos();
-
-    document.getElementById("btnInsert").addEventListener("click", () => {
-        const jogo = obterDadosFormulario();
-         if (!jogo.nome.trim() || !jogo.imagem.trim() || !jogo.tipo.trim() || !jogo.habilidades.trim() || !jogo.descricao.trim() || !jogo.urlJogo) {
-            displayMessage("Preencha todos os campos");
+function insertNivel() {
+    const dados = obterDadosNivel();
+    
+    if (!dados) {
+        displayMessage("Dados inválidos.");
+        return;
+    }
+    
+    fetch(API_URL)
+    .then(res => res.json())
+    .then(jogos => {
+        const jogo = jogos.find(j => j.tipo === dados.tipo);
+        
+        if (!jogo) {
+            displayMessage("Tipo de jogo não encontrado.");
             return;
         }
-        insertJogo(jogo);
-        limparFormulario();
-    });
-
-    document.getElementById("btnUpdate").addEventListener("click", () => {
-        const id = document.getElementById("inputId").value;
-        if (!id) return displayMessage("Selecione um jogo para alterar.");
-        const jogo = obterDadosFormulario();
-        updateJogo(id, jogo);
-        limparFormulario();
-    });
-
-    document.getElementById("btnDelete").addEventListener("click", () => {
-        const id = document.getElementById("inputId").value;
-        if (!id) return displayMessage("Selecione um jogo para excluir.");
-        deleteJogo(id);
-        limparFormulario();
-    });
-
-    document.getElementById("btnClear").addEventListener("click", limparFormulario);
-
-    document.querySelector("#table-jogos").addEventListener("click", (event) => {
-        if (event.target.tagName === "TD") {
-            const linha = event.target.parentElement;
-            const colunas = linha.querySelectorAll("td");
-            document.getElementById("inputId").value = colunas[0].innerText;
-            document.getElementById("inputNome").value = colunas[1].innerText;
-            document.getElementById("inputImagem").value = colunas[2].innerText;
-            document.getElementById("inputURLJogo").value = colunas[3].innerText;
-            document.getElementById("inputTipo").value = colunas[4].innerText;
-            document.getElementById("inputDestaques").value = colunas[5].innerText === "Sim" ? "1" : "2";
-            document.getElementById("inputHabilidades").value = colunas[6].innerText;
-            document.getElementById("inputDesc").value = colunas[7].innerText;
-
-            document.getElementById("title").scrollIntoView({ behavior: 'smooth' });
+        
+        if (!dados.nivel) {
+            dados.nivel = (jogo.niveis.length + 1).toString();
         }
+            const niveis = jogo.niveis || [];
+
+            const nivelExistente = niveis.find(n => n.nivel === dados.nivel);
+            if (nivelExistente) {
+                displayMessage(`O nível ${dados.nivel} já existe para esse tipo de jogo.`);
+                return;
+            }
+
+            let novoNivel = {};
+            if (dados.tipo === "jogo-memoria") {
+                novoNivel = { nivel: jogo.niveis.length + 1, cartas: dados.cartas };
+            } else if (dados.tipo === "caca-palavras") {
+                novoNivel = {
+                    id: jogo.niveis.length + 1,
+                    titulo: "Caça-palavras",
+                    nivel: jogo.niveis.length + 1 , 
+                    palavras: dados.palavras 
+                };
+            } else if (dados.tipo === "quiz") {
+                const respostas = [
+                { texto: dados.respostaCorreta, correta: true },
+                    ...dados.respostasIncorretas.map(texto => ({ texto, correta: false }))
+                ];
+
+                novoNivel = {
+                    id: jogo.niveis.length + 1,
+                    nivel: jogo.niveis.length + 1,
+                    pergunta: dados.pergunta,
+                    respostas
+                };
+            }
+
+            // Atualiza o jogo com o novo nível
+            jogo.niveis.push(novoNivel);
+
+            fetch(`${API_URL}/${jogo.id}`, {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(jogo)
+            })
+            .then(() => {
+                displayMessage(`Nível ${novoNivel.nivel} adicionado com sucesso!`);
+                limparFormularioNivel();
+                exibirNiveis(jogo);
+            })
+            .catch(() => displayMessage("Erro ao salvar o nível.")); 
+    });
+}
+
+function limparFormularioNivel() {
+    const tipo = document.getElementById("inputTipo").value;
+    document.getElementById("form-jogo").reset();
+    document.getElementById("inputTipo").value = tipo;
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    document.getElementById("btnInsert").addEventListener("click", insertNivel);
+    document.getElementById("btnUpdate").addEventListener("click", updateNivel);
+    document.getElementById("btnDelete").addEventListener("click", deleteNivel);
+    document.getElementById("btnClear").addEventListener("click", limparFormularioNivel);
+});
+
+function updateNivel() {
+    const dados = obterDadosNivel();
+    if (!dados) {
+        displayMessage("Dados inválidos.");
+        return;
+    }
+
+    fetch(API_URL)
+        .then(res => res.json())
+        .then(jogos => {
+            const jogo = jogos.find(j => j.tipo === dados.tipo);
+            if (!jogo) {
+                displayMessage("Tipo de jogo não encontrado.");
+                return;
+            }
+
+            const index = jogo.niveis.findIndex(n => String(n.nivel).trim() === String(dados.nivel).trim());
+            if (index === -1) {
+                displayMessage("Nível não encontrado.");
+                return;
+            }
+
+            let nivelAtualizado = {};
+            if (dados.tipo === "jogo-memoria") {
+                nivelAtualizado = { nivel: dados.nivel, cartas: dados.cartas };
+            } else if (dados.tipo === "caca-palavras") {
+                nivelAtualizado = { nivel: dados.nivel, palavras: dados.palavras };
+            } else if (dados.tipo === "quiz") {
+                    nivelAtualizado = {
+                    nivel: dados.nivel,
+                    pergunta: dados.pergunta,
+                    respostas: [
+                        { texto: dados.respostaCorreta, correta: true },
+                        ...dados.respostasIncorretas.map(texto => ({ texto, correta: false }))
+                    ]
+                };
+            }
+
+            jogo.niveis[index] = nivelAtualizado;
+
+            fetch(`${API_URL}/${jogo.id}`, {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(jogo)
+            })
+            .then(() => {
+                displayMessage("Nível alterado com sucesso.");
+                limparFormularioNivel();
+                exibirNiveis(jogo)
+            })
+            .catch(() => displayMessage("Erro ao atualizar o nível."));
+        })
+        .catch(() => displayMessage("Erro ao buscar os dados."));
+}
+
+function deleteNivel() {
+    const tipo = document.getElementById("inputTipo").value;
+    const nivel = parseInt(document.getElementById("inputNivel").value);
+
+    if (!tipo || isNaN(nivel)) {
+        displayMessage("Preencha o tipo e o número do nível para excluir.");
+        return;
+    }
+
+    fetch(API_URL)
+        .then(res => res.json())
+        .then(jogos => {
+            const jogo = jogos.find(j => j.tipo === tipo);
+            if (!jogo) {
+                displayMessage("Tipo de jogo não encontrado.");
+                return;
+            }
+            const novosNiveis = jogo.niveis.filter(n => {
+                const numNivel = parseInt(n.nivel);
+                return isNaN(numNivel) || numNivel !== nivel;
+            });
+
+            if (novosNiveis.length === jogo.niveis.length) {
+                displayMessage("Nível não encontrado.");
+                return;
+            }
+
+            jogo.niveis = novosNiveis;
+
+            fetch(`${API_URL}/${jogo.id}`, {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(jogo)
+            })
+            .then(() => {
+                displayMessage("Nível excluído com sucesso.");
+                limparFormularioNivel();
+                exibirNiveis(jogo)
+                
+            })
+            .catch(() => displayMessage("Erro ao excluir o nível."));
+        })
+        .catch(() => displayMessage("Erro ao acessar os dados."));
+}
+
+function exibirNiveis(jogo) {
+    const container = document.getElementById("grid-jogos");
+    container.innerHTML = ""; // Limpa tudo
+
+    if (jogo.tipo === "jogo-memoria") {
+        const tabelaImagens = document.createElement("table");
+        tabelaImagens.id = "grid-memoria-imagens";
+        const tabelaDescricoes = document.createElement("table");
+        tabelaDescricoes.id = "grid-memoria-descricoes";
+
+        // Cabeçalho Imagens
+        const theadImg = document.createElement("thead");
+        const trImgHead = document.createElement("tr");
+        trImgHead.innerHTML = "<th>Nível</th>";
+        for (let i = 1; i <= 12; i++) {
+            trImgHead.innerHTML += `<th>Img ${i}</th>`;
+        }
+        theadImg.appendChild(trImgHead);
+        tabelaImagens.appendChild(theadImg);
+
+        // Cabeçalho Descrições
+        const theadDesc = document.createElement("thead");
+        const trDescHead = document.createElement("tr");
+        trDescHead.innerHTML = "<th>Nível</th>";
+        for (let i = 1; i <= 12; i++) {
+            trDescHead.innerHTML += `<th>Desc ${i}</th>`;
+        }
+        theadDesc.appendChild(trDescHead);
+        tabelaDescricoes.appendChild(theadDesc);
+
+        const tbodyImg = document.createElement("tbody");
+        const tbodyDesc = document.createElement("tbody");
+
+        jogo.niveis.forEach((nivel) => {
+            const trImg = document.createElement("tr");
+            const trDesc = document.createElement("tr");
+
+            trImg.style.cursor = "pointer";
+            trDesc.style.cursor = "pointer";
+
+            trImg.innerHTML = `<td>${nivel.nivel}</td>`;
+            trDesc.innerHTML = `<td>${nivel.nivel}</td>`;
+
+            for (let i = 0; i < 12; i++) {
+                const carta = nivel.cartas[i] || { imagem: "", descricao: "" };
+                trImg.innerHTML += `<td>${carta.imagem}</td>`;
+                trDesc.innerHTML += `<td>${carta.descricao}</td>`;
+            }
+
+            trImg.addEventListener("click", () => preencherFormularioNivel(jogo.tipo, nivel));
+            trDesc.addEventListener("click", () => preencherFormularioNivel(jogo.tipo, nivel));
+
+            tbodyImg.appendChild(trImg);
+            tbodyDesc.appendChild(trDesc);
+        });
+
+        tabelaImagens.appendChild(tbodyImg);
+        tabelaDescricoes.appendChild(tbodyDesc);
+
+        container.appendChild(document.createElement("h4")).innerText = "Imagens";
+        container.appendChild(tabelaImagens);
+        container.appendChild(document.createElement("h4")).innerText = "Descrições";
+        container.appendChild(tabelaDescricoes);
+
+    } else {
+        const tabela = document.createElement("table");
+        const thead = document.createElement("thead");
+        const trHead = document.createElement("tr");
+
+        if (jogo.tipo === "caca-palavras") {
+            trHead.innerHTML += "<th>Nível</th>";
+            for (let i = 1; i <= 8; i++) {
+                trHead.innerHTML += `<th>Palavra ${i}</th>`;
+            }
+        } else if (jogo.tipo === "quiz") {
+            trHead.innerHTML += `
+                <th>Nível</th>
+                <th>Pergunta</th>
+                <th>Resposta Correta</th>
+            `;
+            for (let i = 1; i <= 5; i++) {
+                trHead.innerHTML += `<th>Resposta Incorreta ${i}</th>`;
+            }
+        }
+
+        thead.appendChild(trHead);
+        tabela.appendChild(thead);
+
+        const tbody = document.createElement("tbody");
+
+        jogo.niveis.forEach((nivel) => {
+            const tr = document.createElement("tr");
+            tr.style.cursor = "pointer";
+            tr.addEventListener("click", () => preencherFormularioNivel(jogo.tipo, nivel));
+            if (jogo.tipo === "caca-palavras") {
+                tr.innerHTML += `<td>${nivel.nivel}</td>`;
+                for (let i = 0; i < 8; i++) {
+                    tr.innerHTML += `<td>${nivel.palavras[i] || ""}</td>`;
+                }
+            } else if (jogo.tipo === "quiz") {
+                // Aqui pega a resposta correta e as incorretas do array 'respostas'
+                if (Array.isArray(nivel.respostas)) {
+                const correta = nivel.respostas.find(r => r.correta)?.texto || "";
+                const incorretas = nivel.respostas.filter(r => !r.correta).map(r => r.texto);
+
+                tr.innerHTML += `<td>${nivel.nivel}</td>`;
+                tr.innerHTML += `<td>${nivel.pergunta}</td>`;
+                tr.innerHTML += `<td>${correta}</td>`;
+
+                for (let i = 0; i < 5; i++) {
+                    tr.innerHTML += `<td>${incorretas[i] || ""}</td>`;
+                }
+            }
+        }
+        tbody.appendChild(tr);
     });
 
-    // Oculta a mensagem após 5 segundos
-    const msgElement = document.getElementById("msg");
-    if (msgElement) {
-        const observer = new MutationObserver(() => {
-            setTimeout(() => {
-                const alerta = msgElement.querySelector(".alert");
-                if (alerta) {
-                    alerta.style.transition = "opacity 0.5s";
-                    alerta.style.opacity = 0;
-                    setTimeout(() => alerta.remove(), 500);
-                }
-            }, 5000);
-        });
-        observer.observe(msgElement, { childList: true });
+        tabela.appendChild(tbody);
+        container.appendChild(tabela);
     }
-});
+}
 
-//Chama a função de exibir passando parametros para filtrar
-document.getElementById("btnSearch").addEventListener("click", (event) => {
-    event.preventDefault();
-    nome = document.getElementById("filtroNome").value;
-    tipo = document.getElementById("filtroTipo").value;
-    destaque = document.getElementById("filtroDestaques").value;
-    exibeJogos(nome, tipo, destaque)
+function preencherFormularioNivel(tipo, nivel) {
+    document.getElementById("inputNivel").value = nivel.nivel;
+    document.getElementById("inputTipo").value = tipo;
 
-});
+    if (tipo === "jogo-memoria") {
+        nivel.cartas.forEach((carta, i) => {
+            document.getElementById(`inputImagem${i+1}`).value = carta.imagem;
+            document.getElementById(`inputDesc${i+1}`).value = carta.descricao;
+        });
+    } else if (tipo === "caca-palavras") {
+        nivel.palavras.forEach((palavra, i) => {
+            document.getElementById(`inputPalavras${i+1}`).value = palavra;
+        });
+    } else if (tipo === "quiz") {
+        document.getElementById("inputPergunta").value = nivel.pergunta;
+        const correta = nivel.respostas.find(r => r.correta);
+        const incorretas = nivel.respostas.filter(r => !r.correta);
+
+        document.getElementById("inputRespostaCorreta").value = correta?.texto || "";
+
+        for (let i = 0; i < 5; i++) {
+            const campo = document.getElementById(`inputRespostaIncorreta${i + 1}`);
+            if (campo) campo.value = incorretas[i]?.texto || "";
+        }
+    }
+}

@@ -13,9 +13,10 @@
 
 <body>
     <nav class="navbar">
-    <a class="navbar" href="#">
-        <img src="img/logo.jpg" alt="img Logo" />
-    </a>
+        <a class="navbar-brand" href="#">
+            <img src="img/logo.jpg" alt="img Logo" />
+        </a>
+
 
     <div id="navbarNav">
         <ul class="navbar-nav">
@@ -37,61 +38,213 @@
         <div class="row">
             <div id="msg" class="col-sm-10 offset-sm-1 "></div>
         </div>
-    <form id="form-jogo">
-        <div class="form-group row">
-            <div class="col-sm-4">
-                <label for="inputId">Id</label>
-                <input type="text" class="form-control" id="inputId" placeholder="ID" disabled>
+        <form id="form-jogo">
+            <div class="form-group row">
+                <div class="col-sm-6">
+                    <label for="inputTipo">Tipo (*)</label>
+                    <select class="form-control" id="inputTipo" required>
+                        <option value="" disabled selected>Tipo de jogo</option>
+                        <option value="jogo-memoria">Jogo da Memória</option>
+                        <option value="caca-palavras">Caça Palavras</option>
+                        <option value="quiz">Quiz</option>
+                    </select>
+                </div>
+                <div class="col-sm-4">
+                    <label for="inputNivel">Id</label>
+                    <input type="text" class="form-control" id="inputNivel" placeholder="Nivel" disabled>
+                </div>
+        </div>
+
+        <!-- Campos para Jogo da Memoria -->
+        <div class="camposMemoria form-group row">
+            <div class="col-sm-6">
+                <label for="inputImagem1">Imagem(*)</label>
+                <input type="url" class="form-control" id="inputImagem1" required placeholder="Insira a URL da imagem">
             </div>
-            <div class="col-sm-8">
-                <label for="inputNome">Nome do Jogo(*)</label>
-                <input type="text" class="form-control" id="inputNome" required placeholder="Informe o nome do Jogo">
+            <div class="col-sm-6">
+                <label for="inputDesc1">Descriçaõ da Imagem (*)</label>
+                <input type="text" class="form-control" id="inputDesc1" required placeholder="Insira a descriçãoda imagem">
             </div>
         </div>
-        
-        <div class="form-group row">
+        <div class="camposMemoria form-group row">
             <div class="col-sm-6">
-                <label for="inputImagem">Imagem de capa (*)</label>
-                <input type="url" class="form-control" id="inputImagem" required placeholder="Insira a URL da imagem">
+                <label for="inputImagem2">Imagem(*)</label>
+                <input type="url" class="form-control" id="inputImagem2" required placeholder="Insira a URL da imagem">
             </div>
             <div class="col-sm-6">
-                <label for="inputURLJogo">Url do Jogo (*)</label>
-                <input type="url" class="form-control" id="inputURLJogo" required placeholder="Insira a URL do Jogo">
-            </div>
-        </div>
-        
-        <div class="form-group row">
-            <div class="col-sm-6">
-                <label for="inputTipo">Tipo (*)</label>
-                <select class="form-control" id="inputTipo" required>
-                    <option value="" disabled selected>Tipo de jogo</option>
-                    <option value="Caça-Palavras">Caça Palavras</option>
-                    <option value="Jogo-Associacao">Jogo de Associação</option>
-                </select>
-            </div>
-            <div class="col-sm-6">
-                <label for="inputDestaques">Destaques (*)</label>
-                <select class="form-control" id="inputDestaques" required>
-                    <option value="" disabled selected>Selecione</option>
-                    <option value="1">Sim</option>
-                    <option value="0">Não</option>
-                </select>
+                <label for="inputDesc2">Descriçaõ da Imagem (*)</label>
+                <input type="text" class="form-control" id="inputDesc2" required placeholder="Insira a descriçãoda imagem">
             </div>
         </div>
-        
-        <div class="form-group row">
+        <div class="camposMemoria form-group row">
+            <div class="col-sm-6">
+                <label for="inputImagem3">Imagem(*)</label>
+                <input type="url" class="form-control" id="inputImagem3" required placeholder="Insira a URL da imagem">
+            </div>
+            <div class="col-sm-6">
+                <label for="inputDesc3">Descriçaõ da Imagem (*)</label>
+                <input type="text" class="form-control" id="inputDesc3" required placeholder="Insira a descriçãoda imagem">
+            </div>
+        </div>
+        <div class="camposMemoria form-group row">
+            <div class="col-sm-6">
+                <label for="inputImagem4">Imagem(*)</label>
+                <input type="url" class="form-control" id="inputImagem4" required placeholder="Insira a URL da imagem">
+            </div>
+            <div class="col-sm-6">
+                <label for="inputDesc4">Descriçaõ da Imagem (*)</label>
+                <input type="text" class="form-control" id="inputDesc4" required placeholder="Insira a descriçãoda imagem">
+            </div>
+        </div>
+        <div class="camposMemoria form-group row">
+            <div class="col-sm-6">
+                <label for="inputImagem5">Imagem(*)</label>
+                <input type="url" class="form-control" id="inputImagem5" required placeholder="Insira a URL da imagem">
+            </div>
+            <div class="col-sm-6">
+                <label for="inputDesc5">Descriçaõ da Imagem (*)</label>
+                <input type="text" class="form-control" id="inputDesc5" required placeholder="Insira a descriçãoda imagem">
+            </div>
+        </div>
+        <div class="camposMemoria form-group row">
+            <div class="col-sm-6">
+                <label for="inputImagem6">Imagem(*)</label>
+                <input type="url" class="form-control" id="inputImagem6" required placeholder="Insira a URL da imagem">
+            </div>
+            <div class="col-sm-6">
+                <label for="inputDesc6">Descriçaõ da Imagem (*)</label>
+                <input type="text" class="form-control" id="inputDesc6" required placeholder="Insira a descriçãoda imagem">
+            </div>
+        </div>
+        <div class="camposMemoria form-group row">
+            <div class="col-sm-6">
+                <label for="inputImagem7">Imagem(*)</label>
+                <input type="url" class="form-control" id="inputImagem7" required placeholder="Insira a URL da imagem">
+            </div>
+            <div class="col-sm-6">
+                <label for="inputDesc7">Descriçaõ da Imagem (*)</label>
+                <input type="text" class="form-control" id="inputDesc7" required placeholder="Insira a descriçãoda imagem">
+            </div>
+        </div>
+        <div class="camposMemoria form-group row">
+            <div class="col-sm-6">
+                <label for="inputImagem8">Imagem(*)</label>
+                <input type="url" class="form-control" id="inputImagem8" required placeholder="Insira a URL da imagem">
+            </div>
+            <div class="col-sm-6">
+                <label for="inputDesc8">Descriçaõ da Imagem (*)</label>
+                <input type="text" class="form-control" id="inputDesc8" required placeholder="Insira a descriçãoda imagem">
+            </div>
+        </div>
+        <div class="camposMemoria form-group row">
+            <div class="col-sm-6">
+                <label for="inputImagem9">Imagem(*)</label>
+                <input type="url" class="form-control" id="inputImagem9" required placeholder="Insira a URL da imagem">
+            </div>
+            <div class="col-sm-6">
+                <label for="inputDesc9">Descriçaõ da Imagem (*)</label>
+                <input type="text" class="form-control" id="inputDesc9" required placeholder="Insira a descriçãoda imagem">
+            </div>
+        </div>
+        <div class="camposMemoria form-group row">
+            <div class="col-sm-6">
+                <label for="inputImagem10">Imagem(*)</label>
+                <input type="url" class="form-control" id="inputImagem10" required placeholder="Insira a URL da imagem">
+            </div>
+            <div class="col-sm-6">
+                <label for="inputDesc10">Descriçaõ da Imagem (*)</label>
+                <input type="text" class="form-control" id="inputDesc10" required placeholder="Insira a descriçãoda imagem">
+            </div>
+        </div>
+        <div class="camposMemoria form-group row">
+            <div class="col-sm-6">
+                <label for="inputImagem11">Imagem(*)</label>
+                <input type="url" class="form-control" id="inputImagem11" required placeholder="Insira a URL da imagem">
+            </div>
+            <div class="col-sm-6">
+                <label for="inputDesc11">Descriçaõ da Imagem (*)</label>
+                <input type="text" class="form-control" id="inputDesc11" required placeholder="Insira a descriçãoda imagem">
+            </div>
+        </div>
+        <div class="camposMemoria form-group row">
+            <div class="col-sm-6">
+                <label for="inputImagem12">Imagem(*)</label>
+                <input type="url" class="form-control" id="inputImagem12" required placeholder="Insira a URL da imagem">
+            </div>
+            <div class="col-sm-6">
+                <label for="inputDesc12">Descriçaõ da Imagem (*)</label>
+                <input type="text" class="form-control" id="inputDesc12" required placeholder="Insira a descriçãoda imagem">
+            </div>
+        </div>
+        <!-- Campos para Caça-Palavras -->
+        <div class="camposCacaPalavras form-group row" >
+            <div class="col-sm-3">
+                <label for="inputPalavras1">Palavras do nível (*)</label>
+                <input type="text" class="form-control" id="inputPalavras1" placeholder="Insira a palavra" />
+            </div>
+            <div class="col-sm-3">
+                <label for="inputPalavras2">Palavras do nível (*)</label>
+                <input type="text" class="form-control" id="inputPalavras2" placeholder="Insira a palavra" />
+            </div>
+            <div class="col-sm-3">
+                <label for="inputPalavras3">Palavras do nível (*)</label>
+                <input type="text" class="form-control" id="inputPalavras3" placeholder="Insira a palavra" />
+            </div>
+            <div class="col-sm-3">
+                <label for="inputPalavras4">Palavras do nível (*)</label>
+                <input type="text" class="form-control" id="inputPalavras4" placeholder="Insira a palavra" />
+            </div>
+            <div class="col-sm-3">
+                <label for="inputPalavras5">Palavras do nível (*)</label>
+                <input type="text" class="form-control" id="inputPalavras5" placeholder="Insira a palavra" />
+            </div>
+            <div class="col-sm-3">
+                <label for="inputPalavras6">Palavras do nível (*)</label>
+                <input type="text" class="form-control" id="inputPalavras6" placeholder="Insira a palavra" />
+            </div>
+            <div class="col-sm-3">
+                <label for="inputPalavras7">Palavras do nível (*)</label>
+                <input type="text" class="form-control" id="inputPalavras7" placeholder="Insira a palavra" />
+            </div>
+            <div class="col-sm-3">
+                <label for="inputPalavras8">Palavras do nível (*)</label>
+                <input type="text" class="form-control" id="inputPalavras8" placeholder="Insira a palavra" />
+            </div>
+            
+        </div>
+
+        <!-- Campos para Quiz -->
+        <div class="camposQuiz form-group row" >
             <div class="col-sm-12">
-                <label for="inputHabilidades">Habilidades (*)</label>
-                <textarea class="form-control" id="inputHabilidades" required placeholder="Informe as habilidades envolvidas no jogo"></textarea>
+                <label for="inputPergunta">Pergunta (*)</label>
+                <textarea class="form-control" name="inputPergunta" id="inputPergunta"></textarea>
+            </div>
+            <div class="col-sm-6">
+                <label for="inputRespostaCorreta">Resposta Correta (*)</label>
+                <input type="text" class="form-control" id="inputRespostaCorreta" placeholder="Digite a resposta correta">
+            </div>
+            <div class="col-sm-6 mt-2">
+                <label for="inputRespostaIncorreta1">Resposta Incorreta 1</label>
+                <input type="text" class="form-control" id="inputRespostaIncorreta1">
+            </div>
+            <div class="col-sm-6 mt-2">
+                <label for="inputRespostaIncorreta2">Resposta Incorreta 2</label>
+                <input type="text" class="form-control" id="inputRespostaIncorreta2">
+            </div>
+            <div class="col-sm-6 mt-2">
+                <label for="inputRespostaIncorreta3">Resposta Incorreta 3</label>
+                <input type="text" class="form-control" id="inputRespostaIncorreta3">
+            </div>
+            <div class="col-sm-6 mt-2">
+                <label for="inputRespostaIncorreta4">Resposta Incorreta 4</label>
+                <input type="text" class="form-control" id="inputRespostaIncorreta4">
+            </div>
+            <div class="col-sm-6 mt-2">
+                <label for="inputRespostaIncorreta5">Resposta Incorreta 5</label>
+                <input type="text" class="form-control" id="inputRespostaIncorreta5">
             </div>
         </div>
-        
-        <div class="form-group row">
-            <div class="col-sm-12">
-                <label for="inputDesc">Descrição (*)</label>
-                <textarea class="form-control" id="inputDesc" required placeholder="Digite a descrição do jogo"></textarea>
-            </div>
-        </div>
+
 
         <div class="form-group row">
             <div class="col-sm-4">
@@ -110,70 +263,11 @@
         </div>
     </form>
 
-    <form id="form-Filtro_Jogo">
-        <div class="form-goup row">
-            <section class="container my-4" id="filtros">
-                <h4>Filtros de busca</h4>
-                <div class="row g-3 align-items-end">
-                    <div class="col-md-4">
-                        <label for="filtroNome" class="form-label">Nome do jogo</label>
-                        <input type="text" class="form-control" id="filtroNome" placeholder="Digite parte do nome...">
-                    </div>
-                    <div class="col-md-4">
-                        <label for="filtroTipo" class="form-label">Tipo</label>
-                        <select id="filtroTipo" class="form-control">
-                            <option value="">Todos</option>
-                            <option value="Caça-Palavras">Caça Palavras</option>
-                            <option value="Jogo-Associacao">Jogo de Associação</option>
-                            <!-- adicione mais conforme necessário -->
-                        </select>
-                    </div>
-                    <div class="col-md-2">
-                        <label for="filtroDestaques" class="form-label">Destaque</label>
-                        <select id="filtroDestaques" class="form-control">
-                            <option value="">Todos</option>
-                            <option value="1">Sim</option>
-                            <option value="0">Não</option>
-                        </select>
-                    </div>
-                    <div class="col-md-2">
-                        <button class="btn w-100 btn-success" id="btnSearch">Buscar</button>
-                    </div>
-                </div>
-            </section>
-        </div>
-    </form>
-
-
         <div class="row">
-            <div class="col-sm-12">
-                <table id="grid-jogos" class="table styled-table">
-                    <thead>
-                        <tr>
-                            <th scope="col">id</th>
-                            <th scope="col">Nome</th>
-                            <th scope="col">Imagem</th>
-                            <th scope="col">Url do Jogo</th>
-                            <th scope="col">Tipo</th>
-                            <th scope="col">Destaques</th>
-                            <th scope="col">Habilidades</th>
-                            <th scope="col">Descrição</th>
-                        </tr>
-                    </thead>
-                    <tbody id="table-jogos">
-                        <tr>
-                            <td scope="row">1</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="tabela-scroll">
+                <table id="grid-jogos" class="table styled-table"></table>
             </div>
+
         </div>
     </div>
 

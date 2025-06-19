@@ -27,12 +27,15 @@ window.onload = () => {
 };
 
 function carregarNivel(nivel) {
-    const jogo = jogosJson.find(j => j.nivel === nivel);
-    if (!jogo) return;
+    const jogoCacaPalavras = jogosJson.find(j => j.tipo === "caca-palavras");
+    if (!jogoCacaPalavras) return;
+
+    const nivelData = jogoCacaPalavras.niveis.find(n => n.nivel === nivel);
+    if (!nivelData) return;
 
     nivelAtual = nivel;
     carregarRankings();
-    palavras = jogo.palavras;
+    palavras = nivelData.palavras;
     palavrasEncontradas = 0;
     listItems = [];
 
@@ -41,24 +44,21 @@ function carregarNivel(nivel) {
             matriz[x][y] = "";
         }
     }
+
     const level = document.getElementById("levelTitle");
-    level.innerHTML = `Nivel - ${nivelAtual}`;
+    level.innerHTML = `Nível - ${nivelAtual}`;
+
     const listaUl = document.getElementById("listWords");
     listaUl.innerHTML = "";
 
     palavras.forEach(palavra => {
         let direcao = Math.floor(Math.random() * 3);
         switch (direcao) {
-            case 0:
-                insereHorizontal(palavra);
-                break;
-            case 1:
-                insereVertical(palavra);
-                break;
-            case 2:
-                insereDiagonal(palavra);
-                break;
+            case 0: insereHorizontal(palavra); break;
+            case 1: insereVertical(palavra); break;
+            case 2: insereDiagonal(palavra); break;
         }
+
         let li = document.createElement("li");
         li.textContent = palavra;
         listaUl.appendChild(li);
@@ -80,6 +80,7 @@ function carregarNivel(nivel) {
             container.innerHTML += `<span class="letra">${matriz[x][y]}</span>`;
         }
     }
+
     iniciarCronometro();
 }
 
@@ -316,14 +317,14 @@ function finalizarJogo() {
   const nome = prompt("Parabéns! Digite seu nome:");
 
   if (nome) {
-const jogador = {
-  nome,
-  pontuacao: pontuacaoAtual,
-  tempo: Number(tempoDecorrido),
-  data: new Date().toISOString().split("T")[0],
-  nivel: nivelAtual  // << adicionar isso
-};
-
+    const jogador = {
+      nome,
+      pontuacao: pontuacaoAtual,
+      tempo: Number(tempoDecorrido),
+      data: new Date().toISOString().split("T")[0],
+      nivel: nivelAtual,
+      idJogo: "2"  // ID do caça-palavras
+    };
 
     fetch("/ranking", {
       method: "POST",
@@ -342,7 +343,10 @@ function carregarRankings() {
     .then(data => {
       if (!Array.isArray(data)) return;
 
-      const dataNivelAtual = data.filter(j => j.nivel === nivelAtual);
+      // Mostra apenas rankings do caça-palavras (idJogo = "2") e do nível atual
+      const dataNivelAtual = data.filter(j =>
+        j.nivel === nivelAtual && j.idJogo === "2"
+      );
 
       const rankingPontuacao = [...dataNivelAtual].sort((a, b) => b.pontuacao - a.pontuacao);
       const rankingTempo = [...dataNivelAtual].sort((a, b) => a.tempo - b.tempo);

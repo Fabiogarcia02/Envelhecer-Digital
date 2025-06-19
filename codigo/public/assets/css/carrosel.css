@@ -86,12 +86,15 @@ header {
     Carousel
 ========================= */
 .carousel {
-    width: 100vw;
-    height: 100vh;
-    margin-top: 80px;
-    overflow: hidden;
-    position: relative;
-    
+  max-width: 1100px;
+  height: 600px; /* ou ajuste conforme preferir */
+  margin: 140px auto 70px auto; /* espaço acima e abaixo */
+  padding: 20px;
+  overflow: hidden;
+  position: relative;
+  background-color: #f2fbff; /* opcional: fundo suave */
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 }
 
 .carousel .list .item {
@@ -150,9 +153,12 @@ header {
     transform: translateY(-50%);
     width: 400px;
     text-align: left;
-    color: rgb(26, 25, 25);
+    color: rgb(4, 32, 85);
     display: none;
     
+}
+.content .des {
+    color: #070000; /
 }
 
 .list .item:nth-child(2) .content {
@@ -206,7 +212,7 @@ header {
     margin-right: 15px;
 }
 
-.content .btn button:nth-child(2):hover {
+.content .btn button:hover {
     background-color: rgb(77, 118, 145);
     color: white;
 }

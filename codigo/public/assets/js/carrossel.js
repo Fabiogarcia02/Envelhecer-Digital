@@ -9,8 +9,8 @@ const carousel = document.querySelector('.carousel');
 const list = document.querySelector('.list');
 const runningTime = document.querySelector('.carousel .timeRunning');
 
-let timeRunning = 3000;       // Tempo de animação das setas (ms)
-let timeAutoNext = 7000;      // Tempo para trocar automaticamente (ms)
+let timeRunning = 7000;       // Tempo de animação das setas (ms)
+let timeAutoNext = 14000;      // Tempo para trocar automaticamente (ms)
 
 // Eventos de clique nas setas
 nextBtn.onclick = () => showSlider('next');
@@ -21,13 +21,7 @@ let runNextAuto = setTimeout(() => {
     nextBtn.click();
 }, timeAutoNext);
 
-// Função para resetar a barra de progresso
-function resetTimeAnimation() {
-    runningTime.style.animation = 'none';
-    runningTime.offsetHeight; // Força o reflow
-    runningTime.style.animation = null;
-    runningTime.style.animation = 'runningTime 7s linear forwards';
-}
+
 
 // Função principal do carrossel
 function showSlider(type) {

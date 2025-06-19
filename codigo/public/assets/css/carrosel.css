@@ -368,3 +368,45 @@ header {
         font-size: 14px;
     }
 }
+  .menu-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 6px;
+    width: 40px;
+    height: 30px;
+    cursor: pointer;
+    margin-right: 20px;
+    position: absolute;
+    right: 10px;
+    top: 25px;
+  }
+
+  .menu-toggle span {
+    display: block;
+    height: 4px;
+    background: rgb(77, 118, 145);
+    border-radius: 2px;
+  }
+
+  @media screen and (max-width: 768px) {
+    .menu ul {
+      display: none;
+      flex-direction: column;
+      background-color: rgba(0, 0, 0, 0.9);
+      position: absolute;
+      top: 80px;
+      left: 0;
+      width: 100%;
+      padding: 10px 0;
+      gap: 15px;
+    }
+
+    .menu ul.active {
+      display: flex;
+    }
+
+    .menu-toggle {
+      display: flex;
+    }
+  }

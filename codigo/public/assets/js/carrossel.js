@@ -84,3 +84,10 @@ if (id) {
 function verDetalhes(jogoId) {
     window.open(`detalhes-jogos.html?jogo=${jogoId}`, '_blank');
 }
+
+  const toggleBtn = document.getElementById('menu-toggle');
+  const menuList = document.getElementById('menu-list');
+
+  toggleBtn.addEventListener('click', () => {
+    menuList.classList.toggle('active');
+  });

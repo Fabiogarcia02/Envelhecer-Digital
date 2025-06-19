@@ -1,138 +1,138 @@
-// Trabalho Interdisciplinar 1 - Aplicações Web
-//
-// Esse módulo realiza o registro de novos usuários e login para aplicações com 
-// backend baseado em API REST provida pelo JSONServer
-// Os dados de usuário estão localizados no arquivo db.json que acompanha este projeto.
-//
-// Autor: Rommel Vieira Carneiro (rommelcarneiro@gmail.com)
-// Data: 09/09/2024
-//
-// Código LoginApp  
+const LOGIN_URL = "login.html";
+const API_URL = `/usuarios`;
 
+let usuarioCorrente = {};
 
-// Página inicial de Login
-const LOGIN_URL = "/modulos/login/login.html";
-let RETURN_URL = "/modulos/login/index.html";
-const API_URL = '/usuarios';
-
-// Objeto para o banco de dados de usuários baseado em JSON
-var db_usuarios = {};
-
-// Objeto para o usuário corrente
-var usuarioCorrente = {};
-
-// Inicializa a aplicação de Login
-function initLoginApp () {
-    let pagina = window.location.pathname;
-    if (pagina != LOGIN_URL) {
-        // CONFIGURA A URLS DE RETORNO COMO A PÁGINA ATUAL
-        sessionStorage.setItem('returnURL', pagina);
-        RETURN_URL = pagina;
-
-        // INICIALIZA USUARIOCORRENTE A PARTIR DE DADOS NO LOCAL STORAGE, CASO EXISTA
-        usuarioCorrenteJSON = sessionStorage.getItem('usuarioCorrente');
-        if (usuarioCorrenteJSON) {
-            usuarioCorrente = JSON.parse (usuarioCorrenteJSON);
+// Gera UUID...
+function generateUUID() {
+    var d = new Date().getTime();
+    var d2 = (performance && performance.now && (performance.now() * 1000)) || 0;
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+        var r = Math.random() * 16;
+        if (d > 0) {
+            r = (d + r) % 16 | 0;
+            d = Math.floor(d / 16);
         } else {
-            window.location.href = LOGIN_URL;
+            r = (d2 + r) % 16 | 0;
+            d2 = Math.floor(d2 / 16);
         }
-
-        // REGISTRA LISTENER PARA O EVENTO DE CARREGAMENTO DA PÁGINA PARA ATUALIZAR INFORMAÇÕES DO USUÁRIO
-        document.addEventListener('DOMContentLoaded', function () {
-            showUserInfo ('userInfo');
-        });
-    }
-    else {
-        // VERIFICA SE A URL DE RETORNO ESTÁ DEFINIDA NO SESSION STORAGE, CASO CONTRARIO USA A PÁGINA INICIAL
-        let returnURL = sessionStorage.getItem('returnURL');
-        RETURN_URL = returnURL || RETURN_URL
-        
-        // INICIALIZA BANCO DE DADOS DE USUÁRIOS
-        carregarUsuarios(() => {
-            console.log('Usuários carregados...');
-        });
-    }
-};
-
-
-function carregarUsuarios(callback) {
-    fetch(API_URL)
-    .then(response => response.json())
-    .then(data => {
-        db_usuarios = data;
-        callback ()
-    })
-    .catch(error => {
-        console.error('Erro ao ler usuários via API JSONServer:', error);
-        displayMessage("Erro ao ler usuários");
+        return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
     });
 }
 
-// Verifica se o login do usuário está ok e, se positivo, direciona para a página inicial
-function loginUser (login, senha) {
-
-    // Verifica todos os itens do banco de dados de usuarios 
-    // para localizar o usuário informado no formulario de login
-    for (var i = 0; i < db_usuarios.length; i++) {
-        var usuario = db_usuarios[i];
-
-        // Se encontrou login, carrega usuário corrente e salva no Session Storage
-        if (login == usuario.login && senha == usuario.senha) {
-            usuarioCorrente.id = usuario.id;
-            usuarioCorrente.login = usuario.login;
-            usuarioCorrente.email = usuario.email;
-            usuarioCorrente.nome = usuario.nome;
-
-            // Salva os dados do usuário corrente no Session Storage, mas antes converte para string
-            sessionStorage.setItem ('usuarioCorrente', JSON.stringify (usuarioCorrente));
-
-            // Retorna true para usuário encontrado
-            return true;
-        }
+function initLoginApp() {
+    const usuarioCorrenteJSON = localStorage.getItem('usuarioCorrente');
+    if (usuarioCorrenteJSON) {
+        usuarioCorrente = JSON.parse(usuarioCorrenteJSON);
     }
-
-    // Se chegou até aqui é por que não encontrou o usuário e retorna falso
-    return false;
 }
 
-// Apaga os dados do usuário corrente no sessionStorage
-function logoutUser () {
-    sessionStorage.removeItem ('usuarioCorrente');
+async function loginUser(login, senha) {
+    try {
+        const res = await fetch(`${API_URL}?login=${login}&senha=${senha}`);
+        const users = await res.json();
+
+        if (users.length > 0) {
+            const usuario = users[0];
+            usuarioCorrente = {
+                id: usuario.id,
+                login: usuario.login,
+                email: usuario.email,
+                nome: usuario.nome
+            };
+            localStorage.setItem('usuarioCorrente', JSON.stringify(usuarioCorrente));
+            return true;
+        } else {
+            return false;
+        }
+    } catch (err) {
+        console.error("Erro ao tentar logar:", err);
+        return false;
+    }
+}
+
+async function addUser(nome, login, senha, email) {
+    const novoUsuario = {
+        id: generateUUID(),
+        login,
+        senha,
+        nome,
+        email
+    };
+
+    try {
+        const res = await fetch(API_URL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(novoUsuario)
+        });
+
+        if (res.ok) {
+            console.log("Usuário criado com sucesso.");
+        } else {
+            console.error("Erro ao criar usuário.");
+            alert("Erro ao salvar o usuário. Verifique o console.");
+        }
+    } catch (err) {
+        console.error("Erro de rede ao adicionar usuário:", err);
+        alert("Erro ao salvar o usuário. Verifique o console.");
+    }
+}
+
+async function processaFormLogin(event) {
+    event.preventDefault();
+
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+
+    const resultadoLogin = await loginUser(username, password);
+
+    if (resultadoLogin) {
+        window.location.href = 'index.html';
+    } else {
+        alert('Usuário ou senha incorretos');
+    }
+}
+
+function salvaLogin(event) {
+    event.preventDefault();
+
+    const login = document.getElementById('txt_login').value.trim();
+    const nome = document.getElementById('txt_nome').value.trim();
+    const email = document.getElementById('txt_email').value.trim();
+    const senha = document.getElementById('txt_senha').value;
+    const senha2 = document.getElementById('txt_senha2').value;
+
+    if (!login || !nome || !email || !senha || !senha2) {
+        alert('Preencha todos os campos.');
+        return;
+    }
+
+    if (senha !== senha2) {
+        alert('As senhas informadas não conferem.');
+        return;
+    }
+
+    addUser(nome, login, senha, email);
+    alert('Usuário salvo com sucesso. Proceda com o login.');
+
+    const modalEl = document.getElementById('loginModal');
+    const modalInstance = bootstrap.Modal.getInstance(modalEl);
+    modalInstance.hide();
+}
+
+function logoutUser() {
+    usuarioCorrente = {};
+    localStorage.setItem('usuarioCorrente', JSON.stringify(usuarioCorrente));
     window.location = LOGIN_URL;
 }
 
-function addUser (nome, login, senha, email) {
+initLoginApp();
 
-    // Cria um objeto de usuario para o novo usuario 
-    let usuario = { "login": login, "senha": senha, "nome": nome, "email": email };
+document.getElementById('login-form').addEventListener('submit', processaFormLogin);
+document.getElementById('btn_salvar').addEventListener('click', salvaLogin);
 
-    // Envia dados do novo usuário para ser inserido no JSON Server
-    fetch(API_URL, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(usuario),
-    })
-        .then(response => response.json())
-        .then(data => {
-            // Adiciona o novo usuário na variável db_usuarios em memória
-            db_usuarios.push (usuario);
-            displayMessage("Usuário inserido com sucesso");
-        })
-        .catch(error => {
-            console.error('Erro ao inserir usuário via API JSONServer:', error);
-            displayMessage("Erro ao inserir usuário");
-        });
-}
-
-function showUserInfo (element) {
-    var elemUser = document.getElementById(element);
-    if (elemUser) {
-        elemUser.innerHTML = `${usuarioCorrente.nome} (${usuarioCorrente.login}) 
-                    <a onclick="logoutUser()">❌</a>`;
-    }
-}
-
-// Inicializa as estruturas utilizadas pelo LoginApp
-initLoginApp ();
+document.getElementById('openModalBtn').addEventListener('click', () => {
+    const modal = new bootstrap.Modal(document.getElementById('loginModal'));
+    modal.show();
+});

@@ -27,11 +27,18 @@
       "nome": "caio",
       "email": "caio@gmail.com",
       "id": 4
+    },
+    {
+      "id": "216eb8d4-86b6-4b0b-b4a8-ae7e52da2e0f",
+      "login": "teste",
+      "senha": "123",
+      "nome": "teste",
+      "email": "teste"
     }
   ],
   "ranking": [
     {
-      "id": 1,
+      "id": "1",
       "nome": "Fabio garcia",
       "pontuacao": 90,
       "tempo": 180,
@@ -40,7 +47,7 @@
       "idJogo": "2"
     },
     {
-      "id": 2,
+      "id": "2",
       "nome": "deide",
       "pontuacao": 80,
       "tempo": 225,
@@ -49,7 +56,7 @@
       "idJogo": "2"
     },
     {
-      "id": 3,
+      "id": "3",
       "nome": "josimar",
       "pontuacao": 50,
       "tempo": 300,
@@ -58,7 +65,7 @@
       "idJogo": "2"
     },
     {
-      "id": 4,
+      "id": "4",
       "nome": "josimar",
       "pontuacao": 100,
       "tempo": 100,
@@ -67,7 +74,7 @@
       "idJogo": "2"
     },
     {
-      "id": 5,
+      "id": "5",
       "nome": "deize",
       "pontuacao": 100,
       "tempo": 140,
@@ -83,6 +90,78 @@
       "data": "2025-06-12",
       "nivel": 10,
       "idJogo": "2"
+    },
+    {
+      "id": "55b0",
+      "nome": "Fabio garcia",
+      "pontuacao": 12,
+      "erros": 2,
+      "data": "2025-06-01",
+      "nivel": 1,
+      "idJogo": "1"
+    },
+    {
+      "id": "bb1e",
+      "nome": "deide",
+      "pontuacao": 12,
+      "erros": 3,
+      "data": "2025-06-04",
+      "nivel": 1,
+      "idJogo": "1"
+    },
+    {
+      "id": "cad1",
+      "nome": "josimar",
+      "pontuacao": 12,
+      "data": "2025-06-08",
+      "nivel": 1,
+      "idJogo": "1"
+    },
+    {
+      "id": "adf9",
+      "nome": "josimar",
+      "pontuacao": 12,
+      "data": "2025-06-08",
+      "nivel": 1,
+      "idJogo": "1"
+    },
+    {
+      "id": "1962",
+      "nome": "deize",
+      "pontuacao": 12,
+      "data": "2025-06-10",
+      "nivel": 1,
+      "idJogo": "1"
+    },
+    {
+      "id": "d0ec",
+      "nome": "dd",
+      "pontuacao": 1,
+      "erros": 6,
+      "tempo": 145,
+      "data": "2025-06-10",
+      "nivel": 1,
+      "idJogo": "1"
+    },
+    {
+      "id": "13e0",
+      "nome": "jçao",
+      "pontuacao": 85.5,
+      "erros": 21,
+      "tempo": 177,
+      "data": "2025-06-19",
+      "nivel": 2,
+      "idJogo": "1"
+    },
+    {
+      "id": "b7d0",
+      "nome": "teste",
+      "pontuacao": 0,
+      "erros": 0,
+      "tempo": 16,
+      "idJogo": "1",
+      "nivel": 1,
+      "data": "2025-06-19"
     }
   ],
   "jogos": [
@@ -96,63 +175,116 @@
           "cartas": [
             {
               "id": 1,
-              "imagem": "img/spotify.png",
+              "imagem": "assets/images/img-memoria/spotify.png",
               "descricao": "Rádio na internet onde você pode ouvir músicas de todos os tipos, quando quiser"
             },
             {
               "id": 2,
-              "imagem": "img/youtube.png",
+              "imagem": "assets/images/img-memoria/youtube.png",
               "descricao": "Aplicativo para assistir a vídeos de todos os tipos, a qualquer hora que quiser"
             },
             {
               "id": 3,
-              "imagem": "img/netflix.png",
+              "imagem": "assets/images/img-memoria/netflix.png",
               "descricao": "Aplicativo de streaming"
             },
             {
               "id": 4,
-              "imagem": "img/tiktok.png",
+              "imagem": "assets/images/img-memoria/tiktok.png",
               "descricao": "Aplicativo onde as pessoas fazem vídeos curtos e divertidos"
             },
             {
               "id": 5,
-              "imagem": "img/maps.png",
+              "imagem": "assets/images/img-memoria/maps.png",
               "descricao": "Ajuda a encontrar lugares e traçar caminhos"
             },
             {
               "id": 6,
-              "imagem": "img/googlefotos.png",
+              "imagem": "assets/images/img-memoria/googlefotos.png",
               "descricao": "Guarda todas as fotos de forma segura na internet"
             },
             {
               "id": 7,
-              "imagem": "img/uber.png",
+              "imagem": "assets/images/img-memoria/uber.png",
               "descricao": "Aplicativo para pedir carro com motorista, seguro e fácil"
             },
             {
               "id": 8,
-              "imagem": "img/ifood.png",
+              "imagem": "assets/images/img-memoria/ifood.png",
               "descricao": "Aplicativo que serve para pedir comida pronta, sem sair de casa."
             },
             {
               "id": 9,
-              "imagem": "img/instagram.png",
+              "imagem": "assets/images/img-memoria/instagram.png",
               "descricao": "Aplicativo para ver e compartilhar fotos, vídeos e mensagens com amigos e familiares"
             },
             {
               "id": 10,
-              "imagem": "img/globoplay.png",
+              "imagem": "assets/images/img-memoria/globoplay.png",
               "descricao": "Usado para ver novelas, jornais, programas e filmes da Globo."
             },
             {
               "id": 11,
-              "imagem": "img/amazon.png",
+              "imagem": "assets/images/img-memoria/amazon.png",
               "descricao": "Aplicativo onde os produtos são entregues na porta da sua casa, um shopping virtual"
             },
             {
               "id": 12,
-              "imagem": "img/olx.png",
+              "imagem": "assets/images/img-memoria/olx.png",
               "descricao": "Um site e aplicativo onde as pessoas podem comprar e vender coisas usadas"
+            }
+          ]
+        },
+        {
+          "nivel": 2,
+          "cartas": [
+            {
+              "imagem": "teste",
+              "descricao": "teste"
+            },
+            {
+              "imagem": "teste",
+              "descricao": "teste"
+            },
+            {
+              "imagem": "teste",
+              "descricao": "teste"
+            },
+            {
+              "imagem": "teste",
+              "descricao": "teste"
+            },
+            {
+              "imagem": "teste",
+              "descricao": "teste"
+            },
+            {
+              "imagem": "teste",
+              "descricao": "teste"
+            },
+            {
+              "imagem": "teste",
+              "descricao": "teste"
+            },
+            {
+              "imagem": "teste",
+              "descricao": "teste"
+            },
+            {
+              "imagem": "teste",
+              "descricao": "teste"
+            },
+            {
+              "imagem": "tetset",
+              "descricao": "tetse"
+            },
+            {
+              "imagem": "tetse",
+              "descricao": "teste"
+            },
+            {
+              "imagem": "reste",
+              "descricao": "teste"
             }
           ]
         }

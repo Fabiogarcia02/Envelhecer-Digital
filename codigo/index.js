@@ -15,11 +15,14 @@
 
 const jsonServer = require('json-server')
 const server = jsonServer.create()
-const router = jsonServer.router('./db/db.json')
+const path = require('path');
+const dbPath = path.join(__dirname, 'db', 'db.json');
+const router = jsonServer.router(dbPath)
   
 // Para permitir que os dados sejam alterados, altere a linha abaixo
 // colocando o atributo readOnly como false.
-const middlewares = jsonServer.defaults({ noCors: true })
+const middlewares = jsonServer.defaults({ readOnly: false
+ })
 server.use(middlewares)
 server.use(router)
 

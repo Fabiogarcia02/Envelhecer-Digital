@@ -67,6 +67,23 @@
       border: none;
     }
 
+    .comentario-form select {
+  width: 90%;
+  margin: 10px auto;
+  display: block;
+  border-radius: 10px;
+  border: 1px solid #1BADCB;
+  background: #fff;
+  color: #1E7A9C;
+  font-size: 1rem;
+  padding: 8px 12px;
+  transition: border 0.2s;
+}
+.comentario-form select:focus {
+  border: 2px solid #1E7A9C;
+  outline: none;
+}
+
     .comentario-button {
       background-color: #1BADCB;
       border: none;
@@ -115,6 +132,7 @@
       outline: none;
       border: none;
       background-color: #FFFDFD;
+      color: black;
     }
 
     .comentario-conteiner-recente section {
@@ -125,3 +143,49 @@
   overflow-y: auto;
   max-height: 200px;
     }
+
+    /* Centraliza horizontalmente as duas divs de comentários */
+.comentarios-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 40px;
+  margin: 40px 0;
+}
+
+@media (max-width: 900px) {
+  .comentarios-wrapper {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+}
+
+.comentario-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+.comentario-item .botoes-comentario {
+  display: flex;
+  gap: 8px;
+}
+
+.botao-excluir, .botao-editar {
+  background: #1BADCB;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 5px 16px;
+  margin: 0;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: background 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(30, 122, 156, 0.07);
+}
+.botao-excluir:hover, .botao-editar:hover {
+  background: #1E7A9C;
+}

@@ -4,6 +4,12 @@ let pontuacaoTotal = 0;
 let nivelAtual = 1;
 
 async function carregarQuiz() {
+  const usuarioCorrente = JSON.parse(localStorage.getItem("usuarioCorrente"));
+  if (!usuarioCorrente || !usuarioCorrente.id) {
+    alert("Você precisa estar logado para jogar.");
+    window.location.href = 'login.html';
+    return;
+  }
   try {
     const resposta = await fetch("http://localhost:3000/jogos");
     const dados = await resposta.json();

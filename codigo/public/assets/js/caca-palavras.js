@@ -20,6 +20,7 @@ window.onload = () => {
   const usuarioCorrente = JSON.parse(localStorage.getItem("usuarioCorrente"));
   if (!usuarioCorrente || !usuarioCorrente.id) {
     alert("Você precisa estar logado para jogar.");
+    window.location.href = 'login.html';
     return;
   }
 

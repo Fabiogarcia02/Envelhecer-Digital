@@ -19,6 +19,15 @@ let nivelAtualMemoria = 1;
 let jogoMemoriaId = 1;
 let jogoMemoria = null;
 
+window.onload = () =>{
+  const usuarioCorrente = JSON.parse(localStorage.getItem("usuarioCorrente"));
+  if (!usuarioCorrente || !usuarioCorrente.id) {
+    alert("Você precisa estar logado para jogar.");
+    window.location.href = 'login.html';
+    return;
+  }
+}
+
 window.addEventListener("DOMContentLoaded", async () => {
   backgroundMusic.volume = 0.03;
   backgroundMusic.play().catch(() => {});
@@ -391,7 +400,3 @@ function avancarNivel() {
   carregarCartas(jogoMemoria);
 }
 
-// Atualização completa do JS do jogo da memória para usar estrutura com idJogo
-
-
-// Ao salvar a pontuação, inclua `idJogo: jogoMemoriaId` no corpo do fetch POST

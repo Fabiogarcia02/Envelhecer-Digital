@@ -17,21 +17,48 @@ let tempoDecorrido = 0;
 let pontuacaoAtual = 100;
 
 window.onload = () => {
-    fetch("/jogos")
-        .then(response => response.json())
-        .then(data => {
-            jogosJson = data;
-            carregarNivel(nivelAtual);
-            carregarRankings();
+  const usuarioCorrente = JSON.parse(localStorage.getItem("usuarioCorrente"));
+  if (!usuarioCorrente || !usuarioCorrente.id) {
+    alert("Você precisa estar logado para jogar.");
+    return;
+  }
+
+  fetch("/jogos")
+    .then(response => response.json())
+    .then(data => {
+      jogosJson = data;
+
+      // Depois de carregar os jogos, busca o ranking do usuário
+      fetch("/ranking")
+        .then(res => res.json())
+        .then(rankings => {
+          const jogadorRankings = rankings.filter(r =>
+            r.idUsuario === usuarioCorrente.id && r.idJogo === "2"
+          );
+
+          if (jogadorRankings.length > 0) {
+            const maiorNivel = Math.max(...jogadorRankings.map(r => r.nivel));
+            nivelAtual = maiorNivel + 1;
+          } else {
+            nivelAtual = 1;
+          }
+
+          carregarNivel(nivelAtual);
+          carregarRankings();
         });
+    });
 };
+
 
 function carregarNivel(nivel) {
     const jogoCacaPalavras = jogosJson.find(j => j.tipo === "caca-palavras");
     if (!jogoCacaPalavras) return;
 
     const nivelData = jogoCacaPalavras.niveis.find(n => n.nivel === nivel);
-    if (!nivelData) return;
+    if (!nivelData) {
+        alert("Parabéns! Você concluiu todos os níveis.");
+        return;
+    }
 
     nivelAtual = nivel;
     carregarRankings();
@@ -249,9 +276,6 @@ function endSelection(e) {
     if (palavrasEncontradas === palavras.length) {
         finalizarJogo(); // salva nome e pontuação
         selectPalavra.forEach(el => el.classList.add("fixa"));
-        setTimeout(() => {
-            carregarNivel(nivelAtual + 1);
-        }, 500);
     }
 
 
@@ -314,28 +338,40 @@ function pararCronometro() {
 
 function finalizarJogo() {
   pararCronometro();
-  const nome = prompt("Parabéns! Digite seu nome:");
 
-  if (nome) {
-    const jogador = {
-      nome,
-      pontuacao: pontuacaoAtual,
-      tempo: Number(tempoDecorrido),
-      data: new Date().toISOString().split("T")[0],
-      nivel: nivelAtual,
-      idJogo: "2"  // ID do caça-palavras
-    };
-
-    fetch("/ranking", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(jogador)
-    })
-      .then(res => res.json())
-      .then(() => alert("Pontuação salva com sucesso!"))
-      .catch(err => console.error("Erro ao salvar:", err));
+  const usuarioCorrente = JSON.parse(localStorage.getItem("usuarioCorrente"));
+  if (!usuarioCorrente || !usuarioCorrente.nome) {
+    alert("Você precisa estar logado para salvar sua pontuação.");
+    return;
   }
+
+  const jogador = {
+    nome: usuarioCorrente.nome,
+    idUsuario: usuarioCorrente.id,
+    pontuacao: pontuacaoAtual,
+    tempo: Number(tempoDecorrido),
+    data: new Date().toISOString().split("T")[0],
+    nivel: nivelAtual,
+    idJogo: "2"
+  };
+
+  fetch("/ranking", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(jogador)
+  })
+    .then(res => res.json())
+    .then(() => {
+      alert("Pontuação salva com sucesso!");
+      selectPalavra.forEach(el => el.classList.add("fixa"));
+      setTimeout(() => {
+        carregarNivel(nivelAtual + 1);
+      }, 500);
+    })
+    .catch(err => console.error("Erro ao salvar:", err));
 }
+
+
 
 function carregarRankings() {
   fetch("/ranking")

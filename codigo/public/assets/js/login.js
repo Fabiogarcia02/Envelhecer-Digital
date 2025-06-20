@@ -1,7 +1,10 @@
+(() => {
 const LOGIN_URL = "login.html";
 const API_URL = `/usuarios`;
 
 let usuarioCorrente = {};
+
+
 
 // Gera UUID...
 function generateUUID() {
@@ -121,10 +124,25 @@ function salvaLogin(event) {
     modalInstance.hide();
 }
 
-function logoutUser() {
-    usuarioCorrente = {};
-    localStorage.setItem('usuarioCorrente', JSON.stringify(usuarioCorrente));
-    window.location = LOGIN_URL;
+// Adiciona o evento de logout ao botão Sair e impede voltar após logout
+function setupLogoutButton() {
+    const btnLogout = document.getElementById('btnLogout');
+    if (btnLogout) {
+        btnLogout.addEventListener('click', function () {
+            // Limpa o usuário e impede voltar para a página anterior
+            usuarioCorrente = {};
+            localStorage.setItem('usuarioCorrente', JSON.stringify(usuarioCorrente));
+            // Redireciona e limpa histórico
+            window.location.replace('login.html');
+        });
+    }
+}
+
+// Chama a função ao carregar a página
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupLogoutButton);
+} else {
+    setupLogoutButton();
 }
 
 initLoginApp();
@@ -136,3 +154,4 @@ document.getElementById('openModalBtn').addEventListener('click', () => {
     const modal = new bootstrap.Modal(document.getElementById('loginModal'));
     modal.show();
 });
+})();

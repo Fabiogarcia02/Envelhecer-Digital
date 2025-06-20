@@ -34,6 +34,13 @@
       "senha": "123",
       "nome": "teste",
       "email": "teste"
+    },
+    {
+      "id": "453fbc07-684b-4bf0-bc47-148193a9b88c",
+      "login": "anthony",
+      "senha": "123",
+      "nome": "fre",
+      "email": "anthon@gmail.com"
     }
   ],
   "ranking": [
@@ -667,8 +674,9 @@
   "comentarios": [
     {
       "idJogo": "1",
-      "nota": "4",
-      "comentario": "deu bom?",
+      "idUsuario": 1,
+      "nota": "2",
+      "comentario": "22",
       "id": 1
     }
   ]

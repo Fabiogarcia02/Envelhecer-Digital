@@ -15,6 +15,23 @@ html, body {
     color: #ffff;
 }
 
+#btnLogout {
+      background-color: #d9534f;
+      color: #fff;
+      border: none;
+      padding: 8px 18px;
+      border-radius: 5px;
+      font-size: 1em;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.2s;
+      margin-left: 10px;
+    }
+
+    #btnLogout:hover {
+      background-color: #c9302c;
+    }
+
 /* =========================
     Cabeçalho e Menu
 ========================= */

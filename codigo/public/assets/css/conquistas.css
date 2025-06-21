@@ -1,0 +1,200 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+:root {
+  --color-bg: #121212;
+  --color-container-bg: #181818;
+  --color-sidebar-bg: #1f1f1f;
+  --color-card-bg: #1e1e1e;
+  --color-border: #333333;
+  --color-text: #e0e0e0;
+  --color-text-light: #a0a0a0;
+  --color-primary: #007BFF;
+  --color-primary-dark: #0056b3;
+  --color-secondary: #DC3545;
+  --color-secondary-dark: #a71d2a;
+  --radius: 8px;
+  --transition-fast: 0.2s ease-in-out;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Roboto', Arial, sans-serif;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.5;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px 15px;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 24px;
+  font-weight: 700;
+  font-size: 2rem;
+  color: var(--color-text);
+}
+
+.content {
+  display: flex;
+  gap: 20px;
+}
+
+.sidebar {
+  flex: 0 0 220px;
+  background-color: var(--color-sidebar-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 16px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+  height: fit-content;
+  position: sticky;
+  top: 20px;
+}
+
+.sidebar h2 {
+  margin-bottom: 12px;
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.filter-btn {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 10px 12px;
+  background-color: #2a2a2a;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  font-size: 1rem;
+  color: var(--color-text);
+  cursor: pointer;
+  transition: background-color var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast);
+}
+
+.filter-btn:last-child {
+  margin-bottom: 0;
+}
+
+.filter-btn:hover {
+  background-color: #333333;
+  border-color: var(--color-primary);
+  transform: translateX(2px);
+}
+
+.filter-btn.active {
+  background-color: var(--color-primary);
+  color: #fff;
+  border-color: var(--color-primary-dark);
+  box-shadow: 0 2px 4px rgba(0,123,255,0.3);
+}
+
+.achievements-grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 24px;
+}
+
+.card {
+  background-color: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 20px 15px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+  text-align: center;
+  position: relative;
+  min-height: 140px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
+  cursor: default;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeInUp 0.3s forwards;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.7);
+  border-color: var(--color-primary);
+}
+
+.card .emoji {
+  font-size: 2.5rem;
+  margin-bottom: 12px;
+  transition: transform var(--transition-fast);
+}
+
+.card:hover .emoji {
+  transform: scale(1.1);
+}
+
+.card .title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+/* Borda colorida por tipo */
+.card[data-game="quiz"] {
+  border-left: 4px solid var(--color-primary);
+}
+.card[data-game="memoria"] {
+  border-left: 4px solid #28a745;
+}
+.card[data-game="caca_palavras"] {
+  border-left: 4px solid var(--color-secondary);
+}
+
+.card.hidden {
+  display: none;
+}
+
+.achievements-grid p {
+  grid-column: 1 / -1;
+  text-align: center;
+  color: var(--color-text-light);
+}
+
+@media (max-width: 900px) {
+  .content {
+    flex-direction: column;
+  }
+  .sidebar {
+    width: 100%;
+    position: relative;
+    top: auto;
+    margin-bottom: 20px;
+  }
+  .achievements-grid {
+    gap: 16px;
+  }
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.filter-btn:focus, .card:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0,123,255,0.25);
+}

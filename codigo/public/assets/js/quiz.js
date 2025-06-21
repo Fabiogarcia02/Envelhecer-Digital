@@ -3,6 +3,17 @@ let perguntaIndex = 0;
 let pontuacaoTotal = 0;
 let nivelAtual = 1;
 
+const usuarioCorrente = JSON.parse(localStorage.getItem("usuarioCorrente"));
+window.onload = () => {
+  if (!usuarioCorrente || !usuarioCorrente.id) {
+    alert("Você precisa estar logado para jogar.");
+    window.location.href = 'login.html';
+    return;
+  }
+  carregarQuiz();
+}
+const idUsuario = usuarioCorrente.id;
+
 async function carregarQuiz() {
   const usuarioCorrente = JSON.parse(localStorage.getItem("usuarioCorrente"));
   if (!usuarioCorrente || !usuarioCorrente.id) {
@@ -52,6 +63,7 @@ function renderQuiz() {
         <button class="next-button" onclick="reiniciarQuiz()">Refazer Quiz</button>
       </footer>
     `;
+    verificarConquistas();
     return;
   }
 
@@ -112,4 +124,36 @@ function lerTexto(texto) {
   voz.speak(fala);
 }
 
-window.onload = carregarQuiz;
+async function verificarConquistas() {
+  // Buscar conquistas já adquiridas pelo usuário
+  const conquistasExistentes = await fetch(`http://localhost:3000/conquistasUsuarios?idUsuario=${idUsuario}`)
+    .then(res => res.json())
+    .catch(() => []);
+
+  const idsExistentes = conquistasExistentes.map(c => Number(c.idAchievement));
+
+  // Buscar dados do quiz
+  const quiz = await fetch("http://localhost:3000/quiz").then(r => r.json());
+
+  const novasConquistas = [];
+
+  // Conquista ID 1 – Sabe tudo (acertar 5 perguntas com no máx. 1 erro cada)
+  const quizRespondidas = quiz.filter(q => q.nivel <= 5);
+  const acertouSabeTudo = quizRespondidas.every(q => {
+    const certa = q.respostas.find(r => r.correta);
+    return certa && (certa.erros ?? 0) <= 1;
+  });
+
+  if (acertouSabeTudo && !idsExistentes.includes(1)) {
+    novasConquistas.push(1);
+  }
+
+  // Enviar novas conquistas para o backend
+  for (const idAchievement of novasConquistas) {
+    await fetch("http://localhost:3000/conquistasUsuarios", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ idUsuario, idAchievement })
+    });
+  }
+}

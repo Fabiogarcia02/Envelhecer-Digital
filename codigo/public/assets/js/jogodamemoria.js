@@ -19,8 +19,9 @@ let nivelAtualMemoria = 1;
 let jogoMemoriaId = 1;
 let jogoMemoria = null;
 
+const usuarioCorrente = JSON.parse(localStorage.getItem("usuarioCorrente"));
+const idUsuario = usuarioCorrente.id;
 window.onload = () =>{
-  const usuarioCorrente = JSON.parse(localStorage.getItem("usuarioCorrente"));
   if (!usuarioCorrente || !usuarioCorrente.id) {
     alert("Você precisa estar logado para jogar.");
     window.location.href = 'login.html';
@@ -384,6 +385,7 @@ function salvarPontuacao(callback) {
     if (!res.ok) throw new Error("Erro ao salvar pontuação");
     alert("Pontuação salva com sucesso!");
     carregarRanking(); // Atualiza ranking
+    verificarConquistas();
     if (callback) callback(); // Avança nível
   })
   .catch(err => {
@@ -392,11 +394,70 @@ function salvarPontuacao(callback) {
   });
 }
 
-
-
 function avancarNivel() {
   nivelAtualMemoria++;
   carregarRanking();
   carregarCartas(jogoMemoria);
 }
 
+async function verificarConquistas() {
+  // Buscar conquistas já registradas para o usuário
+  const conquistasExistentes = await fetch(`http://localhost:3000/conquistasUsuarios?idUsuario=${idUsuario}`)
+    .then(res => res.json())
+    .catch(() => []);
+
+  const idsConquistasExistentes = conquistasExistentes.map(c => Number(c.idAchievement));
+
+  // Buscar ranking
+  const ranking = await fetch("http://localhost:3000/ranking").then(r => r.json());
+
+  const novasConquistas = [];
+
+  // ID 2 – Top 3 em 5 níveis (idJogo = "1" ou "2")
+  const top3PorNivel = {};
+  for (const jogoId of ["1", "2"]) {
+    ranking
+      .filter(r => r.idJogo === jogoId)
+      .forEach(registro => {
+        if (!top3PorNivel[registro.nivel]) top3PorNivel[registro.nivel] = [];
+        top3PorNivel[registro.nivel].push(registro);
+      });
+  }
+
+  const niveisTop3 = Object.values(top3PorNivel).filter(lista =>
+    lista.slice(0, 3).some(j => j.idUsuario === idUsuario)
+  );
+  if (niveisTop3.length >= 5 && !idsConquistasExistentes.includes(2)) {
+    novasConquistas.push(2);
+  }
+
+  // ID 3 – Encontrar todas cartas com até 18 erros (memória)
+  const memoria = ranking.filter(r => r.idJogo === "1" && r.erros <= 18 && r.idUsuario === idUsuario);
+  if (memoria.length > 0 && !idsConquistasExistentes.includes(3)) {
+    novasConquistas.push(3);
+  }
+
+  // ID 5 – Finalizar rápido (memória <= 60s, caça <= 90s)
+  const rapido = ranking.some(j =>
+    ((j.idJogo === "2" && j.tempo <= 90) || (j.idJogo === "1" && j.tempo <= 60)) &&
+    j.idUsuario === idUsuario
+  );
+  if (rapido && !idsConquistasExistentes.includes(5)) {
+    novasConquistas.push(5);
+  }
+
+  // ID 6 – Encontrar tudo com até 12 erros (memória)
+  const memoria12Erros = ranking.filter(r => r.idJogo === "1" && r.erros <= 12 && r.idUsuario === idUsuario);
+  if (memoria12Erros.length > 0 && !idsConquistasExistentes.includes(6)) {
+    novasConquistas.push(6);
+  }
+
+  // Enviar novas conquistas
+  for (const idAchievement of novasConquistas) {
+    await fetch("http://localhost:3000/conquistasUsuarios", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ idUsuario, idAchievement })
+    });
+  }
+}

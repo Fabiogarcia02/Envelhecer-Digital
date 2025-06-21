@@ -8,7 +8,7 @@
       "email": "admin@abc.com"
     },
     {
-      "id": 2,
+      "id": "2",
       "login": "user",
       "senha": "123",
       "nome": "Usuario Comum",
@@ -34,13 +34,6 @@
       "senha": "123",
       "nome": "teste",
       "email": "teste"
-    },
-    {
-      "id": "453fbc07-684b-4bf0-bc47-148193a9b88c",
-      "login": "anthony",
-      "senha": "123",
-      "nome": "fre",
-      "email": "anthon@gmail.com"
     }
   ],
   "ranking": [
@@ -169,6 +162,16 @@
       "idJogo": "1",
       "nivel": 1,
       "data": "2025-06-19"
+    },
+    {
+      "nome": "teste",
+      "idUsuario": "216eb8d4-86b6-4b0b-b4a8-ae7e52da2e0f",
+      "pontuacao": 90,
+      "tempo": 169,
+      "data": "2025-06-20",
+      "nivel": 1,
+      "idJogo": "2",
+      "id": "M4DxuB0"
     }
   ],
   "jogos": [
@@ -674,10 +677,89 @@
   "comentarios": [
     {
       "idJogo": "1",
-      "idUsuario": 1,
-      "nota": "2",
-      "comentario": "22",
+      "nota": "4",
+      "comentario": "deu bom?",
       "id": 1
     }
+  ],
+  "passwords": [
+    {
+      "id": 1,
+      "serviceName": "Banco Principal",
+      "serviceDescription": "Conta corrente e investimentos",
+      "password": "banco123@"
+    },
+    {
+      "id": 2,
+      "serviceName": "E-mail",
+      "serviceDescription": "Conta de e-mail principal",
+      "password": "email#secure"
+    },
+    {
+      "id": 3,
+      "serviceName": "Rede Social",
+      "serviceDescription": "Perfil profissional",
+      "password": "socialMedia2023"
+    }
+  ],
+  "achievements": [
+    {
+      "id": 1,
+      "title": "Sabe tudo",
+      "idJogo": "3",
+      "emoji": "🧠"
+    },
+    {
+      "id": 2,
+      "title": "Melhor jogador",
+      "idJogo": "1",
+      "emoji": "🏆"
+    },
+    {
+      "id": 3,
+      "title": "Melhor jogador",
+      "idJogo": "2",
+      "emoji": "🏆"
+    },
+    {
+      "id": 4,
+      "title": "Melhor raciocínio lógico",
+      "idJogo": "1",
+      "emoji": "🧠"
+    },
+    {
+      "id": 5,
+      "title": "Mestre em história",
+      "idJogo": "2",
+      "emoji": "📖"
+    },
+    {
+      "id": 6,
+      "title": "Velocidade suprema",
+      "idJogo": "1",
+      "emoji": "🚀"
+    },
+    {
+      "id": 7,
+      "title": "Velocidade suprema",
+      "idJogo": "2",
+      "emoji": "🚀"
+    },
+    {
+      "id": 8,
+      "title": "Memória infalível",
+      "idJogo": "1",
+      "emoji": "🧩"
+    },
+    {
+      "id": 9,
+      "title": "Caçador de palavras",
+      "idJogo": "2",
+      "emoji": "🔍"
+    }
+  ],
+  "conquistasUsuarios": [
+    { "idUsuario": "2", "idAchievement": 4 },
+    { "idUsuario": "1", "idAchievement": 7 }
   ]
 }

@@ -16,8 +16,9 @@ let intervaloTempo = null;
 let tempoDecorrido = 0;
 let pontuacaoAtual = 100;
 
+const usuarioCorrente = JSON.parse(localStorage.getItem("usuarioCorrente"));
+const idUsuario = usuarioCorrente.id;
 window.onload = () => {
-  const usuarioCorrente = JSON.parse(localStorage.getItem("usuarioCorrente"));
   if (!usuarioCorrente || !usuarioCorrente.id) {
     alert("Você precisa estar logado para jogar.");
     window.location.href = 'login.html';
@@ -363,11 +364,12 @@ function finalizarJogo() {
   })
     .then(res => res.json())
     .then(() => {
-      alert("Pontuação salva com sucesso!");
-      selectPalavra.forEach(el => el.classList.add("fixa"));
-      setTimeout(() => {
-        carregarNivel(nivelAtual + 1);
-      }, 500);
+        alert("Pontuação salva com sucesso!");
+        selectPalavra.forEach(el => el.classList.add("fixa"));
+        verificarConquistas();
+        setTimeout(() => {
+            carregarNivel(nivelAtual + 1);
+        }, 500);
     })
     .catch(err => console.error("Erro ao salvar:", err));
 }
@@ -423,4 +425,66 @@ function gerarLinhasTabela(lista, tipo) {
     }).join("");
 }
 
+async function verificarConquistas() {
+  // Buscar conquistas já obtidas pelo usuário
+  const conquistasExistentes = await fetch(`http://localhost:3000/conquistasUsuarios?idUsuario=${idUsuario}`)
+    .then(res => res.json())
+    .catch(err => []);
+
+  const idsConquistasExistentes = conquistasExistentes.map(c => Number(c.idAchievement));
+
+  // Buscar ranking
+  const ranking = await fetch("http://localhost:3000/ranking").then(r => r.json());
+
+  const novasConquistas = [];
+
+  // ID 2 – Top 3 em 5 níveis (jogos 1 ou 2)
+  const top3PorNivel = {};
+  for (const jogoId of ["1", "2"]) {
+    ranking.filter(r => r.idJogo === jogoId).forEach(registro => {
+      if (!top3PorNivel[registro.nivel]) top3PorNivel[registro.nivel] = [];
+      top3PorNivel[registro.nivel].push(registro);
+    });
+  }
+  const niveisTop3 = Object.values(top3PorNivel).filter(lista =>
+    lista.slice(0, 3).some(j => j.idUsuario === idUsuario)
+  );
+  if (niveisTop3.length >= 5 && !idsConquistasExistentes.includes(2)) {
+    novasConquistas.push(2);
+  }
+
+  // ID 4 – Completar 10 níveis de caça-palavras (jogo 2)
+  const niveisCaca = ranking.filter(r => r.idJogo === "2" && r.idUsuario === idUsuario);
+  const niveisUnicos = new Set(niveisCaca.map(j => j.nivel));
+  if (niveisUnicos.size >= 10 && !idsConquistasExistentes.includes(4)) {
+    novasConquistas.push(4);
+  }
+
+  // ID 5 – Terminar rápido (memória até 60s, caça até 90s)
+  const rapido = ranking.some(j =>
+    (j.idJogo === "2" && j.tempo <= 90 || j.idJogo === "1" && j.tempo <= 60) &&
+    j.idUsuario === idUsuario
+  );
+  if (rapido && !idsConquistasExistentes.includes(5)) {
+    novasConquistas.push(5);
+  }
+
+  // ID 7 – Caça-palavras: 10 níveis em até 1:50
+  const niveisRapidos = ranking.filter(r =>
+    r.idJogo === "2" && r.tempo <= 110 && r.idUsuario === idUsuario
+  );
+  const niveisRapidosUnicos = new Set(niveisRapidos.map(j => j.nivel));
+  if (niveisRapidosUnicos.size >= 10 && !idsConquistasExistentes.includes(7)) {
+    novasConquistas.push(7);
+  }
+
+  // Registrar novas conquistas no backend
+  for (const idAchievement of novasConquistas) {
+    await fetch("http://localhost:3000/conquistasUsuarios", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ idUsuario, idAchievement })
+    });
+  }
+}
 

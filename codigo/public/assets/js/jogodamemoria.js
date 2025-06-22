@@ -18,15 +18,17 @@ let totalPares = 0;
 let nivelAtualMemoria = 1;
 let jogoMemoriaId = 1;
 let jogoMemoria = null;
+let usuarioCorrente = null;
+let idUsuario = null;
 
-const usuarioCorrente = JSON.parse(localStorage.getItem("usuarioCorrente"));
-const idUsuario = usuarioCorrente.id;
 window.onload = () =>{
+  usuarioCorrente = JSON.parse(localStorage.getItem("usuarioCorrente"));
   if (!usuarioCorrente || !usuarioCorrente.id) {
     alert("Você precisa estar logado para jogar.");
     window.location.href = 'login.html';
     return;
   }
+  idUsuario = usuarioCorrente.id;
 }
 
 window.addEventListener("DOMContentLoaded", async () => {

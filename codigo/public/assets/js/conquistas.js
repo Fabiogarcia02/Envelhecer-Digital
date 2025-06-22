@@ -17,7 +17,6 @@ window.onload = () => {
   fetchAchievements();
 };
 
-
 async function fetchAchievements() {
   try {
     const response = await fetch(API_URL);

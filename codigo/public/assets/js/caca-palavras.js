@@ -15,15 +15,17 @@ let palavras = [];
 let intervaloTempo = null;
 let tempoDecorrido = 0;
 let pontuacaoAtual = 100;
+let usuarioCorrente = null;
+let idUsuario = null;
 
-const usuarioCorrente = JSON.parse(localStorage.getItem("usuarioCorrente"));
-const idUsuario = usuarioCorrente.id;
 window.onload = () => {
+  usuarioCorrente = JSON.parse(localStorage.getItem("usuarioCorrente"));
   if (!usuarioCorrente || !usuarioCorrente.id) {
     alert("Você precisa estar logado para jogar.");
     window.location.href = 'login.html';
     return;
   }
+  idUsuario = usuarioCorrente.id;
 
   fetch("/jogos")
     .then(response => response.json())

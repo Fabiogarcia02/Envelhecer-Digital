@@ -108,9 +108,6 @@ function closeVideoModal() {
 }
 
 
-function voltarHome() {
-    window.location.href = "index.html";
-}
 
 window.onload = gerarCards;
 function voltarHome() {

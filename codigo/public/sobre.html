@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre - Envelhecer Digital</title>
+    <link rel="stylesheet" href="./assets/css/footer.css">
+    <style>
+        body {
+            background: #f6fafd;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        img{
+            height: 20px;
+            width: 20px;
+        }
+        .sobre-container {
+            max-width: 1100px;
+            margin: 40px auto 0 auto;
+            padding: 20px;
+        }
+        .sobre-texto {
+            max-width: 700px;
+            margin: 0 auto 32px auto;
+            background: #eaf4fa;
+            border-radius: 10px;
+            padding: 18px 28px;
+            color: #005577;
+            font-size: 1.15em;
+            text-align: center;
+            box-shadow: 0 1px 6px rgba(0,85,119,0.07);
+        }
+        h1 {
+            text-align: center;
+            color: #005577;
+            margin-bottom: 40px;
+            font-size: 2.5em;
+        }
+        .cards {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 32px;
+            justify-content: center;
+        }
+        .card {
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+            display: flex;
+            align-items: center;
+            padding: 24px 32px;
+            min-width: 320px;
+            max-width: 400px;
+            width: 100%;
+            transition: box-shadow 0.2s;
+        }
+        .card:hover {
+            box-shadow: 0 4px 24px rgba(0,85,119,0.13);
+        }
+        .card-info {
+            flex: 1;
+            text-align: left;
+        }
+        .card-info .nome {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #005577;
+        }
+        .card-info .funcao {
+            font-size: 1em;
+            color: #1e6b8c;
+            margin-top: 6px;
+        }
+        .card-info .redes {
+            margin-top: 12px;
+            display: flex;
+            gap: 16px;
+        }
+        .card-info .redes a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #eaf4fa;
+            transition: background 0.2s;
+        }
+        .card-info .redes a:hover {
+            background: #005577;
+        }
+        .card-info .redes svg {
+            width: 18px;
+            height: 18px;
+            fill: #005577;
+            transition: fill 0.2s;
+        }
+        .card-info .redes a:hover svg {
+            fill: #fff;
+        }
+        .card-img {
+            margin-left: 24px;
+        }
+        .card-img img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 3px solid #005577;
+            background: #eaf4fa;
+        }
+        @media (max-width: 900px) {
+            .cards { flex-direction: column; align-items: center; }
+            .card { max-width: 90vw; }
+        }
+    </style>
+</head>
+<body>
+    <div class="sobre-container">
+        <div class="sobre-texto">
+            <p>
+                O projeto <strong>Envelhecer Digital</strong> tem como objetivo promover a inclusão digital de pessoas idosas, oferecendo conteúdos, jogos e tutoriais acessíveis para facilitar o aprendizado e o uso seguro da tecnologia no dia a dia. Nossa missão é tornar o mundo digital mais simples, seguro e divertido para todos!
+            </p>
+        </div>
+        <h1>Desenvolvedores do Projeto</h1>
+        <div class="cards">
+            <div class="card">
+                <div class="card-info">
+                    <div class="nome">Anthony</div>
+                    <div class="funcao">Desenvolvedor</div>
+                    <div class="redes">
+                        <a href="https://www.instagram.com/anth_28/" title="Instagram" target="_blank">
+                            <img src="./assets/images/instagram.png" alt="" srcset="">
+                        </a>
+                        <a href="https://www.linkedin.com/in/anthony-f-794706280/" title="LinkedIn" target="_blank">
+                            <svg viewBox="0 0 448 512"><path d="M100.28 448H7.4V148.9h92.88zm-46.44-340.7C24.09 107.3 0 83.2 0 53.6A53.6 53.6 0 0 1 53.6 0a53.6 53.6 0 0 1 53.6 53.6c0 29.6-24.09 53.7-53.36 53.7zM447.8 448h-92.4V302.4c0-34.7-12.4-58.4-43.3-58.4-23.6 0-37.6 15.9-43.7 31.3-2.3 5.6-2.8 13.4-2.8 21.2V448h-92.4s1.2-241.1 0-266.1h92.4v37.7c12.3-19 34.3-46.1 83.5-46.1 60.9 0 106.6 39.8 106.6 125.4V448z"/></svg>
+                        </a>
+                        <a href="https://github.com/anthonyfreitasborges" title="GitHub" target="_blank">
+                            <img src="./assets/images/github.jpg" alt="" srcset="">
+                        </a>
+                    </div>
+                </div>
+                <div class="card-img">
+                    <img src="./assets/images/anthony.jpg" alt="Anthony">
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-info">
+                    <div class="nome">Fábio Garcia</div>
+                    <div class="funcao">Desenvolvedor</div>
+                    <div class="redes">
+                        <a href="#" title="Instagram" target="_blank">
+                            <img src="./assets/images/instagram.png" alt="" srcset="">
+                        </a>
+                        <a href="#" title="LinkedIn" target="_blank">
+                            <svg viewBox="0 0 448 512"><path d="M100.28 448H7.4V148.9h92.88zm-46.44-340.7C24.09 107.3 0 83.2 0 53.6A53.6 53.6 0 0 1 53.6 0a53.6 53.6 0 0 1 53.6 53.6c0 29.6-24.09 53.7-53.36 53.7zM447.8 448h-92.4V302.4c0-34.7-12.4-58.4-43.3-58.4-23.6 0-37.6 15.9-43.7 31.3-2.3 5.6-2.8 13.4-2.8 21.2V448h-92.4s1.2-241.1 0-266.1h92.4v37.7c12.3-19 34.3-46.1 83.5-46.1 60.9 0 106.6 39.8 106.6 125.4V448z"/></svg>
+                        </a>
+                        <a href="#" title="GitHub" target="_blank">
+                            <img src="./assets/images/github.jpg" alt="" srcset="">
+                        </a>
+                    </div>
+                </div>
+                <div class="card-img">
+                    <img src="./assets/images/fabio.jpg" alt="Fábio Garcia">
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-info">
+                    <div class="nome">Francisco Sacchetto</div>
+                    <div class="funcao">Desenvolvedor</div>
+                    <div class="redes">
+                        <a href="https://www.instagram.com/franciscosacchetto?igsh=MTl1cjE4YTB5NzRyYw%3D%3D" title="Instagram" target="_blank">
+                            <img src="./assets/images/instagram.png" alt="" srcset="">
+                        </a>
+                        <a href="https://www.linkedin.com/in/francisco-sacchetto-andrade/" title="LinkedIn" target="_blank">
+                            <svg viewBox="0 0 448 512"><path d="M100.28 448H7.4V148.9h92.88zm-46.44-340.7C24.09 107.3 0 83.2 0 53.6A53.6 53.6 0 0 1 53.6 0a53.6 53.6 0 0 1 53.6 53.6c0 29.6-24.09 53.7-53.36 53.7zM447.8 448h-92.4V302.4c0-34.7-12.4-58.4-43.3-58.4-23.6 0-37.6 15.9-43.7 31.3-2.3 5.6-2.8 13.4-2.8 21.2V448h-92.4s1.2-241.1 0-266.1h92.4v37.7c12.3-19 34.3-46.1 83.5-46.1 60.9 0 106.6 39.8 106.6 125.4V448z"/></svg>
+                        </a>
+                        <a href="https://github.com/franciscosacchetto" title="GitHub" target="_blank">
+                            <img src="./assets/images/github.jpg" alt="" srcset="">
+                        </a>
+                    </div>
+                </div>
+                <div class="card-img">
+                    <img src="./assets/images/francisco.jpg" alt="Francisco Sacchetto">
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-info">
+                    <div class="nome">João Pedro Torga</div>
+                    <div class="funcao">Desenvolvedor</div>
+                    <div class="redes">
+                       <a href="#" title="Instagram" target="_blank">
+                            <img src="./assets/images/instagram.png" alt="" srcset="">
+                        </a>
+                        <a href="#" title="LinkedIn" target="_blank">
+                            <svg viewBox="0 0 448 512"><path d="M100.28 448H7.4V148.9h92.88zm-46.44-340.7C24.09 107.3 0 83.2 0 53.6A53.6 53.6 0 0 1 53.6 0a53.6 53.6 0 0 1 53.6 53.6c0 29.6-24.09 53.7-53.36 53.7zM447.8 448h-92.4V302.4c0-34.7-12.4-58.4-43.3-58.4-23.6 0-37.6 15.9-43.7 31.3-2.3 5.6-2.8 13.4-2.8 21.2V448h-92.4s1.2-241.1 0-266.1h92.4v37.7c12.3-19 34.3-46.1 83.5-46.1 60.9 0 106.6 39.8 106.6 125.4V448z"/></svg>
+                        </a>
+                        <a href="#" title="GitHub" target="_blank">
+                            <img src="./assets/images/github.jpg" alt="" srcset="">
+                        </a>
+                    </div>
+                </div>
+                <div class="card-img">
+                    <img src="./assets/images/joaotorga.jpg" alt="João Pedro Torga">
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-info">
+                    <div class="nome">João Vitor Porto Lorencini</div>
+                    <div class="funcao">Desenvolvedor</div>
+                    <div class="redes">
+                       <a href="https://www.instagram.com/jvplorencini/" title="Instagram" target="_blank">
+                            <img src="./assets/images/instagram.png" alt="" srcset="">
+                        </a>
+                        <a href="https://www.linkedin.com/in/jo%C3%A3o-vitor-porto-lorencini-172b5b333/" title="LinkedIn" target="_blank">
+                            <svg viewBox="0 0 448 512"><path d="M100.28 448H7.4V148.9h92.88zm-46.44-340.7C24.09 107.3 0 83.2 0 53.6A53.6 53.6 0 0 1 53.6 0a53.6 53.6 0 0 1 53.6 53.6c0 29.6-24.09 53.7-53.36 53.7zM447.8 448h-92.4V302.4c0-34.7-12.4-58.4-43.3-58.4-23.6 0-37.6 15.9-43.7 31.3-2.3 5.6-2.8 13.4-2.8 21.2V448h-92.4s1.2-241.1 0-266.1h92.4v37.7c12.3-19 34.3-46.1 83.5-46.1 60.9 0 106.6 39.8 106.6 125.4V448z"/></svg>
+                        </a>
+                        <a href="https://github.com/jvplorencini" title="GitHub" target="_blank">
+                            <img src="./assets/images/github.jpg" alt="" srcset="">
+                        </a>
+                    </div>
+                </div>
+                <div class="card-img">
+                    <img src="./assets/images/joaovictor.jpg" alt="João Vitor Porto Lorencini">
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-info">
+                    <div class="nome">Seu Nome Aqui</div>
+                    <div class="funcao">Desenvolvedor</div>
+                    <div class="redes">
+                      <a href="#" title="Instagram" target="_blank">
+                            <img src="./assets/images/instagram.png" alt="" srcset="">
+                        </a>
+                        <a href="#" title="LinkedIn" target="_blank">
+                            <svg viewBox="0 0 448 512"><path d="M100.28 448H7.4V148.9h92.88zm-46.44-340.7C24.09 107.3 0 83.2 0 53.6A53.6 53.6 0 0 1 53.6 0a53.6 53.6 0 0 1 53.6 53.6c0 29.6-24.09 53.7-53.36 53.7zM447.8 448h-92.4V302.4c0-34.7-12.4-58.4-43.3-58.4-23.6 0-37.6 15.9-43.7 31.3-2.3 5.6-2.8 13.4-2.8 21.2V448h-92.4s1.2-241.1 0-266.1h92.4v37.7c12.3-19 34.3-46.1 83.5-46.1 60.9 0 106.6 39.8 106.6 125.4V448z"/></svg>
+                        </a>
+                        <a href="#" title="GitHub" target="_blank">
+                            <img src="./assets/images/github.jpg" alt="" srcset="">
+                        </a>
+                    </div>
+                </div>
+                <div class="card-img">
+                    <img src="https://via.placeholder.com/80" alt="Seu Nome Aqui">
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-left">
+               <a href="index.html"> <img src="assets/images/logoenvelhecer.jpg" alt="Logo Envelhecer Digital" class="logo-footer" /></a>
+            </div>
+            <div class="footer-middle">
+                <p>contato@envelhecerdigital.com</p>
+                <p>(11) 9999-0000</p>
+            </div>
+        </div>
+        <div class="footer-copy">
+            © 2025 <strong>Envelhecer Digital</strong>. Todos os direitos reservados.
+        </div>
+    </footer>
+</body>
+</html>

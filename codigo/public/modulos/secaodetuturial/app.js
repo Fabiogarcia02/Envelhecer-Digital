@@ -21,6 +21,20 @@ const videos = [
         pdf: "PDFs/Tutorial_Banco_do_Brasil.pdf"
     },
     {
+        plataforma: "Instagram",
+        imageApp: "imagens/Logo_Instagram.png",
+        description: "Guia passo a passo para acessar o app do Instagram.",
+        videoLink: "https://www.youtube.com/watch?v=PQULFL8biAs",
+        pdf: "PDFs/Tutorial_Instagram.pdf"
+    },
+    {
+        plataforma: "Spotify",
+        imageApp: "imagens/Logo_Spotify.png",
+        description: "Veja como acessar o aplicativo do Spotify.",
+        videoLink: "https://www.youtube.com/watch?v=B-rWmGYuIYY",
+        pdf: "PDFs/Tutorial_Spotify.pdf"
+    },
+    {
         plataforma: "INSS",
         imageApp: "imagens/Logo_INSS.png",
         description: "Guia prático para acessar o app Meu INSS.",
@@ -44,15 +58,15 @@ function gerarCards() {
                 <img class="Logo_APPs" src="${video.imageApp}" alt="">
                 <div class="middle-content">
                     <a href="#" class="video-link" data-video-id="${videoId}">
-                        <img src="imagens/imagem_padrao.png" alt="Thumbnail do vídeo" class="video-thumb">
+                        <img src="https://img.youtube.com/vi/${videoId}/hqdefault.jpg" alt="Thumbnail do vídeo" class="video-thumb">
                     </a>
                     <small>${video.description}</small>
                 </div>
                 <div class="pdf_conteiner">
                     <a href="${video.pdf}" class="pdf-link" target="_blank">
-    <img class="Logo_PDF" src="imagens/logo_pdf-2.0.png" alt="Ícone PDF">
-    <p>PDF</p>
-</a>
+                        <img class="Logo_PDF" src="imagens/logo_pdf-2.0.png" alt="Ícone PDF">
+                        <p>PDF</p>
+                    </a>
                 </div>
             </div>
         `;

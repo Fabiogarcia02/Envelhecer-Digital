@@ -487,7 +487,8 @@
               "texto": "Se o e-mail vem de um banco conhecido",
               "correta": false
             }
-          ]
+          ],
+          "erros": 1
         },
         {
           "id": 2,
@@ -518,7 +519,8 @@
               "texto": "Compartilhar com familiares em um grupo do WhatsApp",
               "correta": false
             }
-          ]
+          ],
+          "erros": 0
         },
         {
           "id": 3,
@@ -549,7 +551,8 @@
               "texto": "Um controle remoto com pilhas novas",
               "correta": false
             }
-          ]
+          ],
+          "erros": 0
         },
         {
           "id": 4,
@@ -580,7 +583,8 @@
               "texto": "Ler uma receita de bolo",
               "correta": false
             }
-          ]
+          ],
+          "erros": 0
         },
         {
           "id": 5,
@@ -611,7 +615,8 @@
               "texto": "Só pagar depois que o produto chegar",
               "correta": false
             }
-          ]
+          ],
+          "erros": 0
         },
         {
           "id": 6,
@@ -642,7 +647,8 @@
               "texto": "Um botão que apaga todas as mensagens",
               "correta": false
             }
-          ]
+          ],
+          "erros": 0
         },
         {
           "id": 7,
@@ -669,7 +675,8 @@
               "texto": "wtsatw",
               "correta": false
             }
-          ]
+          ],
+          "erros": 0
         }
       ]
     }
@@ -759,7 +766,20 @@
     }
   ],
   "conquistasUsuarios": [
-    { "idUsuario": "2", "idAchievement": 4 },
-    { "idUsuario": "1", "idAchievement": 7 }
+    {
+      "id": 1,
+      "idUsuario": "2",
+      "idAchievement": 4
+    },
+    {
+      "id": 2,
+      "idUsuario": "1",
+      "idAchievement": 7
+    },
+    {
+      "idUsuario": 2,
+      "idAchievement": 1,
+      "id": 3
+    }
   ]
 }

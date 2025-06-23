@@ -572,7 +572,7 @@
               "correta": false
             }
           ],
-          "erros": 1
+          "erros": 0
         },
         {
           "id": 2,
@@ -760,7 +760,7 @@
               "correta": false
             }
           ],
-          "erros": 0
+          "erros": 1
         }
       ]
     }
@@ -791,6 +791,12 @@
       "serviceName": "Rede Social",
       "serviceDescription": "Perfil profissional",
       "password": "socialMedia2023"
+    },
+    {
+      "serviceName": "Instagram",
+      "serviceDescription": "ssss",
+      "password": "111",
+      "id": 4
     }
   ],
   "achievements": [
@@ -851,19 +857,12 @@
   ],
   "conquistasUsuarios": [
     {
-      "id": 1,
       "idUsuario": "2",
       "idAchievement": 4
     },
     {
-      "id": 2,
       "idUsuario": "1",
       "idAchievement": 7
-    },
-    {
-      "idUsuario": 2,
-      "idAchievement": 1,
-      "id": 3
     }
   ]
 }

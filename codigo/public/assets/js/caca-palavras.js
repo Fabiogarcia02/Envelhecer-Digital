@@ -15,57 +15,24 @@ let palavras = [];
 let intervaloTempo = null;
 let tempoDecorrido = 0;
 let pontuacaoAtual = 100;
-let usuarioCorrente = null;
-let idUsuario = null;
 
 window.onload = () => {
-  usuarioCorrente = JSON.parse(localStorage.getItem("usuarioCorrente"));
-  if (!usuarioCorrente || !usuarioCorrente.id) {
-    alert("Você precisa estar logado para jogar.");
-    window.location.href = 'login.html';
-    return;
-  }
-  idUsuario = usuarioCorrente.id;
-
-  fetch("/jogos")
-    .then(response => response.json())
-    .then(data => {
-      jogosJson = data;
-
-      // Depois de carregar os jogos, busca o ranking do usuário
-      fetch("/ranking")
-        .then(res => res.json())
-        .then(rankings => {
-          const jogadorRankings = rankings.filter(r =>
-            r.idUsuario === usuarioCorrente.id && r.idJogo === "2"
-          );
-
-          if (jogadorRankings.length > 0) {
-            const maiorNivel = Math.max(...jogadorRankings.map(r => r.nivel));
-            nivelAtual = maiorNivel + 1;
-          } else {
-            nivelAtual = 1;
-          }
-
-          carregarNivel(nivelAtual);
-          carregarRankings();
+    fetch("/jogos")
+        .then(response => response.json())
+        .then(data => {
+            jogosJson = data;
+            carregarNivel(nivelAtual);
         });
-    });
 };
-
 
 function carregarNivel(nivel) {
     const jogoCacaPalavras = jogosJson.find(j => j.tipo === "caca-palavras");
     if (!jogoCacaPalavras) return;
 
     const nivelData = jogoCacaPalavras.niveis.find(n => n.nivel === nivel);
-    if (!nivelData) {
-        alert("Parabéns! Você concluiu todos os níveis.");
-        return;
-    }
+    if (!nivelData) return;
 
     nivelAtual = nivel;
-    carregarRankings();
     palavras = nivelData.palavras;
     palavrasEncontradas = 0;
     listItems = [];
@@ -274,14 +241,18 @@ function endSelection(e) {
             if (palavras[i] === palavraSelecionada && !listItems[i].classList.contains("encontrado")) {
                 listItems[i].classList.add("encontrado");
                 palavrasEncontradas++;
+
+                selectPalavra.forEach(el => el.classList.add("fixa"));
                 break;
             }
         }
-    if (palavrasEncontradas === palavras.length) {
-        finalizarJogo(); // salva nome e pontuação
-        selectPalavra.forEach(el => el.classList.add("fixa"));
-    }
 
+        if (palavrasEncontradas === palavras.length) {
+            pararCronometro();
+            setTimeout(() => {
+                carregarNivel(nivelAtual + 1);
+            }, 100);
+        }
 
         selecionado = false;
         startX = null;
@@ -291,7 +262,6 @@ function endSelection(e) {
     }
 }
 
-
 document.addEventListener("mousedown", startSelection);
 document.addEventListener("touchstart", startSelection);
 
@@ -300,20 +270,12 @@ document.addEventListener("touchmove", moveSelection);
 
 document.addEventListener("mouseup", endSelection);
 document.addEventListener("touchend", endSelection);
-document.addEventListener("touchmove", function (e) {
-  if (selecionado) {
-    e.preventDefault();
-  }
-}, { passive: false });
-
 
 function formatarTempo(segundos) {
-    if (typeof segundos !== "number" || isNaN(segundos)) return "00:00";
     const min = String(Math.floor(segundos / 60)).padStart(2, '0');
     const sec = String(segundos % 60).padStart(2, '0');
     return `${min}:${sec}`;
 }
-
 
 function atualizarCronometro() {
     tempoDecorrido++;
@@ -339,154 +301,3 @@ function iniciarCronometro() {
 function pararCronometro() {
     clearInterval(intervaloTempo);
 }
-
-function finalizarJogo() {
-  pararCronometro();
-
-  const usuarioCorrente = JSON.parse(localStorage.getItem("usuarioCorrente"));
-  if (!usuarioCorrente || !usuarioCorrente.nome) {
-    alert("Você precisa estar logado para salvar sua pontuação.");
-    return;
-  }
-
-  const jogador = {
-    nome: usuarioCorrente.nome,
-    idUsuario: usuarioCorrente.id,
-    pontuacao: pontuacaoAtual,
-    tempo: Number(tempoDecorrido),
-    data: new Date().toISOString().split("T")[0],
-    nivel: nivelAtual,
-    idJogo: "2"
-  };
-
-  fetch("/ranking", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(jogador)
-  })
-    .then(res => res.json())
-    .then(() => {
-        alert("Pontuação salva com sucesso!");
-        selectPalavra.forEach(el => el.classList.add("fixa"));
-        verificarConquistas();
-        setTimeout(() => {
-            carregarNivel(nivelAtual + 1);
-        }, 500);
-    })
-    .catch(err => console.error("Erro ao salvar:", err));
-}
-
-
-
-function carregarRankings() {
-  fetch("/ranking")
-    .then(res => res.json())
-    .then(data => {
-      if (!Array.isArray(data)) return;
-
-      // Mostra apenas rankings do caça-palavras (idJogo = "2") e do nível atual
-      const dataNivelAtual = data.filter(j =>
-        j.nivel === nivelAtual && j.idJogo === "2"
-      );
-
-      const rankingPontuacao = [...dataNivelAtual].sort((a, b) => b.pontuacao - a.pontuacao);
-      const rankingTempo = [...dataNivelAtual].sort((a, b) => a.tempo - b.tempo);
-      const rankingTabela = [...dataNivelAtual].sort((a, b) => b.pontuacao - a.pontuacao || a.tempo - b.tempo);
-
-      document.getElementById("ranking").innerHTML = gerarLinhasTabela(rankingPontuacao, "pontuacao");
-      document.getElementById("ranking-tempo").innerHTML = gerarLinhasTabela(rankingTempo, "tempo");
-      document.getElementById("ranking-global").innerHTML = gerarTabelaCompleta(rankingTabela);
-    })
-    .catch(err => {
-      console.error("Erro ao carregar rankings:", err);
-    });
-}
-
-
-function gerarListaRanking(lista) {
-  return `<ol>${lista
-    .filter(j => typeof j.tempo === 'number')  // Evita registros inválidos
-    .slice(0, 5)
-    .map(j =>
-      `<li>${j.nome} - ${j.pontuacao} pts - ${formatarTempo(j.tempo)}</li>`
-    ).join("")
-  }</ol>`;
-}
-
-
-function gerarLinhasTabela(lista, tipo) {
-  return lista
-    .filter(j => typeof j.tempo === 'number')
-    .slice(0, 5)
-    .map((j, index) => {
-      if (tipo === "pontuacao") {
-        return `<tr><td>${index + 1}</td><td>${j.nome}</td><td>${j.pontuacao}</td></tr>`;
-      } else if (tipo === "tempo") {
-        return `<tr><td>${index + 1}</td><td>${j.nome}</td><td>${formatarTempo(j.tempo)}</td></tr>`;
-      }
-    }).join("");
-}
-
-async function verificarConquistas() {
-  // Buscar conquistas já obtidas pelo usuário
-  const conquistasExistentes = await fetch(`http://localhost:3000/conquistasUsuarios?idUsuario=${idUsuario}`)
-    .then(res => res.json())
-    .catch(err => []);
-
-  const idsConquistasExistentes = conquistasExistentes.map(c => Number(c.idAchievement));
-
-  // Buscar ranking
-  const ranking = await fetch("http://localhost:3000/ranking").then(r => r.json());
-
-  const novasConquistas = [];
-
-  // ID 2 – Top 3 em 5 níveis (jogos 1 ou 2)
-  const top3PorNivel = {};
-  for (const jogoId of ["1", "2"]) {
-    ranking.filter(r => r.idJogo === jogoId).forEach(registro => {
-      if (!top3PorNivel[registro.nivel]) top3PorNivel[registro.nivel] = [];
-      top3PorNivel[registro.nivel].push(registro);
-    });
-  }
-  const niveisTop3 = Object.values(top3PorNivel).filter(lista =>
-    lista.slice(0, 3).some(j => j.idUsuario === idUsuario)
-  );
-  if (niveisTop3.length >= 5 && !idsConquistasExistentes.includes(2)) {
-    novasConquistas.push(2);
-  }
-
-  // ID 4 – Completar 10 níveis de caça-palavras (jogo 2)
-  const niveisCaca = ranking.filter(r => r.idJogo === "2" && r.idUsuario === idUsuario);
-  const niveisUnicos = new Set(niveisCaca.map(j => j.nivel));
-  if (niveisUnicos.size >= 10 && !idsConquistasExistentes.includes(4)) {
-    novasConquistas.push(4);
-  }
-
-  // ID 5 – Terminar rápido (memória até 60s, caça até 90s)
-  const rapido = ranking.some(j =>
-    (j.idJogo === "2" && j.tempo <= 90 || j.idJogo === "1" && j.tempo <= 60) &&
-    j.idUsuario === idUsuario
-  );
-  if (rapido && !idsConquistasExistentes.includes(5)) {
-    novasConquistas.push(5);
-  }
-
-  // ID 7 – Caça-palavras: 10 níveis em até 1:50
-  const niveisRapidos = ranking.filter(r =>
-    r.idJogo === "2" && r.tempo <= 110 && r.idUsuario === idUsuario
-  );
-  const niveisRapidosUnicos = new Set(niveisRapidos.map(j => j.nivel));
-  if (niveisRapidosUnicos.size >= 10 && !idsConquistasExistentes.includes(7)) {
-    novasConquistas.push(7);
-  }
-
-  // Registrar novas conquistas no backend
-  for (const idAchievement of novasConquistas) {
-    await fetch("http://localhost:3000/conquistasUsuarios", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ idUsuario, idAchievement })
-    });
-  }
-}
-

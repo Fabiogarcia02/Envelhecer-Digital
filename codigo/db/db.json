@@ -41,6 +41,83 @@
       "senha": "123",
       "nome": "Fábio Garcia Martins",
       "email": "fabio@example"
+    },
+    {
+      "id": "151ec33d-1828-447d-ae56-87fd51ec2871",
+      "login": "fabio lindo",
+      "senha": "123",
+      "nome": "dddd",
+      "email": "fabio lindo"
+    },
+    {
+      "id": "22c328e4-146e-4510-aa76-149bbe9a0631",
+      "login": "teste",
+      "senha": "12",
+      "nome": "teste",
+      "email": "teste"
+    },
+    {
+      "id": "592c3b30-f03c-4eee-9b9e-8f2774984b32",
+      "login": "teste",
+      "senha": "1",
+      "nome": "ww",
+      "email": "ww"
+    },
+    {
+      "id": "71c1e248-9690-4c52-9eba-655ea3bb749d",
+      "login": "teste",
+      "senha": "1",
+      "nome": "ww",
+      "email": "ww"
+    },
+    {
+      "id": "8cdf6d69-f9a2-46e2-93da-254a4acff627",
+      "login": "teste",
+      "senha": "111",
+      "nome": "111",
+      "email": "111"
+    },
+    {
+      "id": "7c179901-1f73-4072-8f29-b59ac851b3a9",
+      "login": "teste",
+      "senha": "111",
+      "nome": "111",
+      "email": "111"
+    },
+    {
+      "id": "96a81eed-72ed-4d7e-a6bb-ce03183c488f",
+      "login": "teste",
+      "senha": "111",
+      "nome": "111",
+      "email": "111"
+    },
+    {
+      "id": "120e3393-c098-4712-afe3-475202cb5326",
+      "login": "teste",
+      "senha": "111",
+      "nome": "111",
+      "email": "111"
+    },
+    {
+      "id": "677f7357-78b2-4b25-871f-0de8ee596819",
+      "login": "teste",
+      "senha": "111",
+      "nome": "111",
+      "email": "111"
+    },
+    {
+      "id": "60f0ea69-a442-40f5-8dcf-5a20a211bdb4",
+      "login": "11",
+      "senha": "11",
+      "nome": "11",
+      "email": "11"
+    },
+    {
+      "id": "3ac8f4da-3d14-4bc2-ae40-68c1b7e9f33a",
+      "login": "teste",
+      "senha": "1",
+      "nome": "teste",
+      "email": "teste"
     }
   ],
   "ranking": [
@@ -694,13 +771,6 @@
       "nota": "4",
       "comentario": "deu bom?",
       "id": 1
-    },
-    {
-      "idJogo": "2",
-      "idUsuario": "2",
-      "nota": "9",
-      "comentario": "33",
-      "id": 2
     }
   ],
   "passwords": [

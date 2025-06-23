@@ -1,0 +1,193 @@
+body {
+  background-color: #eaf6fc;
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.login-card {
+  background-color: #fff;
+  border-radius: 20px;
+  padding: 40px 30px;
+  max-width: 400px;
+  margin: 80px auto;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+  text-align: center;
+}
+
+.login-card h2 {
+  color: #123c63;
+  font-size: 22px;
+  margin-bottom: 25px;
+  font-weight: 700;
+}
+
+.illustration {
+  width: 120px;
+  height: auto;
+  margin-bottom: 25px;
+}
+
+.form-group {
+  text-align: left;
+  margin-bottom: 16px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+.btn-primary,
+.btn-info {
+  width: 100%;
+  background-color: #0b3967;
+  border: none;
+  padding: 14px;
+  font-size: 16px;
+  color: white;
+  border-radius: 12px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.btn-primary:hover,
+.btn-info:hover {
+  background-color: #072e55;
+}
+
+.text-link {
+  font-size: 14px;
+  margin-top: 15px;
+}
+
+.text-link a {
+  color: #0b3967;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.text-link a:hover {
+  text-decoration: underline;
+}
+
+.password-wrapper {
+  position: relative;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 14px;
+  cursor: pointer;
+  color: #666;
+}
+
+/* Responsivo */
+@media (max-width: 576px) {
+  .login-card {
+    padding: 30px 20px;
+    margin: 40px 15px;
+  }
+
+  .login-card h2 {
+    font-size: 18px;
+  }
+
+  .btn-primary,
+  .btn-info {
+    font-size: 15px;
+  }
+
+  .illustration {
+    width: 100px;
+  }
+}
+/* Estilo do modal de cadastro */
+.modal-content {
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  background-color: #fff;
+}
+
+.modal-header,
+.modal-footer {
+  border: none;
+  padding: 0;
+}
+
+.modal-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #123c63;
+  margin-bottom: 20px;
+}
+
+.modal-body form {
+  margin-top: 10px;
+}
+
+.modal-body .form-group {
+  margin-bottom: 16px;
+}
+
+.modal-body .form-control {
+  border-radius: 12px;
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 20px;
+}
+
+.modal-footer .btn {
+  border-radius: 12px;
+  padding: 10px 20px;
+  font-size: 15px;
+}
+
+.btn-info {
+  background-color: #123c63;
+  border: none;
+  color: #fff;
+}
+
+.btn-info:hover {
+  background-color: #0d2f50;
+}
+
+.btn-secondary {
+  background-color: #ccc;
+  color: #333;
+  border: none;
+}
+
+.btn-secondary:hover {
+  background-color: #bbb;
+}
+
+/* Responsivo */
+@media (max-width: 576px) {
+  .modal-content {
+    padding: 20px;
+  }
+
+  .modal-title {
+    font-size: 18px;
+  }
+
+  .modal-footer .btn {
+    font-size: 14px;
+  }
+}

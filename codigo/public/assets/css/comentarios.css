@@ -1,6 +1,6 @@
 .comentario-conteiner {
       background-color: #E8E8E8;
-      height: 280px;
+      height: 300px;
       width: 300px;
       border-radius: 20px;
       position: relative;
@@ -103,7 +103,7 @@
 
     .comentario-conteiner-recente {
       background-color: #E8E8E8;
-      height: 280px;
+      height: 290px;
       width: 400px;
       border-radius: 20px;
       position: relative;

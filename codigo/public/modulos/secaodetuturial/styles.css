@@ -172,6 +172,19 @@ p {
 .close-modal:hover {
     color: #ccc;
 }
+.video-thumb {
+            width: 100%;
+            max-width: 320px;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .video-thumb:hover {
+            transform: scale(1.03);
+        }
 
 #videoFrame {
     width: 320px;

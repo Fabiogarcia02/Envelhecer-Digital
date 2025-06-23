@@ -34,6 +34,13 @@
       "senha": "123",
       "nome": "teste",
       "email": "teste"
+    },
+    {
+      "id": "64042245-b697-45fe-a1a3-8527064bcffd",
+      "login": "fabio lindo",
+      "senha": "123",
+      "nome": "Fábio Garcia Martins",
+      "email": "fabio@example"
     }
   ],
   "ranking": [
@@ -687,6 +694,13 @@
       "nota": "4",
       "comentario": "deu bom?",
       "id": 1
+    },
+    {
+      "idJogo": "2",
+      "idUsuario": "2",
+      "nota": "9",
+      "comentario": "33",
+      "id": 2
     }
   ],
   "passwords": [

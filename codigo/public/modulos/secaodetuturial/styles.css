@@ -3,6 +3,8 @@ body {
     font-family: Arial, sans-serif;
     background-color: #bdd9ec;
     color: #333;
+    padding-top: 150px; 
+
 }
 
 .top-bar {
@@ -27,6 +29,7 @@ h1 {
     color: #003366;
     font-size: 2em;
     margin-bottom: 45px; /* espaçamento maior abaixo do título */
+    text-align: center;
 }
 
 p {

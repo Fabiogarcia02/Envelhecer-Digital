@@ -9,12 +9,10 @@ body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background: linear-gradient(135deg, #1d3557, #457b9d);
   color: #fff;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
+  min-height: 100vh;
+  /* Remova o display: flex, justify-content, align-items e overflow */
   animation: fadeInBody 1s ease-in-out;
+  padding-top: 90px; 
 }
 
 /* Animação de entrada do body */
@@ -40,6 +38,16 @@ body {
   width: 90%;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   animation: popUp 0.8s ease;
+
+  /* Centralização */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 70vh;
+  margin: 90px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* Efeito ao passar o mouse */

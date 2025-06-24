@@ -199,6 +199,65 @@ O vídeo a seguir traz uma apresentação do problema que a equipe está tratand
 
 ## Funcionalidades
 
+##### Funcionalidade 1 -Carrosel de jogos 
+
+Uma seção que quando usuario clicar em jogar ira redirecionar para a pagina de jogo especifica.
+
+* **Estrutura de dados:** [Contatos](#ti_ed_contatos)
+* **Instruções de acesso:**
+  * Abra o site e efetue o login
+  * Acesse a pagina  principal e escolha a um dos jogos do carrosel
+ 
+* **Tela da funcionalidade**:
+
+![Tela de Funcionalidade](images/exemplo-funcionalidade.png)
+
+> ⚠️ **APAGUE ESSA PARTE ANTES DE ENTREGAR SEU TRABALHO**
+>
+> Apresente cada uma das funcionalidades que a aplicação fornece tanto para os usuários quanto aos administradores da solução.
+>
+> Inclua, para cada funcionalidade, itens como: (1) titulos e descrição da funcionalidade; (2) Estrutura de dados associada; (3) o detalhe sobre as instruções de acesso e uso.
+
+## Estruturas de Dados
+
+Descrição das estruturas de dados utilizadas na solução com exemplos no formato JSON.Info
+
+##### Estrutura de Dados - Contatos   ⚠️ EXEMPLO ⚠️
+
+Contatos da aplicação
+
+```json
+  {
+    "id": 1,
+    "nome": "Leanne Graham",
+    "cidade": "Belo Horizonte",
+    "categoria": "amigos",
+    "email": "Sincere@april.biz",
+    "telefone": "1-770-736-8031",
+    "website": "hildegard.org"
+  }
+  
+```
+
+##### Estrutura de Dados - Usuários  ⚠️ EXEMPLO ⚠️
+
+Registro dos usuários do sistema utilizados para login e para o perfil do sistema
+
+```json
+  {
+    id: "eed55b91-45be-4f2c-81bc-7686135503f9",
+    email: "admin@abc.com",
+    id: "eed55b91-45be-4f2c-81bc-7686135503f9",
+    login: "admin",
+    nome: "Administrador do Sistema",
+    senha: "123"
+  }
+```
+
+
+
+## Funcionalidades
+
 Esta seção apresenta as funcionalidades da solução.Info
 
 ##### Funcionalidade 1 - Cadastro de Contatos ⚠️ EXEMPLO ⚠️

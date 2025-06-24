@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:3000/achievements';
+const API_URL = '/achievements';
 const achievementsGrid = document.getElementById('achievements-grid');
 const filterButtons = document.querySelectorAll('.filter-btn');
 
@@ -24,7 +24,7 @@ async function fetchAchievements() {
     allAchievements = await response.json();
 
     // Buscar conquistas do usuário logado
-    const conquistasUsuarioRes = await fetch(`http://localhost:3000/conquistasUsuarios?idUsuario=${encodeURIComponent(idUsuario)}`);
+    const conquistasUsuarioRes = await fetch(`/conquistasUsuarios?idUsuario=${encodeURIComponent(idUsuario)}`);
     if (!conquistasUsuarioRes.ok) throw new Error('Erro ao buscar conquistas do usuário');
     const conquistasUsuario = await conquistasUsuarioRes.json();
     const idsUsuario = conquistasUsuario.map(c => String(c.idAchievement));

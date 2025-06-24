@@ -439,7 +439,7 @@ async function verificarConquistas() {
   const idsConquistasExistentes = conquistasExistentes.map(c => Number(c.idAchievement));
 
   // Buscar ranking
-  const ranking = await fetch("http://localhost:3000/ranking").then(r => r.json());
+  const ranking = await fetch("/ranking").then(r => r.json());
 
   const novasConquistas = [];
 
@@ -485,7 +485,7 @@ async function verificarConquistas() {
 
   // Registrar novas conquistas no backend
   for (const idAchievement of novasConquistas) {
-    await fetch("http://localhost:3000/conquistasUsuarios", {
+    await fetch("/conquistasUsuarios", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ idUsuario, idAchievement })

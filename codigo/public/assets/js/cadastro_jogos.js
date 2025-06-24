@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:3000/jogos";
+const API_URL = "/jogos";
 function displayMessage(msg) {
     const div = document.getElementById("msg");
     if (div) {

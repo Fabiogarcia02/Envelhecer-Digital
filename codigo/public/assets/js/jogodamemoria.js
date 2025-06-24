@@ -36,7 +36,7 @@ window.addEventListener("DOMContentLoaded", async () => {
   backgroundMusic.play().catch(() => {});
 
   try {
-    const jogos = await fetch("http://localhost:3000/jogos").then(r => r.json());
+    const jogos = await fetch("/jogos").then(r => r.json());
     jogoMemoria = jogos.find(jogo => jogo.tipo === "jogo-memoria");
 
     if (!jogoMemoria) throw new Error("Jogo da memória não encontrado.");
@@ -62,7 +62,7 @@ toggleButton.addEventListener("click", () => {
 
 async function carregarRanking() {
   try {
-    const res = await fetch("http://localhost:3000/ranking");
+    const res = await fetch("/ranking");
     const data = await res.json();
     const rankingFiltrado = data.filter(item =>
       item.idJogo === jogoMemoriaId && item.nivel === nivelAtualMemoria
@@ -369,7 +369,7 @@ function salvarPontuacao(callback) {
   const tempoGastoAtual = 240 - tempoRestante;
   const pontosFinais = Math.max(0, score - erros * 0.5);
 
-  fetch("http://localhost:3000/ranking", {
+  fetch("/ranking", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -404,7 +404,7 @@ function avancarNivel() {
 
 async function verificarConquistas() {
   // Buscar conquistas já registradas para o usuário
-  const conquistasExistentes = await fetch(`http://localhost:3000/conquistasUsuarios?idUsuario=${idUsuario}`)
+  const conquistasExistentes = await fetch(`/conquistasUsuarios?idUsuario=${idUsuario}`)
     .then(res => res.json())
     .catch(() => []);
 
@@ -456,7 +456,7 @@ async function verificarConquistas() {
 
   // Enviar novas conquistas
   for (const idAchievement of novasConquistas) {
-    await fetch("http://localhost:3000/conquistasUsuarios", {
+    await fetch("/conquistasUsuarios", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ idUsuario, idAchievement })

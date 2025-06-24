@@ -1,192 +1,171 @@
-.comentario-conteiner {
-      background-color: #E8E8E8;
-      height: 300px;
-      width: 300px;
-      border-radius: 20px;
-      position: relative;
-    }
-
-    .comentario-conteiner .title .img-titulo {
-      position: absolute;
-      height: 10px;
-      width: 10px;
-      left: 10px;
-      top: 10px;
-    }
-
-    .comentario-conteiner h1 {
-      color: #FFFFFF;
-      background-color: #1BADCB;
-      height: 50px;
-      width: 100%;
-      text-align: center;
-      border-radius: 20px 20px 0px 0px;
-      padding-top: 10px;
-      margin-bottom: 0;
-    }
-
-    .comentario-form {
-      text-align: center;
-      width: 100%;
-    }
-
-    .comentario-form input:nth-of-type(n+2), textarea {
-      margin-top: 10px;
-    }
-
-    .comentario-form input::placeholder,
-    textarea::placeholder {
-      color: #1E7A9C;
-    }
-
-    .comentario-form input {
-      padding-top: 5px;
-      padding-left: 13px;
-      border-radius: 20px;
-      outline: none;
-      border: none;
-      background-color: #FFFDFD;
-      width: 165px;
-    }
-    .comentario-form input[type="number"] {
-      padding-top: 5px;
-      padding-left: 13px;
-      border-radius: 20px;
-      outline: none;
-      border: none;
-      background-color: #FFFDFD;
-      width: 165px;
-    }
-
-    .comentario-form textarea {
-      resize: none;
-      width: 165px;
-      padding-bottom: 53px;
-      border-radius: 5px;
-      outline: none;
-      border: none;
-    }
-
-    .comentario-form select {
-  width: 90%;
-  margin: 10px auto;
-  display: block;
-  border-radius: 10px;
-  border: 1px solid #1BADCB;
-  background: #fff;
-  color: #1E7A9C;
-  font-size: 1rem;
-  padding: 8px 12px;
-  transition: border 0.2s;
-}
-.comentario-form select:focus {
-  border: 2px solid #1E7A9C;
-  outline: none;
-}
-
-    .comentario-button {
-      background-color: #1BADCB;
-      border: none;
-      color: #FFFFFF;
-      padding: 10px;
-      margin-top: 5px;
-      border-radius: 15px;
-    }
-
-    .comentario-conteiner-recente .title img {
-      position: absolute;
-      height: 10px;
-      width: 10px;
-      left: 10px;
-      top: 10px;
-    }
-
-    .comentario-conteiner-recente {
-      background-color: #E8E8E8;
-      height: 290px;
-      width: 400px;
-      border-radius: 20px;
-      position: relative;
-    }
-
-    .comentario-conteiner-recente h1 {
-      color: #FFFFFF;
-      background-color: #1BADCB;
-      text-align: center;
-      border-radius: 20px 20px 0px 0px;
-      padding-top: 10px;
-      margin-bottom: 0;
-    }
-
-    .comentario-p-recentee {
-      text-align: center;
-      width: 100%;
-    }
-
-    .comentario-conteiner-recente p {
-      height: 60px;
-      width: 350px;
-      padding-left: 15px;
-      padding-top: 10px;
-      border-radius: 20px;
-      outline: none;
-      border: none;
-      background-color: #FFFDFD;
-      color: black;
-    }
-
-    .comentario-conteiner-recente section {
-      display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  overflow-y: auto;
-  max-height: 200px;
-    }
-
-    /* Centraliza horizontalmente as duas divs de comentários */
+/* Container geral */
 .comentarios-wrapper {
   display: flex;
   justify-content: center;
   align-items: flex-start;
   gap: 40px;
   margin: 40px 0;
+  flex-wrap: wrap;
 }
 
-@media (max-width: 900px) {
-  .comentarios-wrapper {
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-  }
+/* Bloco base */
+.comentario-conteiner,
+.comentario-conteiner-recente {
+  background-color: #f9f9f9;
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+  transition: transform 0.3s ease;
 }
 
+.comentario-conteiner:hover,
+.comentario-conteiner-recente:hover {
+  transform: translateY(-4px);
+}
+
+/* Título dos blocos */
+.comentario-conteiner h1,
+.comentario-conteiner-recente h1 {
+  background-color: #1BADCB;
+  color: #fff;
+  text-align: center;
+  padding: 14px;
+  border-radius: 16px 16px 0 0;
+  font-size: 1.2rem;
+  margin: -20px -20px 20px -20px;
+  position: relative;
+}
+
+.comentario-conteiner h1::before,
+.comentario-conteiner-recente h1::before {
+  content: "💬";
+  margin-right: 8px;
+}
+
+/* Área do formulário */
+.comentario-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Campos do formulário */
+.comentario-form select,
+.comentario-form input[type="number"],
+.comentario-form textarea {
+  width: 90%;
+  margin-bottom: 12px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  padding: 10px 14px;
+  font-size: 0.95rem;
+  background-color: #fff;
+  transition: border-color 0.2s;
+}
+
+.comentario-form select:focus,
+.comentario-form input:focus,
+.comentario-form textarea:focus {
+  border-color: #1BADCB;
+  outline: none;
+}
+
+/* Caixa de texto */
+.comentario-form textarea {
+  resize: none;
+  height: 80px;
+}
+
+/* Botão de enviar */
+.comentario-button {
+  background-color: #1BADCB;
+  border: none;
+  color: white;
+  font-weight: 600;
+  padding: 10px 20px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.comentario-button:hover {
+  background-color: #188da5;
+  transform: scale(1.05);
+}
+
+/* Histórico de comentários */
+.comentario-conteiner-recente {
+  width: 400px;
+}
+
+/* Seção scrollável de comentários */
+.comentario-conteiner-recente section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  overflow-y: auto;
+  max-height: 220px;
+  padding-right: 8px;
+}
+
+/* Estilo individual dos comentários */
+.comentario-conteiner-recente p {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 14px 18px;
+  margin: 0;
+  font-size: 0.95rem;
+  color: #333;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.07);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* Item de comentário + botões */
 .comentario-item {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  gap: 6px;
-}
-
-
-.comentario-item .botoes-comentario {
-  display: flex;
   gap: 8px;
 }
 
-.botao-excluir, .botao-editar {
-  background: #1BADCB;
+/* Botões de edição/exclusão */
+.botoes-comentario {
+  display: flex;
+  gap: 10px;
+  margin-top: 6px;
+  justify-content: center;
+}
+
+.botao-excluir,
+.botao-editar {
+  background-color: #1BADCB;
   color: #fff;
   border: none;
   border-radius: 8px;
-  padding: 5px 16px;
-  margin: 0;
-  cursor: pointer;
-  font-size: 0.95rem;
+  padding: 6px 14px;
+  font-size: 0.9rem;
   font-weight: 500;
-  transition: background 0.2s, box-shadow 0.2s;
-  box-shadow: 0 2px 8px rgba(30, 122, 156, 0.07);
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  box-shadow: 0 2px 6px rgba(30, 122, 156, 0.1);
 }
-.botao-excluir:hover, .botao-editar:hover {
-  background: #1E7A9C;
+
+.botao-excluir:hover,
+.botao-editar:hover {
+  background-color: #188da5;
+  transform: scale(1.05);
 }
+
+/* Responsivo para telas menores */
+@media (max-width: 700px) {
+  .comentarios-wrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .comentario-conteiner,
+  .comentario-conteiner-recente {
+    width: 90%;
+  }
+}
+

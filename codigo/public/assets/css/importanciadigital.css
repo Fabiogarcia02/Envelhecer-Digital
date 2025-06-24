@@ -1,106 +1,95 @@
-.secao-independencia-digital {
-  display: flex;
-  align-items: flex-start;
-  margin-top: 100px;
-  margin-left: 600px;
-  flex-wrap: wrap;
-  gap: 20px;
-    padding: 50px;
-}
-
-.texto-independencia {
-  max-width: 600px;
-}
-
-.titulo-secao {
-  color: #005577;
-  font-size: 30px;
-  margin-bottom: 20px;
-}
-
-.paragrafo-explicativo {
-  font-size: 16px;
-  line-height: 1.5;
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #e6f0f8;
+  margin: 0;
+  padding: 0;
   color: #333;
 }
 
+.secao-independencia-digital {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 60px 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 40px;
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
 .bloco-imagem-ilustrativa {
-  width: 400px;
-  height: 400px;
-  margin-right: 20px;
+  flex: 1 1 300px;
+  max-width: 400px;
+  border-radius: 12px;
   overflow: hidden;
-  border-radius: 8px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
 }
 
 .imagem-ilustrativa {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;
   display: block;
+  object-fit: cover;
 }
 
+.texto-independencia {
+  flex: 2 1 400px;
+  max-width: 600px;
+}
 
+.titulo-secao {
+  color: #014f6d;
+  font-size: 32px;
+  margin-bottom: 24px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.paragrafo-explicativo {
+  font-size: 17px;
+  line-height: 1.7;
+  margin-bottom: 20px;
+  color: #444;
+}
+
+.destaque-azul {
+  color: #0077a3;
+  font-weight: 700;
+}
+
+/* Responsividade */
 @media (max-width: 768px) {
   .secao-independencia-digital {
-    flex-direction: column;      
-    align-items: center;         
-    margin: 40px 20px;           
+    flex-direction: column;
+    padding: 40px 20px;
   }
 
- 
   .texto-independencia {
-    order: 0;                    
-    max-width: 100%;
     text-align: center;
   }
 
-
-  .bloco-imagem-ilustrativa {
-    order: 1;                  
-    width: 100%;
-    height: auto;
-    margin-right: 0;             
-    margin-top: 20px;            
-  }
-
-  .imagem-ilustrativa {
-    height: auto;
-  }
-
-
   .titulo-secao {
-    font-size: 24px;
+    font-size: 26px;
+  }
+
+  .paragrafo-explicativo {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .titulo-secao {
+    font-size: 22px;
   }
 
   .paragrafo-explicativo {
     font-size: 15px;
   }
-}
-
-
-@media (max-width: 480px) {
-  .titulo-secao {
-    font-size: 20px;
-  }
-
-  .paragrafo-explicativo {
-    font-size: 14px;
-  }
 
   .secao-independencia-digital {
-    margin: 20px 10px;
+    padding: 30px 15px;
   }
-}
-
-
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f0f4f8;
-  margin: 0;
-  padding: 20px;
-}
-
-.destaque-azul {
- color: #005577;
-  font-weight: bold;
 }

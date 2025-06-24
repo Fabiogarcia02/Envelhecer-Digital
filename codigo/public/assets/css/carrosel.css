@@ -104,12 +104,12 @@ header {
 ========================= */
 .carousel {
   max-width: 1100px;
-  height: 600px; /* ou ajuste conforme preferir */
-  margin: 140px auto 70px auto; /* espaço acima e abaixo */
+  height: 600px;
+  margin: 180px auto 70px auto; /* ⬅ aumentei o espaço acima */
   padding: 20px;
   overflow: hidden;
   position: relative;
-  background-color: #f2fbff; /* opcional: fundo suave */
+  background-color: #f2fbff;
   border-radius: 20px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 }

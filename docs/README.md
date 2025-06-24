@@ -369,7 +369,6 @@ Contatos da aplicação
 
 ![image](https://github.com/user-attachments/assets/d23b52f2-9271-464b-9bdd-8ab7f9c2bedb)
 
-
 ## Estruturas de Dados caça palavras
 
 ```json
@@ -773,214 +772,252 @@ Contatos da aplicação
   ],
 ```
 
+##### Funcionalidade 5 - tutorial 
 
-## Funcionalidades
+Permite que o usuario aprenda a mecher em alguns aplicativos essenciais 
 
-Esta seção apresenta as funcionalidades da solução.Info
-
-##### Funcionalidade 1 - Cadastro de Contatos ⚠️ EXEMPLO ⚠️
-
-Permite a inclusão, leitura, alteração e exclusão de contatos para o sistema
-
-* **Estrutura de dados:** [Contatos](#ti_ed_contatos)
 * **Instruções de acesso:**
   * Abra o site e efetue o login
-  * Acesse o menu principal e escolha a opção Cadastros
-  * Em seguida, escolha a opção Contatos
+  * Acesse o menu principal e escolha a opção tutoriais
+  
 * **Tela da funcionalidade**:
 
-![Tela de Funcionalidade](images/exemplo-funcionalidade.png)
+<img width="167" alt="{2ABC5995-F077-4040-9724-745F84B2FCDB}" src="https://github.com/user-attachments/assets/7251bd91-cc53-4756-a9d8-3d1cc2cf95eb" />
 
-> ⚠️ **APAGUE ESSA PARTE ANTES DE ENTREGAR SEU TRABALHO**
->
-> Apresente cada uma das funcionalidades que a aplicação fornece tanto para os usuários quanto aos administradores da solução.
->
-> Inclua, para cada funcionalidade, itens como: (1) titulos e descrição da funcionalidade; (2) Estrutura de dados associada; (3) o detalhe sobre as instruções de acesso e uso.
-
-## Estruturas de Dados
-
-Descrição das estruturas de dados utilizadas na solução com exemplos no formato JSON.Info
-
-##### Estrutura de Dados - Contatos   ⚠️ EXEMPLO ⚠️
-
-Contatos da aplicação
+## Estruturas de Dados tutorial
 
 ```json
-  {
-    "id": 1,
-    "nome": "Leanne Graham",
-    "cidade": "Belo Horizonte",
-    "categoria": "amigos",
-    "email": "Sincere@april.biz",
-    "telefone": "1-770-736-8031",
-    "website": "hildegard.org"
-  }
+[
+    {
+        plataforma: "Santander",
+        imageApp: "imagens/Logo_Santander.png",
+        description: "Tutorial completo com passo a passo da recarga no Santander.",
+        videoLink: "https://www.youtube.com/watch?v=vPcdWETgu3A",
+        pdf: "PDFs/Tutorial_Santander.pdf"
+    },
+    {
+        plataforma: "Itaú",
+        imageApp: "imagens/Logo_Itaú.png",
+        description: "Aprenda como baixar o app do Itaú em poucos passos.",
+        videoLink: "https://www.youtube.com/watch?v=TPx7pEuMkvo",
+        pdf: "PDFs/Tutorial_Itaú.pdf"
+    },
+    {
+        plataforma: "Banco do Brasil",
+        imageApp: "imagens/Logo_Banco_do_Brasil.png",
+        description: "Veja como instalar e acessar o aplicativo do Banco do Bransil.",
+        videoLink: "https://www.youtube.com/watch?v=hhe2dRRks98",
+        pdf: "PDFs/Tutorial_Banco_do_Brasil.pdf"
+    },
+    {
+        plataforma: "Instagram",
+        imageApp: "imagens/Logo_Instagram.png",
+        description: "Guia passo a passo para acessar o app do Instagram.",
+        videoLink: "https://www.youtube.com/watch?v=PQULFL8biAs",
+        pdf: "PDFs/Tutorial_Instagram.pdf"
+    },
+    {
+        plataforma: "Spotify",
+        imageApp: "imagens/Logo_Spotify.png",
+        description: "Veja como acessar o aplicativo do Spotify.",
+        videoLink: "https://www.youtube.com/watch?v=B-rWmGYuIYY",
+        pdf: "PDFs/Tutorial_Spotify.pdf"
+    },
+    {
+        plataforma: "INSS",
+        imageApp: "imagens/Logo_INSS.png",
+        description: "Guia prático para acessar o app Meu INSS.",
+        videoLink: "https://www.youtube.com/watch?v=2ztRnE4AYUE",
+        pdf: "PDFs/Tutorial_INSS.pdf"
+    }
+];
   
 ```
 
-##### Estrutura de Dados - Usuários  ⚠️ EXEMPLO ⚠️
+##### Funcionalidade 6 - Cadastro de level dos jogos 
 
-Registro dos usuários do sistema utilizados para login e para o perfil do sistema
-
-```json
-  {
-    id: "eed55b91-45be-4f2c-81bc-7686135503f9",
-    email: "admin@abc.com",
-    id: "eed55b91-45be-4f2c-81bc-7686135503f9",
-    login: "admin",
-    nome: "Administrador do Sistema",
-    senha: "123"
-  }
-
-
-## Funcionalidades
-
-Esta seção apresenta as funcionalidades da solução.Info
-
-##### Funcionalidade 1 - Cadastro de Contatos ⚠️ EXEMPLO ⚠️
-
-Permite a inclusão, leitura, alteração e exclusão de contatos para o sistema
-
-* **Estrutura de dados:** [Contatos](#ti_ed_contatos)
 * **Instruções de acesso:**
-  * Abra o site e efetue o login
-  * Acesse o menu principal e escolha a opção Cadastros
-  * Em seguida, escolha a opção Contatos
+  * Abra o site e efetue o login como administrador
+  * Acesse o menu principal e escolha a opção cadastrar jogos
+  * Em seguida, escolha o nivel dos jogos 
 * **Tela da funcionalidade**:
 
-![Tela de Funcionalidade](images/exemplo-funcionalidade.png)
+<img width="449" alt="{FFD1E04D-0153-4ED3-A5A3-EB8228EA2645}" src="https://github.com/user-attachments/assets/5c14c9c1-1eb6-4528-b238-4e0f8499c6b6" />
 
-> ⚠️ **APAGUE ESSA PARTE ANTES DE ENTREGAR SEU TRABALHO**
->
-> Apresente cada uma das funcionalidades que a aplicação fornece tanto para os usuários quanto aos administradores da solução.
->
-> Inclua, para cada funcionalidade, itens como: (1) titulos e descrição da funcionalidade; (2) Estrutura de dados associada; (3) o detalhe sobre as instruções de acesso e uso.
 
-## Estruturas de Dados
+##### Funcionalidade 7 - Armazenamento de senha 
 
-Descrição das estruturas de dados utilizadas na solução com exemplos no formato JSON.Info
+Permite que o usuario deixe sua senha quardada 
 
-##### Estrutura de Dados - Contatos   ⚠️ EXEMPLO ⚠️
+* **Instruções de acesso:**
+  * Abra o site e efetue o login
+  * Acesse o menu principal e escolha a opção adicionar senha
+  * Em seguida, adicione o nome de onde é a sua senha e a senha em si.
+* **Tela da funcionalidade**:
 
-Contatos da aplicação
+<img width="148" alt="{A5131B64-4918-4D22-B50E-3B51DDA16C38}" src="https://github.com/user-attachments/assets/794b6abd-5853-43ff-86c6-b0d56082f461" />
+
+## Estruturas de Dados do armazenamento de senha
 
 ```json
   {
-    "id": 1,
-    "nome": "Leanne Graham",
-    "cidade": "Belo Horizonte",
-    "categoria": "amigos",
-    "email": "Sincere@april.biz",
-    "telefone": "1-770-736-8031",
-    "website": "hildegard.org"
-  }
+  "passwords": [
+    {
+      "id": 1,
+      "serviceName": "Banco Principal",
+      "serviceDescription": "Conta corrente e investimentos",
+      "password": "banco123@"
+    },
+    {
+      "id": 2,
+      "serviceName": "E-mail",
+      "serviceDescription": "Conta de e-mail principal",
+      "password": "email#secure"
+    },
+    {
+      "id": 3,
+      "serviceName": "Rede Social",
+      "serviceDescription": "Perfil profissional",
+      "password": "socialMedia2023"
+    }
+  ]
+}
   
 ```
 
-##### Estrutura de Dados - Usuários  ⚠️ EXEMPLO ⚠️
 
-Registro dos usuários do sistema utilizados para login e para o perfil do sistema
+##### Funcionalidade 8 - historia dos usuarios 
 
-```json
-  {
-    id: "eed55b91-45be-4f2c-81bc-7686135503f9",
-    email: "admin@abc.com",
-    id: "eed55b91-45be-4f2c-81bc-7686135503f9",
-    login: "admin",
-    nome: "Administrador do Sistema",
-    senha: "123"
-  }
-
-
-## Funcionalidades
-
-Esta seção apresenta as funcionalidades da solução.Info
-
-##### Funcionalidade 1 - Cadastro de Contatos ⚠️ EXEMPLO ⚠️
-
-Permite a inclusão, leitura, alteração e exclusão de contatos para o sistema
-
-* **Estrutura de dados:** [Contatos](#ti_ed_contatos)
 * **Instruções de acesso:**
-  * Abra o site e efetue o login
-  * Acesse o menu principal e escolha a opção Cadastros
-  * Em seguida, escolha a opção Contatos
+  * Abra o site e efetue o login como administrador
+  * Acesse o menu principal  
 * **Tela da funcionalidade**:
 
-![Tela de Funcionalidade](images/exemplo-funcionalidade.png)
+![image](https://github.com/user-attachments/assets/8bb8263c-8a2b-41e1-973b-b70add98ede8)
 
-> ⚠️ **APAGUE ESSA PARTE ANTES DE ENTREGAR SEU TRABALHO**
->
-> Apresente cada uma das funcionalidades que a aplicação fornece tanto para os usuários quanto aos administradores da solução.
->
-> Inclua, para cada funcionalidade, itens como: (1) titulos e descrição da funcionalidade; (2) Estrutura de dados associada; (3) o detalhe sobre as instruções de acesso e uso.
-
-## Estruturas de Dados
-
-Descrição das estruturas de dados utilizadas na solução com exemplos no formato JSON.Info
-
-##### Estrutura de Dados - Contatos   ⚠️ EXEMPLO ⚠️
-
-Contatos da aplicação
+## Estruturas de Dados do armazenamento de historia de usuario
 
 ```json
-  {
-    "id": 1,
-    "nome": "Leanne Graham",
-    "cidade": "Belo Horizonte",
-    "categoria": "amigos",
-    "email": "Sincere@april.biz",
-    "telefone": "1-770-736-8031",
-    "website": "hildegard.org"
+  { "nome": "Dona Maria",
+ "idade": 72,
+"profissao": "Costureira",
+ "dificuldades":[ "Entender como funcionam os aplicativos de mensagens", "Utilizar senhas seguras", "Navegar em sites com segurança"]
   }
-  
 ```
 
-##### Estrutura de Dados - Usuários  ⚠️ EXEMPLO ⚠️
+##### Funcionalidade 9 - conquistas  
 
-Registro dos usuários do sistema utilizados para login e para o perfil do sistema
+* **Instruções de acesso:**
+  * Abra o site e efetue o login
+  * consiga alguma conquista em algum jogo
+  * Acesse o menu principal e vai para a aba conquista
+* **Tela da funcionalidade**:
+
+<img width="480" alt="{5BAD4017-F2D9-4D5A-9A2C-BB82D324062B}" src="https://github.com/user-attachments/assets/ebe4a848-ebcb-4da5-b568-ee71f82bfd43" />
+
+
+## Estruturas de Dados da conquista 
 
 ```json
-  {
-    id: "eed55b91-45be-4f2c-81bc-7686135503f9",
-    email: "admin@abc.com",
-    id: "eed55b91-45be-4f2c-81bc-7686135503f9",
-    login: "admin",
-    nome: "Administrador do Sistema",
-    senha: "123"
-  }
+ [
+    {
+      "id": 1,
+      "title": "Sabe tudo",
+      "idJogo": "3",
+      "emoji": "🧠"
+    },
+    {
+      "id": 2,
+      "title": "Melhor jogador",
+      "idJogo": "1",
+      "emoji": "🏆"
+    },
+    {
+      "id": 3,
+      "title": "Melhor jogador",
+      "idJogo": "2",
+      "emoji": "🏆"
+    },
+    {
+      "id": 4,
+      "title": "Melhor raciocínio lógico",
+      "idJogo": "1",
+      "emoji": "🧠"
+    },
+    {
+      "id": 5,
+      "title": "Mestre em história",
+      "idJogo": "2",
+      "emoji": "📖"
+    },
+    {
+      "id": 6,
+      "title": "Velocidade suprema",
+      "idJogo": "1",
+      "emoji": "🚀"
+    },
+    {
+      "id": 7,
+      "title": "Velocidade suprema",
+      "idJogo": "2",
+      "emoji": "🚀"
+    },
+    {
+      "id": 8,
+      "title": "Memória infalível",
+      "idJogo": "1",
+      "emoji": "🧩"
+    },
+    {
+      "id": 9,
+      "title": "Caçador de palavras",
+      "idJogo": "2",
+      "emoji": "🔍"
+    }
+  ],
+```
 
-> ⚠️ **APAGUE ESSA PARTE ANTES DE ENTREGAR SEU TRABALHO**
->
-> Apresente as estruturas de dados utilizadas na solução tanto para dados utilizados na essência da aplicação quanto outras estruturas que foram criadas para algum tipo de configuração
->
-> Nomeie a estrutura, coloque uma descrição sucinta e apresente um exemplo em formato JSON.
->
-> **Orientações:**
->
-> * [JSON Introduction](https://www.w3schools.com/js/js_json_intro.asp)
-> * [Trabalhando com JSON - Aprendendo desenvolvimento web | MDN](https://developer.mozilla.org/pt-BR/docs/Learn/JavaScript/Objects/JSON)
+
+
+##### Funcionalidade 10 - comentario
+
+* **Instruções de acesso:**
+  * Abra o site e efetue o login
+  * jogue algum jogo
+  * volter para a pagina principal 
+  * deixe um comentario 
+* **Tela da funcionalidade**:
+
+<img width="157" alt="{06AED124-06C8-45EB-8314-B5BD91958A29}" src="https://github.com/user-attachments/assets/2cdb8388-5835-48b0-ba39-d7c003287485" />
+
+
+## Estruturas de Dados do armazenamento de historia de usuario
+
+```json
+ [
+    {
+      "idJogo": "1",
+      "nota": "4",
+      "comentario": "deu bom?",
+      "id": 1
+    }
+  ],
+```
 
 ## Módulos e APIs
 
 Esta seção apresenta os módulos e APIs utilizados na solução
 
-**Images**:
+**APIs**:
 
-* Unsplash - [https://unsplash.com/](https://unsplash.com/) ⚠️ EXEMPLO ⚠️
+* SpeechSynthesis -https://elevenlabs.io/speech-to-text 
 
 **Fonts:**
 
-* Icons Font Face - [https://fontawesome.com/](https://fontawesome.com/) ⚠️ EXEMPLO ⚠️
+* Icons Font Face - [https://fontawesome.com/](https://fontawesome.com/) 
 
 **Scripts:**
-
-* jQuery - [http://www.jquery.com/](http://www.jquery.com/) ⚠️ EXEMPLO ⚠️
-* Bootstrap 4 - [http://getbootstrap.com/](http://getbootstrap.com/) ⚠️ EXEMPLO ⚠️
-
-> ⚠️ **APAGUE ESSA PARTE ANTES DE ENTREGAR SEU TRABALHO**
->
-> Apresente os módulos e APIs utilizados no desenvolvimento da solução. Inclua itens como: (1) Frameworks, bibliotecas, módulos, etc. utilizados no desenvolvimento da solução; (2) APIs utilizadas para acesso a dados, serviços, etc.
+* Bootstrap 4 - [http://getbootstrap.com/](http://getbootstrap.com/) 
 
 # Referências
 

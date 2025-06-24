@@ -358,123 +358,420 @@ Contatos da aplicação
 
 
 
-## Funcionalidades
+##### Funcionalidade 3 - Caça palavras 
 
-Esta seção apresenta as funcionalidades da solução.Info
 
-##### Funcionalidade 1 - Cadastro de Contatos ⚠️ EXEMPLO ⚠️
-
-Permite a inclusão, leitura, alteração e exclusão de contatos para o sistema
-
-* **Estrutura de dados:** [Contatos](#ti_ed_contatos)
 * **Instruções de acesso:**
   * Abra o site e efetue o login
-  * Acesse o menu principal e escolha a opção Cadastros
-  * Em seguida, escolha a opção Contatos
+  * Acesse o jogo pelo carrosel 
+
 * **Tela da funcionalidade**:
 
-![Tela de Funcionalidade](images/exemplo-funcionalidade.png)
+![image](https://github.com/user-attachments/assets/d23b52f2-9271-464b-9bdd-8ab7f9c2bedb)
 
-> ⚠️ **APAGUE ESSA PARTE ANTES DE ENTREGAR SEU TRABALHO**
->
-> Apresente cada uma das funcionalidades que a aplicação fornece tanto para os usuários quanto aos administradores da solução.
->
-> Inclua, para cada funcionalidade, itens como: (1) titulos e descrição da funcionalidade; (2) Estrutura de dados associada; (3) o detalhe sobre as instruções de acesso e uso.
 
-## Estruturas de Dados
-
-Descrição das estruturas de dados utilizadas na solução com exemplos no formato JSON.Info
-
-##### Estrutura de Dados - Contatos   ⚠️ EXEMPLO ⚠️
-
-Contatos da aplicação
+## Estruturas de Dados caça palavras
 
 ```json
-  {
-    "id": 1,
-    "nome": "Leanne Graham",
-    "cidade": "Belo Horizonte",
-    "categoria": "amigos",
-    "email": "Sincere@april.biz",
-    "telefone": "1-770-736-8031",
-    "website": "hildegard.org"
-  }
-  
+{
+      "id": "2",
+      "tipo": "caca-palavras",
+      "niveis": [
+        {
+          "id": 1,
+          "titulo": "Caça-palavras",
+          "nivel": 1,
+          "palavras": [
+            "SENHA",
+            "LOGIN",
+            "USUÁRIO",
+            "ACESSO",
+            "CONTA",
+            "PÁGINA",
+            "AJUDA",
+            "BOTÃO"
+          ]
+        },
+        {
+          "id": 2,
+          "titulo": "Caça-palavras",
+          "nivel": 2,
+          "palavras": [
+            "CAIXA",
+            "BRADESCO",
+            "EXTRATO",
+            "PIX",
+            "SALDO",
+            "AGÊNCIA",
+            "TRANSFERÊNCIA",
+            "DEPÓSITO"
+          ]
+        },
+        {
+          "id": 3,
+          "titulo": "Caça-palavras",
+          "nivel": 3,
+          "palavras": [
+            "SITE",
+            "OLX",
+            "NAVEGAR",
+            "MENU",
+            "FONTE",
+            "CONTRASTE",
+            "LINK",
+            "TELA"
+          ]
+        },
+        {
+          "id": 4,
+          "titulo": "Caça-palavras",
+          "nivel": 4,
+          "palavras": [
+            "APLICATIVO",
+            "DOWNLOAD",
+            "WHATSAPP",
+            "TELAFÁCIL",
+            "SOM",
+            "VOZ",
+            "TOQUE",
+            "TUTORIAL"
+          ]
+        },
+        {
+          "id": 5,
+          "titulo": "Caça-palavras",
+          "nivel": 5,
+          "palavras": [
+            "SENHA",
+            "SEGURANÇA",
+            "CONFIRMAR",
+            "VERIFICA",
+            "AUTENTICA",
+            "RECUPERA",
+            "CÓDIGO",
+            "ACESSÍVEL"
+          ]
+        },
+        {
+          "id": 6,
+          "titulo": "Caça-palavras",
+          "nivel": 6,
+          "palavras": [
+            "BANCO",
+            "AGENDAMENTO",
+            "CONSULTA",
+            "SALDO",
+            "DEPÓSITO",
+            "EXTRATO",
+            "PAGAMENTO",
+            "FATURA"
+          ]
+        },
+        {
+          "id": 7,
+          "titulo": "Caça-palavras",
+          "nivel": 7,
+          "palavras": [
+            "SITE",
+            "AJUDA",
+            "MENU",
+            "TECLADO",
+            "MOUSE",
+            "TELA",
+            "ACESSO",
+            "FUNÇÃO"
+          ]
+        },
+        {
+          "id": 8,
+          "titulo": "Caça-palavras",
+          "nivel": 8,
+          "palavras": [
+            "APP",
+            "VOZ",
+            "TOQUE",
+            "AJUSTE",
+            "CONFIG",
+            "INSTRUTOR",
+            "TELAFÁCIL",
+            "TELAFUNDO"
+          ]
+        },
+        {
+          "id": 9,
+          "titulo": "Caça-palavras",
+          "nivel": 9,
+          "palavras": [
+            "SENHA",
+            "VALIDAÇÃO",
+            "AUTENTICA",
+            "SEGURANÇA",
+            "CONFIRMA",
+            "CÓDIGO",
+            "ACESSO",
+            "PRIVACIDADE"
+          ]
+        },
+        {
+          "nivel": 10,
+          "palavras": [
+            "BANCO",
+            "TRANSFERÊNCIA",
+            "PIX",
+            "EXTRATO",
+            "PAGAMENTO",
+            "AGÊNCIA",
+            "CARTÃO",
+            "SALDO"
+          ]
+        }
+      ]
+    },
 ```
 
-##### Estrutura de Dados - Usuários  ⚠️ EXEMPLO ⚠️
 
-Registro dos usuários do sistema utilizados para login e para o perfil do sistema
+##### Funcionalidade 4 - Quiz 
 
-```json
-  {
-    id: "eed55b91-45be-4f2c-81bc-7686135503f9",
-    email: "admin@abc.com",
-    id: "eed55b91-45be-4f2c-81bc-7686135503f9",
-    login: "admin",
-    nome: "Administrador do Sistema",
-    senha: "123"
-  }
-
-
-## Funcionalidades
-
-Esta seção apresenta as funcionalidades da solução.Info
-
-##### Funcionalidade 1 - Cadastro de Contatos ⚠️ EXEMPLO ⚠️
-
-Permite a inclusão, leitura, alteração e exclusão de contatos para o sistema
-
-* **Estrutura de dados:** [Contatos](#ti_ed_contatos)
 * **Instruções de acesso:**
   * Abra o site e efetue o login
-  * Acesse o menu principal e escolha a opção Cadastros
-  * Em seguida, escolha a opção Contatos
+  * Acesse o jogo pelo carrosel da pagina  principal 
+
 * **Tela da funcionalidade**:
 
-![Tela de Funcionalidade](images/exemplo-funcionalidade.png)
+![image](https://github.com/user-attachments/assets/ba1826fa-8c3f-4e34-a690-dd70b59dcfe7)
 
-> ⚠️ **APAGUE ESSA PARTE ANTES DE ENTREGAR SEU TRABALHO**
->
-> Apresente cada uma das funcionalidades que a aplicação fornece tanto para os usuários quanto aos administradores da solução.
->
-> Inclua, para cada funcionalidade, itens como: (1) titulos e descrição da funcionalidade; (2) Estrutura de dados associada; (3) o detalhe sobre as instruções de acesso e uso.
 
-## Estruturas de Dados
-
-Descrição das estruturas de dados utilizadas na solução com exemplos no formato JSON.Info
-
-##### Estrutura de Dados - Contatos   ⚠️ EXEMPLO ⚠️
-
-Contatos da aplicação
+## Estruturas de Dados do quiz
 
 ```json
-  {
-    "id": 1,
-    "nome": "Leanne Graham",
-    "cidade": "Belo Horizonte",
-    "categoria": "amigos",
-    "email": "Sincere@april.biz",
-    "telefone": "1-770-736-8031",
-    "website": "hildegard.org"
-  }
-  
+     {
+      "id": "3",
+      "tipo": "quiz",
+      "niveis": [
+        {
+          "id": 1,
+          "nivel": 1,
+          "pergunta": "Como você pode identificar se um e-mail é falso (golpe)?",
+          "respostas": [
+            {
+              "texto": "Se o e-mail tem muitas imagens bonitas",
+              "correta": false
+            },
+            {
+              "texto": "Se o remetente é desconhecido e pede dados pessoais",
+              "correta": true
+            },
+            {
+              "texto": "Se o e-mail começa com “Olá, tudo bem?”",
+              "correta": false
+            },
+            {
+              "texto": "Se o e-mail tem letras grandes",
+              "correta": false
+            },
+            {
+              "texto": "Se o e-mail fala sobre promoções",
+              "correta": false
+            },
+            {
+              "texto": "Se o e-mail vem de um banco conhecido",
+              "correta": false
+            }
+          ],
+          "erros": 0
+        },
+        {
+          "id": 2,
+          "nivel": 2,
+          "pergunta": "Qual é o lugar mais seguro para guardar suas senhas?",
+          "respostas": [
+            {
+              "texto": "Escrever num papel e deixar perto do computador",
+              "correta": false
+            },
+            {
+              "texto": "Enviar por WhatsApp para alguém de confiança",
+              "correta": false
+            },
+            {
+              "texto": "Salvar em um bloco de notas no celular",
+              "correta": false
+            },
+            {
+              "texto": "Decorar ou usar um gerenciador de senhas seguro",
+              "correta": true
+            },
+            {
+              "texto": "Colar em um post-it na geladeira",
+              "correta": false
+            },
+            {
+              "texto": "Compartilhar com familiares em um grupo do WhatsApp",
+              "correta": false
+            }
+          ],
+          "erros": 0
+        },
+        {
+          "id": 3,
+          "nivel": 3,
+          "pergunta": "O que é necessário para fazer uma videochamada?",
+          "respostas": [
+            {
+              "texto": "Um rádio ligado",
+              "correta": false
+            },
+            {
+              "texto": "Uma televisão com antena",
+              "correta": false
+            },
+            {
+              "texto": "Um telefone de disco",
+              "correta": false
+            },
+            {
+              "texto": "Um computador ou celular com câmera e internet",
+              "correta": true
+            },
+            {
+              "texto": "Um ventilador ligado",
+              "correta": false
+            },
+            {
+              "texto": "Um controle remoto com pilhas novas",
+              "correta": false
+            }
+          ],
+          "erros": 0
+        },
+        {
+          "id": 4,
+          "nivel": 4,
+          "pergunta": "O que significa clicar em um 'link suspeito'?",
+          "respostas": [
+            {
+              "texto": "Ver uma imagem engraçada",
+              "correta": false
+            },
+            {
+              "texto": "Abrir uma foto de família",
+              "correta": false
+            },
+            {
+              "texto": "Clicar em algo que pode levar a um golpe ou vírus",
+              "correta": true
+            },
+            {
+              "texto": "Jogar um joguinho online",
+              "correta": false
+            },
+            {
+              "texto": "Receber um presente virtual",
+              "correta": false
+            },
+            {
+              "texto": "Ler uma receita de bolo",
+              "correta": false
+            }
+          ],
+          "erros": 0
+        },
+        {
+          "id": 5,
+          "nivel": 5,
+          "pergunta": "Para fazer uma compra online com segurança, é importante:",
+          "respostas": [
+            {
+              "texto": "Comprar de qualquer site que apareça",
+              "correta": false
+            },
+            {
+              "texto": "Clicar em propagandas de redes sociais",
+              "correta": false
+            },
+            {
+              "texto": "Passar o cartão por telefone para o vendedor",
+              "correta": false
+            },
+            {
+              "texto": "Usar sites confiáveis e verificar se tem 'cadeado' na barra de endereço",
+              "correta": true
+            },
+            {
+              "texto": "Pedir para o vizinho comprar para você",
+              "correta": false
+            },
+            {
+              "texto": "Só pagar depois que o produto chegar",
+              "correta": false
+            }
+          ],
+          "erros": 0
+        },
+        {
+          "id": 6,
+          "nivel": 6,
+          "pergunta": "O que é o botão 'sair' ou 'logout' em um site?",
+          "respostas": [
+            {
+              "texto": "Um botão que fecha o navegador",
+              "correta": false
+            },
+            {
+              "texto": "Um botão que apaga seu computador",
+              "correta": false
+            },
+            {
+              "texto": "Um botão que reinicia a página",
+              "correta": false
+            },
+            {
+              "texto": "Um botão para sair da sua conta com segurança",
+              "correta": true
+            },
+            {
+              "texto": "Um botão que salva sua senha",
+              "correta": false
+            },
+            {
+              "texto": "Um botão que apaga todas as mensagens",
+              "correta": false
+            }
+          ],
+          "erros": 0
+        },
+        {
+          "id": 7,
+          "nivel": 7,
+          "pergunta": "testet",
+          "respostas": [
+            {
+              "texto": "tste",
+              "correta": true
+            },
+            {
+              "texto": "teste",
+              "correta": false
+            },
+            {
+              "texto": "tweste",
+              "correta": false
+            },
+            {
+              "texto": "testet",
+              "correta": false
+            },
+            {
+              "texto": "wtsatw",
+              "correta": false
+            }
+          ],
+          "erros": 1
+        }
+      ]
+    }
+  ],
 ```
-
-##### Estrutura de Dados - Usuários  ⚠️ EXEMPLO ⚠️
-
-Registro dos usuários do sistema utilizados para login e para o perfil do sistema
-
-```json
-  {
-    id: "eed55b91-45be-4f2c-81bc-7686135503f9",
-    email: "admin@abc.com",
-    id: "eed55b91-45be-4f2c-81bc-7686135503f9",
-    login: "admin",
-    nome: "Administrador do Sistema",
-    senha: "123"
-  }
-
 
 
 ## Funcionalidades

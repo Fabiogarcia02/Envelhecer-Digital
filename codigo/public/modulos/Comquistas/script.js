@@ -41,7 +41,7 @@ function renderAchievements(achievements) {
 
     // Título
     const titleElem = document.createElement('div');
-    titleElem.classList.add('title');
+    titleElem.classList.add('card-title');
     titleElem.textContent = item.title;
 
     card.appendChild(emojiElem);

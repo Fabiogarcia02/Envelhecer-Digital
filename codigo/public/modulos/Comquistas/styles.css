@@ -30,6 +30,7 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  padding-top: 150px;
 }
 
 .container {
@@ -145,10 +146,11 @@ h1 {
   transform: scale(1.1);
 }
 
-.card .title {
+.card-title {
   font-size: 1rem;
   font-weight: 600;
   color: var(--color-text);
+  text-transform: none;
 }
 
 /* Borda colorida por tipo */

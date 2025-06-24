@@ -1,40 +1,19 @@
-// =======================
-// Script do Carrossel de Personas
-// =======================
 const slider = document.getElementById('slider');
 const personas = slider.querySelectorAll('.persona');
-let index = 0;
+let currentIndex = 0;
 
-// Função que mostra o slide atual e esconde os outros
-function showSlide(i) {
-    slider.style.transform = `translateX(-${i * 100}%)`;
+function showSlide(index) {
+  if(index < 0) index = personas.length - 1;
+  if(index >= personas.length) index = 0;
+  currentIndex = index;
 
-    personas.forEach((persona, idx) => {
-        if (idx === i) {
-            persona.classList.add('active');
-        } else {
-            persona.classList.remove('active');
-        }
-    });
+  slider.style.transform = `translateX(-${currentIndex * 100}%)`;
 }
-
-// Inicializa o primeiro slide
-showSlide(index);
 
 // Troca automática a cada 10 segundos
 setInterval(() => {
-    index = (index + 1) % personas.length;
-    showSlide(index);
+  showSlide(currentIndex + 1);
 }, 10000);
 
-// =======================
-// Script da FAQ (Dúvidas Frequentes)
-// =======================
-const faqItems = document.querySelectorAll('.faq-item');
-
-faqItems.forEach(item => {
-    const question = item.querySelector('.faq-question');
-    question.addEventListener('click', () => {
-        item.classList.toggle('active');
-    });
-});
+// Inicializa o slider
+showSlide(currentIndex);

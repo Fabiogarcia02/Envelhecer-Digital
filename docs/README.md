@@ -210,49 +210,151 @@ Uma seção que quando usuario clicar em jogar ira redirecionar para a pagina de
  
 * **Tela da funcionalidade**:
 
-![Tela de Funcionalidade](images/exemplo-funcionalidade.png)
+![image](https://github.com/user-attachments/assets/a913bc34-0238-42e9-8ae5-be8ac022e195)
 
-> ⚠️ **APAGUE ESSA PARTE ANTES DE ENTREGAR SEU TRABALHO**
->
-> Apresente cada uma das funcionalidades que a aplicação fornece tanto para os usuários quanto aos administradores da solução.
->
-> Inclua, para cada funcionalidade, itens como: (1) titulos e descrição da funcionalidade; (2) Estrutura de dados associada; (3) o detalhe sobre as instruções de acesso e uso.
 
-## Estruturas de Dados
+##### Funcionalidade 2 - Jogo da memoria
 
-Descrição das estruturas de dados utilizadas na solução com exemplos no formato JSON.Info
+Permite o usuario exercitar a sua memoria jogando o jogo da memoria 
 
-##### Estrutura de Dados - Contatos   ⚠️ EXEMPLO ⚠️
+* **Instruções de acesso:**
+  * Abra o site e efetue o login
+  * Acesse o jogo da memoria pelo carrosel
+* **Tela da funcionalidade**:
+<img width="325" alt="{77A56033-07F1-43C6-B2D5-D97C12A80A46}" src="https://github.com/user-attachments/assets/2b2d0907-8934-4aa5-b43a-c6f0b28fb41e" />
+
+##### Estrutura de Dados - jogo da memoria  
 
 Contatos da aplicação
 
 ```json
-  {
-    "id": 1,
-    "nome": "Leanne Graham",
-    "cidade": "Belo Horizonte",
-    "categoria": "amigos",
-    "email": "Sincere@april.biz",
-    "telefone": "1-770-736-8031",
-    "website": "hildegard.org"
-  }
-  
+{
+      "id": "1",
+      "tipo": "jogo-memoria",
+      "niveis": [
+        {
+          "id": 1,
+          "nivel": 1,
+          "cartas": [
+            {
+              "id": 1,
+              "imagem": "assets/images/img-memoria/spotify.png",
+              "descricao": "Rádio na internet onde você pode ouvir músicas de todos os tipos, quando quiser"
+            },
+            {
+              "id": 2,
+              "imagem": "assets/images/img-memoria/youtube.png",
+              "descricao": "Aplicativo para assistir a vídeos de todos os tipos, a qualquer hora que quiser"
+            },
+            {
+              "id": 3,
+              "imagem": "assets/images/img-memoria/netflix.png",
+              "descricao": "Aplicativo de streaming"
+            },
+            {
+              "id": 4,
+              "imagem": "assets/images/img-memoria/tiktok.png",
+              "descricao": "Aplicativo onde as pessoas fazem vídeos curtos e divertidos"
+            },
+            {
+              "id": 5,
+              "imagem": "assets/images/img-memoria/maps.png",
+              "descricao": "Ajuda a encontrar lugares e traçar caminhos"
+            },
+            {
+              "id": 6,
+              "imagem": "assets/images/img-memoria/googlefotos.png",
+              "descricao": "Guarda todas as fotos de forma segura na internet"
+            },
+            {
+              "id": 7,
+              "imagem": "assets/images/img-memoria/uber.png",
+              "descricao": "Aplicativo para pedir carro com motorista, seguro e fácil"
+            },
+            {
+              "id": 8,
+              "imagem": "assets/images/img-memoria/ifood.png",
+              "descricao": "Aplicativo que serve para pedir comida pronta, sem sair de casa."
+            },
+            {
+              "id": 9,
+              "imagem": "assets/images/img-memoria/instagram.png",
+              "descricao": "Aplicativo para ver e compartilhar fotos, vídeos e mensagens com amigos e familiares"
+            },
+            {
+              "id": 10,
+              "imagem": "assets/images/img-memoria/globoplay.png",
+              "descricao": "Usado para ver novelas, jornais, programas e filmes da Globo."
+            },
+            {
+              "id": 11,
+              "imagem": "assets/images/img-memoria/amazon.png",
+              "descricao": "Aplicativo onde os produtos são entregues na porta da sua casa, um shopping virtual"
+            },
+            {
+              "id": 12,
+              "imagem": "assets/images/img-memoria/olx.png",
+              "descricao": "Um site e aplicativo onde as pessoas podem comprar e vender coisas usadas"
+            }
+          ]
+        },
+        {
+          "nivel": 2,
+          "cartas": [
+            {
+              "imagem": "teste",
+              "descricao": "teste"
+            },
+            {
+              "imagem": "teste",
+              "descricao": "teste"
+            },
+            {
+              "imagem": "teste",
+              "descricao": "teste"
+            },
+            {
+              "imagem": "teste",
+              "descricao": "teste"
+            },
+            {
+              "imagem": "teste",
+              "descricao": "teste"
+            },
+            {
+              "imagem": "teste",
+              "descricao": "teste"
+            },
+            {
+              "imagem": "teste",
+              "descricao": "teste"
+            },
+            {
+              "imagem": "teste",
+              "descricao": "teste"
+            },
+            {
+              "imagem": "teste",
+              "descricao": "teste"
+            },
+            {
+              "imagem": "tetset",
+              "descricao": "tetse"
+            },
+            {
+              "imagem": "tetse",
+              "descricao": "teste"
+            },
+            {
+              "imagem": "reste",
+              "descricao": "teste"
+            }
+          ]
+        }
+      ]
+    },
 ```
 
-##### Estrutura de Dados - Usuários  ⚠️ EXEMPLO ⚠️
-
-Registro dos usuários do sistema utilizados para login e para o perfil do sistema
-
-```json
-  {
-    id: "eed55b91-45be-4f2c-81bc-7686135503f9",
-    email: "admin@abc.com",
-    id: "eed55b91-45be-4f2c-81bc-7686135503f9",
-    login: "admin",
-    nome: "Administrador do Sistema",
-    senha: "123"
-  }
-```
 
 
 
@@ -313,7 +415,243 @@ Registro dos usuários do sistema utilizados para login e para o perfil do siste
     nome: "Administrador do Sistema",
     senha: "123"
   }
+
+
+## Funcionalidades
+
+Esta seção apresenta as funcionalidades da solução.Info
+
+##### Funcionalidade 1 - Cadastro de Contatos ⚠️ EXEMPLO ⚠️
+
+Permite a inclusão, leitura, alteração e exclusão de contatos para o sistema
+
+* **Estrutura de dados:** [Contatos](#ti_ed_contatos)
+* **Instruções de acesso:**
+  * Abra o site e efetue o login
+  * Acesse o menu principal e escolha a opção Cadastros
+  * Em seguida, escolha a opção Contatos
+* **Tela da funcionalidade**:
+
+![Tela de Funcionalidade](images/exemplo-funcionalidade.png)
+
+> ⚠️ **APAGUE ESSA PARTE ANTES DE ENTREGAR SEU TRABALHO**
+>
+> Apresente cada uma das funcionalidades que a aplicação fornece tanto para os usuários quanto aos administradores da solução.
+>
+> Inclua, para cada funcionalidade, itens como: (1) titulos e descrição da funcionalidade; (2) Estrutura de dados associada; (3) o detalhe sobre as instruções de acesso e uso.
+
+## Estruturas de Dados
+
+Descrição das estruturas de dados utilizadas na solução com exemplos no formato JSON.Info
+
+##### Estrutura de Dados - Contatos   ⚠️ EXEMPLO ⚠️
+
+Contatos da aplicação
+
+```json
+  {
+    "id": 1,
+    "nome": "Leanne Graham",
+    "cidade": "Belo Horizonte",
+    "categoria": "amigos",
+    "email": "Sincere@april.biz",
+    "telefone": "1-770-736-8031",
+    "website": "hildegard.org"
+  }
+  
 ```
+
+##### Estrutura de Dados - Usuários  ⚠️ EXEMPLO ⚠️
+
+Registro dos usuários do sistema utilizados para login e para o perfil do sistema
+
+```json
+  {
+    id: "eed55b91-45be-4f2c-81bc-7686135503f9",
+    email: "admin@abc.com",
+    id: "eed55b91-45be-4f2c-81bc-7686135503f9",
+    login: "admin",
+    nome: "Administrador do Sistema",
+    senha: "123"
+  }
+
+
+
+## Funcionalidades
+
+Esta seção apresenta as funcionalidades da solução.Info
+
+##### Funcionalidade 1 - Cadastro de Contatos ⚠️ EXEMPLO ⚠️
+
+Permite a inclusão, leitura, alteração e exclusão de contatos para o sistema
+
+* **Estrutura de dados:** [Contatos](#ti_ed_contatos)
+* **Instruções de acesso:**
+  * Abra o site e efetue o login
+  * Acesse o menu principal e escolha a opção Cadastros
+  * Em seguida, escolha a opção Contatos
+* **Tela da funcionalidade**:
+
+![Tela de Funcionalidade](images/exemplo-funcionalidade.png)
+
+> ⚠️ **APAGUE ESSA PARTE ANTES DE ENTREGAR SEU TRABALHO**
+>
+> Apresente cada uma das funcionalidades que a aplicação fornece tanto para os usuários quanto aos administradores da solução.
+>
+> Inclua, para cada funcionalidade, itens como: (1) titulos e descrição da funcionalidade; (2) Estrutura de dados associada; (3) o detalhe sobre as instruções de acesso e uso.
+
+## Estruturas de Dados
+
+Descrição das estruturas de dados utilizadas na solução com exemplos no formato JSON.Info
+
+##### Estrutura de Dados - Contatos   ⚠️ EXEMPLO ⚠️
+
+Contatos da aplicação
+
+```json
+  {
+    "id": 1,
+    "nome": "Leanne Graham",
+    "cidade": "Belo Horizonte",
+    "categoria": "amigos",
+    "email": "Sincere@april.biz",
+    "telefone": "1-770-736-8031",
+    "website": "hildegard.org"
+  }
+  
+```
+
+##### Estrutura de Dados - Usuários  ⚠️ EXEMPLO ⚠️
+
+Registro dos usuários do sistema utilizados para login e para o perfil do sistema
+
+```json
+  {
+    id: "eed55b91-45be-4f2c-81bc-7686135503f9",
+    email: "admin@abc.com",
+    id: "eed55b91-45be-4f2c-81bc-7686135503f9",
+    login: "admin",
+    nome: "Administrador do Sistema",
+    senha: "123"
+  }
+
+
+## Funcionalidades
+
+Esta seção apresenta as funcionalidades da solução.Info
+
+##### Funcionalidade 1 - Cadastro de Contatos ⚠️ EXEMPLO ⚠️
+
+Permite a inclusão, leitura, alteração e exclusão de contatos para o sistema
+
+* **Estrutura de dados:** [Contatos](#ti_ed_contatos)
+* **Instruções de acesso:**
+  * Abra o site e efetue o login
+  * Acesse o menu principal e escolha a opção Cadastros
+  * Em seguida, escolha a opção Contatos
+* **Tela da funcionalidade**:
+
+![Tela de Funcionalidade](images/exemplo-funcionalidade.png)
+
+> ⚠️ **APAGUE ESSA PARTE ANTES DE ENTREGAR SEU TRABALHO**
+>
+> Apresente cada uma das funcionalidades que a aplicação fornece tanto para os usuários quanto aos administradores da solução.
+>
+> Inclua, para cada funcionalidade, itens como: (1) titulos e descrição da funcionalidade; (2) Estrutura de dados associada; (3) o detalhe sobre as instruções de acesso e uso.
+
+## Estruturas de Dados
+
+Descrição das estruturas de dados utilizadas na solução com exemplos no formato JSON.Info
+
+##### Estrutura de Dados - Contatos   ⚠️ EXEMPLO ⚠️
+
+Contatos da aplicação
+
+```json
+  {
+    "id": 1,
+    "nome": "Leanne Graham",
+    "cidade": "Belo Horizonte",
+    "categoria": "amigos",
+    "email": "Sincere@april.biz",
+    "telefone": "1-770-736-8031",
+    "website": "hildegard.org"
+  }
+  
+```
+
+##### Estrutura de Dados - Usuários  ⚠️ EXEMPLO ⚠️
+
+Registro dos usuários do sistema utilizados para login e para o perfil do sistema
+
+```json
+  {
+    id: "eed55b91-45be-4f2c-81bc-7686135503f9",
+    email: "admin@abc.com",
+    id: "eed55b91-45be-4f2c-81bc-7686135503f9",
+    login: "admin",
+    nome: "Administrador do Sistema",
+    senha: "123"
+  }
+
+
+## Funcionalidades
+
+Esta seção apresenta as funcionalidades da solução.Info
+
+##### Funcionalidade 1 - Cadastro de Contatos ⚠️ EXEMPLO ⚠️
+
+Permite a inclusão, leitura, alteração e exclusão de contatos para o sistema
+
+* **Estrutura de dados:** [Contatos](#ti_ed_contatos)
+* **Instruções de acesso:**
+  * Abra o site e efetue o login
+  * Acesse o menu principal e escolha a opção Cadastros
+  * Em seguida, escolha a opção Contatos
+* **Tela da funcionalidade**:
+
+![Tela de Funcionalidade](images/exemplo-funcionalidade.png)
+
+> ⚠️ **APAGUE ESSA PARTE ANTES DE ENTREGAR SEU TRABALHO**
+>
+> Apresente cada uma das funcionalidades que a aplicação fornece tanto para os usuários quanto aos administradores da solução.
+>
+> Inclua, para cada funcionalidade, itens como: (1) titulos e descrição da funcionalidade; (2) Estrutura de dados associada; (3) o detalhe sobre as instruções de acesso e uso.
+
+## Estruturas de Dados
+
+Descrição das estruturas de dados utilizadas na solução com exemplos no formato JSON.Info
+
+##### Estrutura de Dados - Contatos   ⚠️ EXEMPLO ⚠️
+
+Contatos da aplicação
+
+```json
+  {
+    "id": 1,
+    "nome": "Leanne Graham",
+    "cidade": "Belo Horizonte",
+    "categoria": "amigos",
+    "email": "Sincere@april.biz",
+    "telefone": "1-770-736-8031",
+    "website": "hildegard.org"
+  }
+  
+```
+
+##### Estrutura de Dados - Usuários  ⚠️ EXEMPLO ⚠️
+
+Registro dos usuários do sistema utilizados para login e para o perfil do sistema
+
+```json
+  {
+    id: "eed55b91-45be-4f2c-81bc-7686135503f9",
+    email: "admin@abc.com",
+    id: "eed55b91-45be-4f2c-81bc-7686135503f9",
+    login: "admin",
+    nome: "Administrador do Sistema",
+    senha: "123"
+  }
 
 > ⚠️ **APAGUE ESSA PARTE ANTES DE ENTREGAR SEU TRABALHO**
 >

@@ -155,16 +155,16 @@ ul {
   padding-left: 0;
   margin-left: 0;
 }
-    .users {
+.users {
   font-family: 'Montserrat', sans-serif;
   font-weight: 900;
   font-size: 3.0rem;
-  color: var(--color-primary);
+  color: #032f5c;
   text-align: center;
   margin: 2.5rem 0 1.5rem;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  text-shadow: 2px 2px 8px rgb(4, 44, 90);
+  text-shadow: 2px 2px 8px rgb(52, 103, 197);
   line-height: 1.1;
   user-select: none;
   transition: color 0.3s ease;

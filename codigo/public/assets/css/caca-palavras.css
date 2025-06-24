@@ -43,8 +43,11 @@ main {
   height: calc(100vh - 90px);
   padding: 10px;
   gap: 10px;
+  /*margin-top: 100px;*/
 }
-
+.header-spacer {
+  height: 150px; /* ajuste conforme a altura real do seu header/menu */
+}
 .procura-palavras,
 .lista-palavras {
   background-color: #fefdfb;

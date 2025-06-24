@@ -17,12 +17,12 @@
 
 body {
        background-color: #bdd9ec;
-    padding: 30px;
+  
 }
 
 .password-container {
     max-width: 850px;
-    margin: 0 auto;
+    margin: 30px auto;
     background-color: white;
     padding: 30px;
     border-radius: var(--borda-suave);

@@ -5,7 +5,8 @@
   padding: 0;
 }
 
-body {
+main {
+  margin-top: 100px;
   font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
   background: linear-gradient(135deg, #e3f0ff 0%, #b3e0ff 100%);
   color: #034f84;

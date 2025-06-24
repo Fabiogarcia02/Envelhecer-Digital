@@ -12,7 +12,6 @@ html, body {
     overflow-x: hidden;
   
     font-family: 'Poppins', sans-serif;
-    color: #ffff;
 }
 
 #btnLogout {
@@ -53,7 +52,7 @@ header {
 
 .menu h1 {
     color: rgb(77, 118, 145);
-    font-size: 55px;
+    font-size: 40px;
     margin-bottom: 10px;
     padding-left: 5rem;
     text-align: left;
@@ -75,7 +74,7 @@ header {
     color: rgb(77, 118, 145);
     text-decoration: none;
     font-weight: bold;
-    font-size: 30px;
+    font-size: 25px;
     padding: 10px;
     transition: color 0.15s ease;
 }

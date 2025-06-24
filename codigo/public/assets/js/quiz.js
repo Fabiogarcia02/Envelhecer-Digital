@@ -22,7 +22,7 @@ async function carregarQuiz() {
     return;
   }
   try {
-    const resposta = await fetch("http://localhost:3000/jogos");
+    const resposta = await fetch("/jogos");
     const dados = await resposta.json();
 
     const jogoQuiz = dados.find(j => j.tipo === "quiz");
@@ -60,7 +60,7 @@ async function carregarQuiz() {
 
     // Só envia para o backend se houve atualização
     if (atualizou) {
-      await fetch(`http://localhost:3000/jogos/${jogoQuiz.id}`, {
+      await fetch(`/jogos/${jogoQuiz.id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(jogoQuiz)
@@ -129,7 +129,7 @@ function responder(indiceResposta) {
 
 async function registrarErro(nivel) {
   try {
-    const resposta = await fetch("http://localhost:3000/jogos");
+    const resposta = await fetch("/jogos");
     const dados = await resposta.json();
 
     const jogoQuiz = dados.find(j => j.tipo === "quiz");
@@ -145,7 +145,7 @@ async function registrarErro(nivel) {
     jogoQuiz.niveis[nivelIndex].erros = novosErros;
 
     // PATCH ou PUT do jogo inteiro (porque 'niveis' é um array dentro do objeto do jogo)
-    await fetch(`http://localhost:3000/jogos/${jogoQuiz.id}`, {
+    await fetch(`/jogos/${jogoQuiz.id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(jogoQuiz)
@@ -176,40 +176,29 @@ function lerTexto(texto) {
 }
 
 async function verificarConquistas() {
-  // Buscar conquistas já adquiridas pelo usuário
-  const conquistasExistentes = await fetch(`http://localhost:3000/conquistasUsuarios?idUsuario=${idUsuario}`)
+  const conquistasExistentes = await fetch(`/conquistasUsuarios?idUsuario=${String(idUsuario)}`)
     .then(res => res.json())
     .catch(() => []);
 
   const idsExistentes = conquistasExistentes.map(c => Number(c.idAchievement));
 
-  // Buscar dados do quiz
-  const dados = await fetch("http://localhost:3000/jogos").then(r => r.json());
+  const dados = await fetch(`/jogos`).then(r => r.json());
   const jogoQuiz = dados.find(j => j.tipo === "quiz");
   if (!jogoQuiz || !Array.isArray(jogoQuiz.niveis)) return;
-
-  // Conquista ID 1 – Sabe tudo (acertar 5 perguntas com no máx. 1 erro cada)
-  const quizRespondidas = jogoQuiz.niveis.filter(n => n.nivel <= 5);
-
-  const acertouSabeTudo = quizRespondidas.every(n => (n.erros ?? 0) <= 1);
-
   const novasConquistas = [];
 
-  if (acertouSabeTudo && !idsExistentes.includes(1)) {
+  if (pontuacaoTotal >= 5) {
     novasConquistas.push(1);
   }
-  // Enviar novas conquistas para o backend
+  
   for (const idAchievement of novasConquistas) {
-    console.log("Enviando conquista:", {
-  idUsuario: Number(idUsuario),
-  idAchievement: Number(idAchievement)
-});
-
-    await fetch("http://localhost:3000/conquistasUsuarios", {
+    const idGerado = Date.now().toString(36) + Math.random().toString(36).substring(2, 6);
+    await fetch(`/conquistasUsuarios`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        idUsuario: Number(idUsuario),
+        id: idGerado,
+        idUsuario: idUsuario,
         idAchievement: Number(idAchievement)
       })
     });

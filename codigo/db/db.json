@@ -256,6 +256,17 @@
       "nivel": 1,
       "idJogo": "2",
       "id": "M4DxuB0"
+    },
+    {
+      "idUsuario": "8cdf6d69-f9a2-46e2-93da-254a4acff627",
+      "nome": "111",
+      "pontuacao": 83,
+      "erros": 26,
+      "tempo": 214,
+      "idJogo": "1",
+      "nivel": 1,
+      "data": "2025-06-25",
+      "id": "DGans4o"
     }
   ],
   "jogos": [
@@ -732,7 +743,7 @@
               "correta": false
             }
           ],
-          "erros": 0
+          "erros": 1
         },
         {
           "id": 7,
@@ -797,6 +808,12 @@
       "serviceDescription": "ssss",
       "password": "111",
       "id": 4
+    },
+    {
+      "serviceName": "instagram",
+      "serviceDescription": "sssssssss",
+      "password": "ssssssssssss",
+      "id": 5
     }
   ],
   "achievements": [

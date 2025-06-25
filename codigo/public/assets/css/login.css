@@ -1,193 +1,236 @@
+:root {
+  --color-primary: #1d3557;
+  --color-primary-dark: #0b2540;
+  --color-accent: #457b9d;
+  --color-bg: #f0f8fb;
+  --color-white: #ffffff;
+  --color-text: #123c63;
+  --color-shadow: rgba(0, 0, 0, 0.1);
+  --font-base: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Reset básico */
 body {
-  background-color: #eaf6fc;
-  font-family: 'Segoe UI', sans-serif;
   margin: 0;
-  padding: 0;
+  font-family: var(--font-base);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  
 }
 
-.login-card {
-  background-color: #fff;
-  border-radius: 20px;
-  padding: 40px 30px;
-  max-width: 400px;
-  margin: 80px auto;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+/* Animações */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+/* Cabeçalho */
+.site-header {
+  background: linear-gradient(90deg, #a8dadc, #457b9d);
+  color: var(--color-white);
+  padding: 60px 20px 40px;
   text-align: center;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  animation: fadeSlide 1s ease-in-out both;
 }
 
-.login-card h2 {
-  color: #123c63;
-  font-size: 22px;
-  margin-bottom: 25px;
+.site-header h1 {
+  font-size: 2.5rem;
   font-weight: 700;
+  margin-bottom: 10px;
+  letter-spacing: 0.5px;
 }
+
+.site-header p {
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: #f1f1f1;
+}
+
+@keyframes fadeSlide {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Cartão de login */
+
 
 .illustration {
   width: 120px;
-  height: auto;
-  margin-bottom: 25px;
+
+  margin-bottom: 20px;
 }
 
-.form-group {
-  text-align: left;
-  margin-bottom: 16px;
+
+
+input:focus {
+  outline: none;
+  border-color: var(--color-accent);
 }
 
-.form-control {
-  width: 100%;
-  padding: 12px;
-  border: 1px solid #ccc;
-  border-radius: 12px;
-  font-size: 16px;
-  box-sizing: border-box;
+
+
+.btn:hover {
+  background-color: var(--color-primary-dark);
+  transform: scale(1.03);
 }
 
-.btn-primary,
-.btn-info {
-  width: 100%;
-  background-color: #0b3967;
-  border: none;
-  padding: 14px;
-  font-size: 16px;
-  color: white;
-  border-radius: 12px;
-  cursor: pointer;
-  margin-top: 10px;
-}
-
-.btn-primary:hover,
-.btn-info:hover {
-  background-color: #072e55;
-}
-
+/* Links */
 .text-link {
-  font-size: 14px;
   margin-top: 15px;
 }
 
 .text-link a {
-  color: #0b3967;
+  color: var(--color-primary);
   text-decoration: none;
   font-weight: 600;
+  transition: color 0.3s;
 }
 
 .text-link a:hover {
   text-decoration: underline;
+  color: var(--color-primary-dark);
 }
 
+/* Mostrar senha */
 .password-wrapper {
   position: relative;
 }
 
 .toggle-password {
   position: absolute;
-  right: 12px;
+  right: 14px;
   top: 50%;
   transform: translateY(-50%);
   font-size: 14px;
   cursor: pointer;
-  color: #666;
+  color: #555;
+  user-select: none;
+}
+
+/* Modal Bootstrap */
+.modal.fade .modal-dialog {
+  animation: fadeIn 0.4s ease;
+}
+
+.modal-content {
+  background: var(--color-white);
+  padding: 30px;
+  border-radius: 16px;
+  animation: float 3s ease-in-out infinite;
+}
+
+.modal-content h5 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: var(--color-primary);
+}
+
+.modal-body input {
+  margin-bottom: 15px;
 }
 
 /* Responsivo */
-@media (max-width: 576px) {
+@media (max-width: 480px) {
   .login-card {
     padding: 30px 20px;
-    margin: 40px 15px;
+    margin: 40px 20px;
   }
 
-  .login-card h2 {
-    font-size: 18px;
+  .site-header h1 {
+    font-size: 2rem;
   }
 
-  .btn-primary,
-  .btn-info {
+  .site-header p {
+    font-size: 1rem;
+  }
+
+  .btn {
     font-size: 15px;
+    padding: 10px;
   }
 
-  .illustration {
-    width: 100px;
+  input[type="text"],
+  input[type="email"],
+  input[type="password"] {
+    font-size: 15px;
+    padding: 10px;
   }
 }
-/* Estilo do modal de cadastro */
-.modal-content {
-  border-radius: 20px;
-  padding: 30px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-  background-color: #fff;
+.login-card {
+  background-color: var(--color-white);
+  max-width: 400px;
+  margin: 60px auto;
+  padding: 50px 35px;
+  border-radius: 30px; 
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1); 
+  text-align: center;
+  animation: float 3s ease-in-out infinite;
+  transition: transform 0.3s ease;
 }
 
-.modal-header,
-.modal-footer {
-  border: none;
-  padding: 0;
-}
-
-.modal-title {
-  font-size: 20px;
+.login-card h2 {
+  font-size: 2rem;
+  margin-bottom: 25px;
+  color: var(--color-primary);
   font-weight: 700;
-  color: #123c63;
-  margin-bottom: 20px;
 }
 
-.modal-body form {
-  margin-top: 10px;
-}
-
-.modal-body .form-group {
-  margin-bottom: 16px;
-}
-
-.modal-body .form-control {
-  border-radius: 12px;
-  padding: 12px;
-  font-size: 16px;
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 14px;
   border: 1px solid #ccc;
+  border-radius: 18px; 
+  font-size: 16px;
+  box-sizing: border-box;
+  transition: border-color 0.3s;
 }
 
-.modal-footer {
-  display: flex;
-  justify-content: space-between;
-  padding-top: 20px;
-}
-
-.modal-footer .btn {
-  border-radius: 12px;
-  padding: 10px 20px;
-  font-size: 15px;
-}
-
-.btn-info {
-  background-color: #123c63;
-  border: none;
+/* Botão mais macio */
+.btn {
+  display: block;
+  width: 100%;
+  background-color: var(--color-primary);
   color: #fff;
-}
-
-.btn-info:hover {
-  background-color: #0d2f50;
-}
-
-.btn-secondary {
-  background-color: #ccc;
-  color: #333;
+  padding: 14px;
   border: none;
+  font-size: 16px;
+  border-radius: 20px; 
+  margin-top: 15px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
 }
 
-.btn-secondary:hover {
-  background-color: #bbb;
+.btn:hover {
+  background-color: var(--color-primary-dark);
+  transform: scale(1.04);
 }
 
-/* Responsivo */
-@media (max-width: 576px) {
-  .modal-content {
-    padding: 20px;
-  }
-
-  .modal-title {
-    font-size: 18px;
-  }
-
-  .modal-footer .btn {
-    font-size: 14px;
-  }
-}
